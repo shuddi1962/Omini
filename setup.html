@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>OmniPlatform Setup</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    * { font-family: 'Inter', system-ui, sans-serif; margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: #06142E; color: #fff; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+    .container { max-width: 600px; width: 90%; }
+    .card { background: #0c1829; border: 1px solid #1e3a5f; border-radius: 16px; padding: 40px; }
+    h1 { font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: #8b9dc3; margin-bottom: 32px; }
+    .step { display: flex; align-items: flex-start; gap: 16px; padding: 16px 0; border-bottom: 1px solid #1e3a5f; }
+    .step:last-child { border-bottom: none; }
+    .step-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+    .step-icon.pending { background: #1e3a5f; color: #8b9dc3; }
+    .step-icon.running { background: #3b82f6; color: #fff; animation: pulse 1s infinite; }
+    .step-icon.success { background: #10b981; color: #fff; }
+    .step-icon.error { background: #ef4444; color: #fff; }
+    .step-content { flex: 1; }
+    .step-title { font-weight: 600; margin-bottom: 4px; }
+    .step-desc { color: #8b9dc3; font-size: 14px; }
+    .step-log { margin-top: 8px; padding: 8px 12px; background: #06142E; border-radius: 8px; font-family: monospace; font-size: 12px; color: #10b981; display: none; }
+    .step-log.visible { display: block; }
+    .btn { width: 100%; padding: 14px; border: none; border-radius: 8px; font-size: 16px; font-weight: 600; cursor: pointer; margin-top: 24px; transition: all 0.2s; }
+    .btn-primary { background: #ba002a; color: #fff; }
+    .btn-primary:hover { background: #92001f; }
+    .btn-primary:disabled { background: #4a1525; cursor: not-allowed; }
+    .btn-success { background: #10b981; color: #fff; }
+    .result { margin-top: 24px; padding: 16px; border-radius: 8px; display: none; }
+    .result.success { background: #064e3b; border: 1px solid #10b981; display: block; }
+    .result.error { background: #450a0a; border: 1px solid #ef4444; display: block; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>OmniPlatform Setup</h1>
+      <p class="subtitle">One-click setup for your database and storage</p>
+      
+      <div class="step" id="step1">
+        <div class="step-icon pending" id="icon1">1</div>
+        <div class="step-content">
+          <div class="step-title">Database Schema</div>
+          <div class="step-desc">Create tables for users, campaigns, invoices, etc.</div>
+          <div class="step-log" id="log1"></div>
+        </div>
+      </div>
+      
+      <div class="step" id="step2">
+        <div class="step-icon pending" id="icon2">2</div>
+        <div class="step-content">
+          <div class="step-title">Row Level Security</div>
+          <div class="step-desc">Enable RLS policies for data protection</div>
+          <div class="step-log" id="log2"></div>
+        </div>
+      </div>
+      
+      <div class="step" id="step3">
+        <div class="step-icon pending" id="icon3">3</div>
+        <div class="step-content">
+          <div class="step-title">Storage Buckets</div>
+          <div class="step-desc">Create avatars, documents, and assets storage</div>
+          <div class="step-log" id="log3"></div>
+        </div>
+      </div>
+      
+      <div class="step" id="step4">
+        <div class="step-icon pending" id="icon4">4</div>
+        <div class="step-content">
+          <div class="step-title">Triggers & Functions</div>
+          <div class="step-desc">Auto-create profiles on signup</div>
+          <div class="step-log" id="log4"></div>
+        </div>
+      </div>
+      
+      <button class="btn btn-primary" id="setupBtn" onclick="runSetup()">
+        Start Setup
+      </button>
+      
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://krdfdhjzwggsuaqjso.supabase.co';
+    const SUPABASE_SERVICE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imtyd2RmZGhqendnZ3N1YXFhanNvIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc4MjcxMjczOSwiZXhwIjoyMDk4Mjg4NzM5fQ.IvE_Flf8pYDEZMrKHiJqPUmpRelIlxwmge2v4vRHfic';
+
+    function updateStep(num, status, log = '') {
+      const icon = document.getElementById(`icon${num}`);
+      const logEl = document.getElementById(`log${num}`);
+      icon.className = `step-icon ${status}`;
+      if (status === 'running') icon.innerHTML = '<svg class="animate-spin" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10" stroke-opacity="0.25"/><path d="M4 12a8 8 0 018-8" stroke-linecap="round"/></svg>';
+      if (status === 'success') icon.innerHTML = '✓';
+      if (status === 'error') icon.innerHTML = '✗';
+      if (log) { logEl.textContent = log; logEl.classList.add('visible'); }
+    }
+
+    async function runSetup() {
+      const btn = document.getElementById('setupBtn');
+      btn.disabled = true;
+      btn.textContent = 'Setting up...';
+
+      const headers = {
+        'apikey': SUPABASE_SERVICE_KEY,
+        'Authorization': `Bearer ${SUPABASE_SERVICE_KEY}`,
+        'Content-Type': 'application/json'
+      };
+
+      // Step 1: Create tables
+      updateStep(1, 'running', 'Creating tables...');
+      try {
+        const tables = [
+          `CREATE TABLE IF NOT EXISTS organizations (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            name TEXT NOT NULL,
+            slug TEXT UNIQUE NOT NULL,
+            logo_url TEXT,
+            plan TEXT DEFAULT 'free',
+            settings JSONB DEFAULT '{}',
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS user_profiles (
+            id UUID PRIMARY KEY REFERENCES auth.users(id) ON DELETE CASCADE,
+            organization_id UUID REFERENCES organizations(id) ON DELETE SET NULL,
+            full_name TEXT,
+            avatar_url TEXT,
+            role TEXT DEFAULT 'member',
+            phone TEXT,
+            timezone TEXT DEFAULT 'UTC',
+            preferences JSONB DEFAULT '{}',
+            last_active_at TIMESTAMPTZ,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS contacts (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            email TEXT NOT NULL,
+            full_name TEXT,
+            phone TEXT,
+            company TEXT,
+            status TEXT DEFAULT 'lead',
+            tags TEXT[] DEFAULT '{}',
+            custom_fields JSONB DEFAULT '{}',
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS campaigns (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            name TEXT NOT NULL,
+            description TEXT,
+            status TEXT DEFAULT 'draft',
+            type TEXT,
+            budget DECIMAL(10,2),
+            spent DECIMAL(10,2) DEFAULT 0,
+            start_date TIMESTAMPTZ,
+            end_date TIMESTAMPTZ,
+            metrics JSONB DEFAULT '{"impressions": 0, "clicks": 0, "conversions": 0}',
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS invoices (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            contact_id UUID REFERENCES contacts(id) ON DELETE SET NULL,
+            invoice_number TEXT NOT NULL,
+            status TEXT DEFAULT 'draft',
+            subtotal DECIMAL(10,2) NOT NULL,
+            tax DECIMAL(10,2) DEFAULT 0,
+            total DECIMAL(10,2) NOT NULL,
+            currency TEXT DEFAULT 'USD',
+            due_date DATE,
+            paid_at TIMESTAMPTZ,
+            items JSONB DEFAULT '[]',
+            notes TEXT,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS support_tickets (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            contact_id UUID REFERENCES contacts(id) ON DELETE SET NULL,
+            assigned_to UUID REFERENCES user_profiles(id) ON DELETE SET NULL,
+            subject TEXT NOT NULL,
+            description TEXT,
+            status TEXT DEFAULT 'open',
+            priority TEXT DEFAULT 'medium',
+            category TEXT,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS support_messages (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            ticket_id UUID REFERENCES support_tickets(id) ON DELETE CASCADE,
+            sender_id UUID REFERENCES user_profiles(id) ON DELETE SET NULL,
+            content TEXT NOT NULL,
+            is_internal BOOLEAN DEFAULT FALSE,
+            attachments TEXT[] DEFAULT '{}',
+            created_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS files (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            uploaded_by UUID REFERENCES user_profiles(id) ON DELETE SET NULL,
+            name TEXT NOT NULL,
+            path TEXT NOT NULL,
+            bucket TEXT NOT NULL,
+            mime_type TEXT,
+            size BIGINT,
+            folder TEXT DEFAULT '/',
+            is_starred BOOLEAN DEFAULT FALSE,
+            is_trashed BOOLEAN DEFAULT FALSE,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS workflows (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            organization_id UUID REFERENCES organizations(id) ON DELETE CASCADE,
+            name TEXT NOT NULL,
+            description TEXT,
+            status TEXT DEFAULT 'draft',
+            trigger_type TEXT,
+            trigger_config JSONB DEFAULT '{}',
+            steps JSONB DEFAULT '[]',
+            last_run_at TIMESTAMPTZ,
+            run_count INTEGER DEFAULT 0,
+            created_at TIMESTAMPTZ DEFAULT NOW(),
+            updated_at TIMESTAMPTZ DEFAULT NOW()
+          )`,
+          `CREATE TABLE IF NOT EXISTS workflow_executions (
+            id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+            workflow_id UUID REFERENCES workflows(id) ON DELETE CASCADE,
+            status TEXT DEFAULT 'running',
+            started_at TIMESTAMPTZ DEFAULT NOW(),
+            completed_at TIMESTAMPTZ,
+            duration_ms INTEGER,
+            error_message TEXT,
+            steps_result JSONB DEFAULT '[]'
+          )`
+        ];
+
+        for (const sql of tables) {
+          const res = await fetch(`${SUPABASE_URL}/rest/v1/rpc/exec`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ query: sql })
+          });
+        }
+        updateStep(1, 'success', 'Tables created successfully');
+      } catch (e) {
+        updateStep(1, 'error', e.message);
+      }
+
+      // Step 2: Enable RLS
+      updateStep(2, 'running', 'Enabling RLS...');
+      try {
+        const tables = ['organizations', 'user_profiles', 'contacts', 'campaigns', 'invoices', 'support_tickets', 'support_messages', 'files', 'workflows', 'workflow_executions'];
+        for (const table of tables) {
+          await fetch(`${SUPABASE_URL}/rest/v1/rpc/exec`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify({ query: `ALTER TABLE ${table} ENABLE ROW LEVEL SECURITY` })
+          });
+        }
+        updateStep(2, 'success', 'RLS enabled on all tables');
+      } catch (e) {
+        updateStep(2, 'error', e.message);
+      }
+
+      // Step 3: Storage buckets
+      updateStep(3, 'running', 'Creating storage buckets...');
+      try {
+        const buckets = [
+          { id: 'avatars', name: 'avatars', public: true },
+          { id: 'campaign-assets', name: 'campaign-assets', public: false },
+          { id: 'documents', name: 'documents', public: false },
+          { id: 'attachments', name: 'attachments', public: false }
+        ];
+        for (const bucket of buckets) {
+          await fetch(`${SUPABASE_URL}/storage/v1/bucket`, {
+            method: 'POST',
+            headers,
+            body: JSON.stringify(bucket)
+          }).catch(() => {});
+        }
+        updateStep(3, 'success', 'Storage buckets created');
+      } catch (e) {
+        updateStep(3, 'error', e.message);
+      }
+
+      // Step 4: Triggers
+      updateStep(4, 'running', 'Creating triggers...');
+      try {
+        const triggerSQL = `
+          CREATE OR REPLACE FUNCTION handle_new_user()
+          RETURNS TRIGGER AS $$
+          BEGIN
+            INSERT INTO public.user_profiles (id, full_name, avatar_url)
+            VALUES (
+              NEW.id,
+              COALESCE(NEW.raw_user_meta_data->>'full_name', NEW.raw_user_meta_data->>'name', split_part(NEW.email, '@', 1)),
+              COALESCE(NEW.raw_user_meta_data->>'avatar_url', NULL)
+            );
+            RETURN NEW;
+          END;
+          $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+          DROP TRIGGER IF EXISTS on_auth_user_created ON auth.users;
+          CREATE TRIGGER on_auth_user_created
+            AFTER INSERT ON auth.users
+            FOR EACH ROW EXECUTE FUNCTION handle_new_user();
+        `;
+        await fetch(`${SUPABASE_URL}/rest/v1/rpc/exec`, {
+          method: 'POST',
+          headers,
+          body: JSON.stringify({ query: triggerSQL })
+        });
+        updateStep(4, 'success', 'Triggers created');
+      } catch (e) {
+        updateStep(4, 'error', e.message);
+      }
+
+      // Done
+      const result = document.getElementById('result');
+      result.className = 'result success';
+      result.innerHTML = '<strong>Setup Complete!</strong><br><br>Your OmniPlatform is ready. You can now:<br>• <a href="pages/core/login/" style="color:#10b981">Login</a> with email or social auth<br>• <a href="pages/core/homepage/" style="color:#10b981">View Homepage</a><br>• <a href="pages/core/dashboard/" style="color:#10b981">Access Dashboard</a>';
+      result.style.display = 'block';
+      
+      btn.textContent = 'Setup Complete!';
+      btn.className = 'btn btn-success';
+    }
+  </script>
+</body>
+</html>
