@@ -5,28 +5,40 @@
     {
       "src": "**/*.html",
       "use": "@vercel/static"
+    },
+    {
+      "src": "shared/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/pages/core/login",
-      "dest": "/pages/core/login/code.html"
+      "src": "/pages/(.+)/code\\.html",
+      "dest": "/pages/$1/code.html"
     },
     {
-      "src": "/pages/core/dashboard",
-      "dest": "/pages/core/dashboard/code.html"
-    },
-    {
-      "src": "/pages/core/homepage",
-      "dest": "/pages/core/homepage/code.html"
-    },
-    {
-      "src": "/pages/([^/]+)/([^/]+)",
+      "src": "/pages/([^/]+)/([^/]+)/code\\.html",
       "dest": "/pages/$1/$2/code.html"
     },
     {
-      "src": "/(.*)",
+      "src": "/setup",
+      "dest": "/setup.html"
+    },
+    {
+      "src": "/login",
+      "dest": "/pages/core/login/code.html"
+    },
+    {
+      "src": "/dashboard",
+      "dest": "/pages/core/dashboard/code.html"
+    },
+    {
+      "src": "/homepage",
       "dest": "/pages/core/homepage/code.html"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/$1"
     }
   ],
   "headers": [
