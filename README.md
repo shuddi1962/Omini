@@ -186,6 +186,26 @@ All components include dark mode styles automatically.
 4. Place new pages in the appropriate `pages/` subdirectory
 5. Use the template (`TEMPLATE.html`) as a starting point
 
+## Deployment
+
+### Quick Deploy to Vercel
+
+1. Go to [vercel.com/new](https://vercel.com/new)
+2. Import your GitHub repository: `shuddi1962/Omini`
+3. Click **Deploy**
+
+### Setup Supabase Database
+
+1. Open `setup.html` in your browser after deployment
+2. Click **Start Setup** to create all tables and storage buckets
+3. Or run `shared/schema.sql` manually in Supabase SQL Editor
+
+### Environment Variables
+
+Your Supabase credentials are configured in `shared/supabase-client.js`:
+- **Project URL**: `https://krdfdhjzwggsuaqjso.supabase.co`
+- **Anon Key**: Safe for frontend use
+
 ## License
 
 This is a proprietary design system for OmniPlatform.
