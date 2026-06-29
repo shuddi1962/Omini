@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Login | OmniPlatform</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  
+  <!-- Supabase JS Client -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  
+  <!-- Tailwind Config -->
+  <script src="../../../shared/tailwind.config.js"></script>
+  
+  <!-- Supabase Client -->
+  <script src="../../../shared/supabase-client.js"></script>
+  
+  <!-- Shared Styles -->
+  <link rel="stylesheet" href="../../../shared/styles.css"/>
+
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .login-card-shadow {
+      box-shadow: 0 4px 20px rgba(0, 30, 66, 0.08);
+    }
+    .glass-panel {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md min-h-screen">
+  <main class="flex min-h-screen w-full overflow-hidden">
+    <!-- Left Side: Professional Imagery & Branding -->
+    <section class="hidden lg:flex lg:w-1/2 relative bg-primary items-center justify-center p-section-padding">
+      <div class="absolute inset-0 z-0 overflow-hidden">
+        <div class="w-full h-full opacity-60 bg-cover bg-center" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAhCuzt7Nvezbubg4kB-E5R2o9N1npuludCfGlNAfrilydHNUtiY6qiaxXPAhpWdFNRqYkIVBmvTRKeda55FvHikt_QJ2mWOVcZVZFD6tjjEJEve9MgvujUl21lMVM9LZSZuZ1TZGBd3sZ3XwiLcCxDg-qcZyf42PkC2ELDZ_lSmfVUkg4BZeEJBjgGCF-MpLQmVUuz3aiivw4mJTuB6rHygzyFDENup-G3zCvXH25YwftIRKEIxnlsP1zOO5KJBdVbQ3KsZz-5AzzC')">
+        </div>
+      </div>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-primary/20"></div>
+      
+      <div class="relative z-10 max-w-lg text-on-primary">
+        <div class="mb-gutter flex items-center gap-3">
+          <div class="w-12 h-12 bg-secondary rounded-lg flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-secondary text-headline-sm" style="font-variation-settings: 'FILL' 1;">dns</span>
+          </div>
+          <h1 class="font-headline-lg text-headline-lg font-extrabold tracking-tight">OmniPlatform</h1>
+        </div>
+        <h2 class="font-display-lg text-display-lg mb-gutter">The Enterprise Suite for Infinite Growth.</h2>
+        <p class="font-body-lg text-body-lg text-on-primary/80 leading-relaxed mb-8">
+          Secure, scalable, and built for modern teams. Manage communications, storage, and analytics in a single integrated ecosystem.
+        </p>
+        <div class="grid grid-cols-2 gap-gutter border-t border-on-primary/10 pt-8">
+          <div>
+            <span class="block font-headline-sm text-headline-sm font-bold">99.9%</span>
+            <span class="font-label-md text-label-md text-on-primary/60">Uptime SLA</span>
+          </div>
+          <div>
+            <span class="block font-headline-sm text-headline-sm font-bold">ISO 27001</span>
+            <span class="font-label-md text-label-md text-on-primary/60">Certified Security</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Right Side: Login Form -->
+    <section class="w-full lg:w-1/2 flex items-center justify-center p-margin-mobile md:p-gutter bg-surface-container-lowest">
+      <div class="w-full max-w-md">
+        <!-- Mobile Branding -->
+        <div class="lg:hidden flex items-center gap-2 mb-10">
+          <div class="w-8 h-8 bg-secondary rounded flex items-center justify-center">
+            <span class="material-symbols-outlined text-on-secondary text-body-md" style="font-variation-settings: 'FILL' 1;">dns</span>
+          </div>
+          <span class="font-headline-sm text-headline-sm font-black text-primary">OmniPlatform</span>
+        </div>
+        
+        <div class="mb-10">
+          <h3 class="font-headline-lg text-headline-lg text-text-main mb-2">Welcome Back</h3>
+          <p class="font-body-md text-body-md text-text-muted">Enter your credentials to access your workspace.</p>
+        </div>
+
+        <!-- Error Message (Hidden by default) -->
+        <div id="errorMessage" class="hidden mb-6 p-4 bg-error-container rounded-lg">
+          <p class="text-body-sm text-on-error-container" id="errorText"></p>
+        </div>
+
+        <!-- Social Logins -->
+        <div class="grid grid-cols-2 gap-4 mb-8">
+          <button onclick="signInWithGoogle()" class="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-border-subtle rounded-lg font-label-md text-label-md text-text-main hover:bg-surface-container-low transition-all active:scale-95">
+            <svg class="w-5 h-5" viewBox="0 0 24 24">
+              <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"></path>
+              <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"></path>
+              <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"></path>
+              <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 12-4.53z" fill="#EA4335"></path>
+            </svg>
+            Google
+          </button>
+          <button onclick="signInWithGitHub()" class="flex items-center justify-center gap-2 py-3 px-4 bg-white border border-border-subtle rounded-lg font-label-md text-label-md text-text-main hover:bg-surface-container-low transition-all active:scale-95">
+            <svg class="w-5 h-5" fill="#333" viewBox="0 0 24 24">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </button>
+        </div>
+
+        <div class="relative flex py-5 items-center">
+          <div class="flex-grow border-t border-border-subtle"></div>
+          <span class="flex-shrink mx-4 text-label-md font-label-md text-outline uppercase tracking-widest">or continue with email</span>
+          <div class="flex-grow border-t border-border-subtle"></div>
+        </div>
+
+        <!-- Login Form -->
+        <form class="space-y-6" id="loginForm" onsubmit="handleLogin(event)">
+          <div>
+            <label class="block font-label-md text-label-md text-text-main mb-2" for="email">Email Address</label>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">mail</span>
+              <input class="w-full pl-10 pr-4 py-3 border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-sm text-body-sm outline-none" id="email" placeholder="name@company.com" required type="email"/>
+            </div>
+          </div>
+          
+          <div>
+            <div class="flex justify-between items-center mb-2">
+              <label class="block font-label-md text-label-md text-text-main" for="password">Password</label>
+              <button type="button" onclick="handleResetPassword()" class="font-label-md text-label-md text-secondary hover:underline transition-all">Forgot Password?</button>
+            </div>
+            <div class="relative">
+              <span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline">lock</span>
+              <input class="w-full pl-10 pr-12 py-3 border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-sm text-body-sm outline-none" id="password" placeholder="••••••••" required type="password"/>
+              <button class="absolute right-3 top-1/2 -translate-y-1/2 text-outline hover:text-text-main transition-colors" onclick="togglePassword()" type="button">
+                <span class="material-symbols-outlined" id="visibilityIcon">visibility</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex items-center">
+            <input class="w-4 h-4 rounded border-border-subtle text-primary focus:ring-primary" id="remember" type="checkbox"/>
+            <label class="ml-2 font-body-sm text-body-sm text-text-muted" for="remember">Keep me logged in for 30 days</label>
+          </div>
+
+          <button id="submitBtn" class="w-full bg-primary text-on-primary py-3 rounded-lg font-headline-sm text-headline-sm font-semibold hover:bg-primary/90 transition-all active:scale-[0.98] login-card-shadow flex items-center justify-center gap-2 group" type="submit">
+            Sign In
+            <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+          </button>
+        </form>
+
+        <div class="mt-8 pt-8 border-t border-border-subtle text-center">
+          <p class="font-body-md text-body-md text-text-muted mb-4">Don't have an account yet?</p>
+          <a class="inline-flex items-center justify-center px-8 py-3 bg-secondary text-on-secondary rounded-lg font-label-md text-label-md uppercase tracking-wider hover:bg-secondary/90 transition-all active:scale-95 shadow-md" href="../get-started/">
+            Create Account
+          </a>
+        </div>
+
+        <footer class="mt-12 flex justify-center gap-6">
+          <a class="font-label-md text-label-md text-text-muted hover:text-primary transition-colors" href="#">Privacy Policy</a>
+          <a class="font-label-md text-label-md text-text-muted hover:text-primary transition-colors" href="#">Terms of Service</a>
+          <a class="font-label-md text-label-md text-text-muted hover:text-primary transition-colors" href="#">Help Center</a>
+        </footer>
+      </div>
+    </section>
+  </main>
+
+  <!-- Success Toast -->
+  <div class="fixed bottom-gutter right-gutter transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none" id="successToast">
+    <div class="bg-success-green text-on-primary px-gutter py-4 rounded-xl flex items-center gap-3 shadow-xl">
+      <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+      <span class="font-label-md text-label-md">Success! Redirecting to workspace...</span>
+    </div>
+  </div>
+
+  <!-- Reset Password Modal -->
+  <div id="resetModal" class="hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl p-8 max-w-md w-full">
+      <h3 class="font-headline-md text-headline-md text-text-main mb-4">Reset Password</h3>
+      <p class="font-body-md text-body-md text-text-muted mb-6">Enter your email address and we'll send you a link to reset your password.</p>
+      <input id="resetEmail" type="email" placeholder="name@company.com" class="w-full px-4 py-3 border border-border-subtle rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all font-body-sm text-body-sm outline-none mb-4"/>
+      <div class="flex gap-4">
+        <button onclick="closeResetModal()" class="flex-1 py-3 border border-border-subtle rounded-lg font-label-md text-label-md text-text-main hover:bg-surface-container-low transition-all">Cancel</button>
+        <button onclick="sendResetEmail()" class="flex-1 py-3 bg-primary text-on-primary rounded-lg font-label-md text-label-md hover:bg-primary/90 transition-all">Send Link</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Supabase
+    OmniSupabase.init();
+
+    // Check if user is already logged in
+    (async () => {
+      const session = await OmniSupabase.Auth.getSession();
+      if (session) {
+        window.location.href = '../dashboard/';
+      }
+    })();
+
+    // Toggle password visibility
+    function togglePassword() {
+      const pwd = document.getElementById('password');
+      const icon = document.getElementById('visibilityIcon');
+      if (pwd.type === 'password') {
+        pwd.type = 'text';
+        icon.textContent = 'visibility_off';
+      } else {
+        pwd.type = 'password';
+        icon.textContent = 'visibility';
+      }
+    }
+
+    // Show error message
+    function showError(message) {
+      const errorDiv = document.getElementById('errorMessage');
+      const errorText = document.getElementById('errorText');
+      errorText.textContent = message;
+      errorDiv.classList.remove('hidden');
+    }
+
+    // Hide error message
+    function hideError() {
+      document.getElementById('errorMessage').classList.add('hidden');
+    }
+
+    // Show success toast
+    function showSuccess() {
+      const toast = document.getElementById('successToast');
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+    }
+
+    // Handle email/password login
+    async function handleLogin(e) {
+      e.preventDefault();
+      hideError();
+      
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const submitBtn = document.getElementById('submitBtn');
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+        </svg>
+        Signing in...
+      `;
+      
+      try {
+        await OmniSupabase.Auth.signIn(email, password);
+        showSuccess();
+        setTimeout(() => {
+          window.location.href = '../dashboard/';
+        }, 1500);
+      } catch (error) {
+        showError(error.message || 'Invalid email or password. Please try again.');
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+          Sign In
+          <span class="material-symbols-outlined group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        `;
+      }
+    }
+
+    // Sign in with Google
+    async function signInWithGoogle() {
+      try {
+        await OmniSupabase.Auth.signInWithOAuth('google');
+      } catch (error) {
+        showError(error.message || 'Failed to sign in with Google.');
+      }
+    }
+
+    // Sign in with GitHub
+    async function signInWithGitHub() {
+      try {
+        await OmniSupabase.Auth.signInWithOAuth('github');
+      } catch (error) {
+        showError(error.message || 'Failed to sign in with GitHub.');
+      }
+    }
+
+    // Reset password
+    function handleResetPassword() {
+      document.getElementById('resetModal').classList.remove('hidden');
+      document.getElementById('resetEmail').value = document.getElementById('email').value;
+    }
+
+    function closeResetModal() {
+      document.getElementById('resetModal').classList.add('hidden');
+    }
+
+    async function sendResetEmail() {
+      const email = document.getElementById('resetEmail').value;
+      if (!email) {
+        showError('Please enter your email address.');
+        return;
+      }
+      
+      try {
+        await OmniSupabase.Auth.resetPassword(email);
+        closeResetModal();
+        showSuccess();
+        document.getElementById('successToast').querySelector('span:last-child').textContent = 'Password reset link sent! Check your email.';
+      } catch (error) {
+        showError(error.message || 'Failed to send reset email.');
+      }
+    }
+
+    // Subtle parallax effect
+    document.addEventListener('mousemove', (e) => {
+      const moveX = (e.clientX - window.innerWidth / 2) * 0.005;
+      const moveY = (e.clientY - window.innerHeight / 2) * 0.005;
+      const bg = document.querySelector('[data-alt]');
+      if (bg) {
+        bg.style.transform = `scale(1.1) translate(${moveX}px, ${moveY}px)`;
+      }
+    });
+  </script>
+</body>
+</html>

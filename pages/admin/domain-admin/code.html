@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Domain Management | OmniPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "inverse-on-surface": "#eef1f3",
+                  "tertiary-container": "#c3ab00",
+                  "surface-container-high": "#e5e9eb",
+                  "inverse-primary": "#afc7f4",
+                  "on-primary-fixed-variant": "#2f476d",
+                  "surface-variant": "#e0e3e5",
+                  "on-secondary-fixed": "#410008",
+                  "surface-dim": "#d7dadc",
+                  "primary-fixed": "#d6e3ff",
+                  "on-tertiary": "#ffffff",
+                  "on-background": "#181c1e",
+                  "secondary-fixed": "#ffdad9",
+                  "outline-variant": "#c4c6cf",
+                  "on-primary-fixed": "#001b3d",
+                  "on-primary": "#ffffff",
+                  "on-error": "#ffffff",
+                  "inverse-surface": "#2d3133",
+                  "surface-container-lowest": "#ffffff",
+                  "error-container": "#ffdad6",
+                  "surface-dark": "#06142E",
+                  "secondary-container": "#e2213c",
+                  "tertiary-fixed-dim": "#e2c600",
+                  "background": "#f7fafc",
+                  "success-green": "#00A91C",
+                  "surface": "#f7fafc",
+                  "primary-fixed-dim": "#afc7f4",
+                  "text-main": "#121C2D",
+                  "primary-container": "#001e42",
+                  "secondary-fixed-dim": "#ffb3b2",
+                  "surface-container": "#ebeef0",
+                  "on-primary-container": "#6f87b0",
+                  "border-subtle": "#E1E8ED",
+                  "on-surface": "#181c1e",
+                  "on-secondary-fixed-variant": "#92001f",
+                  "surface-bright": "#f7fafc",
+                  "secondary": "#ba002a",
+                  "on-tertiary-fixed": "#211b00",
+                  "on-secondary-container": "#fffbff",
+                  "outline": "#74777f",
+                  "surface-container-low": "#f1f4f6",
+                  "surface-container-highest": "#e0e3e5",
+                  "tertiary": "#6d5e00",
+                  "on-surface-variant": "#44474e",
+                  "on-error-container": "#93000a",
+                  "on-tertiary-container": "#493f00",
+                  "on-tertiary-fixed-variant": "#524700",
+                  "error": "#ba1a1a",
+                  "surface-tint": "#475f86",
+                  "primary": "#000513",
+                  "text-muted": "#52667A",
+                  "on-secondary": "#ffffff",
+                  "tertiary-fixed": "#ffe241"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "section-padding": "80px",
+                  "container-max": "1280px",
+                  "base": "8px",
+                  "gutter": "24px",
+                  "margin-mobile": "16px"
+          },
+          "fontFamily": {
+                  "display-lg-mobile": ["Inter"],
+                  "headline-lg": ["Inter"],
+                  "body-md": ["Inter"],
+                  "code": ["JetBrains Mono"],
+                  "body-lg": ["Inter"],
+                  "headline-md": ["Inter"],
+                  "display-lg": ["Inter"],
+                  "body-sm": ["Inter"],
+                  "headline-sm": ["Inter"],
+                  "label-md": ["Inter"]
+          },
+          "fontSize": {
+                  "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                  "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                  "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                  "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      background-color: #f7fafc;
+      color: #181c1e;
+      overflow-x: hidden;
+    }
+    .glass-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border: 1px solid #E1E8ED;
+      box-shadow: 0 4px 20px rgba(0, 30, 66, 0.05);
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 6px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: #c4c6cf;
+      border-radius: 10px;
+    }
+    @keyframes subtle-float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+    .animate-float {
+      animation: subtle-float 4s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- TopNavBar (Fixed) -->
+<header class="fixed top-0 w-full z-50 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container shadow-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<nav class="hidden md:flex items-center gap-6 ml-8">
+<a class="text-secondary dark:text-secondary-fixed border-b-2 border-secondary font-label-md text-label-md h-16 flex items-center" href="#">Domains</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:bg-primary-container/20 transition-colors font-label-md text-label-md h-16 flex items-center px-2" href="#">Workspaces</a>
+<a class="text-on-primary/80 dark:text-on-primary-container/80 hover:bg-primary-container/20 transition-colors font-label-md text-label-md h-16 flex items-center px-2" href="#">Security</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/60">search</span>
+<input class="bg-primary-container/40 border-none rounded-full pl-10 pr-4 py-1.5 text-sm focus:ring-2 focus:ring-secondary w-64 text-white placeholder-on-primary/40" placeholder="Search domains..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors">settings</button>
+<div class="h-8 w-8 rounded-full bg-secondary-container flex items-center justify-center text-on-secondary-container font-bold text-xs">JD</div>
+</div>
+</header>
+<!-- SideNavBar (Fixed Left) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface dark:bg-surface-dark border-r border-border-subtle dark:border-outline-variant flex flex-col py-4 px-3 space-y-2 hidden md:flex z-40">
+<div class="flex items-center gap-3 px-3 py-4 mb-4">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-white">grid_view</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-black text-primary leading-tight">Global Workspace</p>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Plan</p>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-3 rounded-lg font-bold flex items-center justify-center gap-2 mb-6 active:scale-95 duration-150 shadow-lg shadow-secondary/20">
+<span class="material-symbols-outlined">add_circle</span>
+      New Project
+    </button>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">chat</span> Communications
+      </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">folder_shared</span> Files
+      </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">dns</span> Domains
+      </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">autorenew</span> Automations
+      </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high dark:hover:bg-surface-container-highest transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">bar_chart</span> Analytics
+      </a>
+</div>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">support_agent</span> Support
+      </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low transition-all rounded-lg font-label-md text-label-md" href="#">
+<span class="material-symbols-outlined">person</span> Account
+      </a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-64 pt-24 pb-20 px-6 max-w-[1400px] mx-auto">
+<!-- Hero / Welcome Section -->
+<div class="mb-10 flex flex-col md:flex-row md:items-end justify-between gap-6">
+<div>
+<h1 class="font-display-lg text-display-lg text-text-main mb-2">Domain Management</h1>
+<p class="text-text-muted font-body-lg text-body-lg max-w-2xl">Manage your enterprise domain portfolio, configure professional email aliases, and secure your brand identity from a single dashboard.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold flex items-center gap-2 shadow-xl shadow-primary/10 hover:-translate-y-1 transition-transform">
+<span class="material-symbols-outlined">language</span>
+        Add and Verify your Domain
+      </button>
+</div>
+<!-- Bento Grid Dashboard -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-12">
+<!-- Primary Domains Status (Bento Large) -->
+<div class="md:col-span-8 glass-card rounded-xl overflow-hidden flex flex-col">
+<div class="p-6 border-b border-border-subtle flex items-center justify-between">
+<h2 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+            Active Business Domains
+          </h2>
+<span class="bg-success-green/10 text-success-green px-3 py-1 rounded-full font-label-md text-label-md">3 Domains Secure</span>
+</div>
+<div class="p-0 overflow-x-auto custom-scrollbar">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-text-muted font-label-md text-label-md">
+<tr>
+<th class="px-6 py-4">Domain Name</th>
+<th class="px-6 py-4">Status</th>
+<th class="px-6 py-4">Renewal Date</th>
+<th class="px-6 py-4">Security</th>
+<th class="px-6 py-4"></th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-text-main">omniplatform.io</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-success-green font-bold">
+<span class="w-2 h-2 rounded-full bg-success-green"></span> Verified
+                  </span>
+</td>
+<td class="px-6 py-4 text-text-muted">Oct 24, 2025</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm text-secondary" title="SSL Active">lock</span>
+<span class="material-symbols-outlined text-sm text-blue-500" title="DNSSEC On">security</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:bg-surface-container p-1 rounded transition-colors material-symbols-outlined">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-text-main">omni-cloud.net</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-success-green font-bold">
+<span class="w-2 h-2 rounded-full bg-success-green"></span> Verified
+                  </span>
+</td>
+<td class="px-6 py-4 text-text-muted">Jan 12, 2026</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm text-secondary">lock</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:bg-surface-container p-1 rounded transition-colors material-symbols-outlined">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-lowest transition-colors">
+<td class="px-6 py-4 font-bold text-text-main">staging.omni.io</td>
+<td class="px-6 py-4">
+<span class="flex items-center gap-1.5 text-tertiary-container font-bold">
+<span class="w-2 h-2 rounded-full bg-tertiary-container"></span> Pending DNS
+                  </span>
+</td>
+<td class="px-6 py-4 text-text-muted">N/A</td>
+<td class="px-6 py-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-sm text-outline">lock_open</span>
+</div>
+</td>
+<td class="px-6 py-4 text-right">
+<button class="text-primary hover:bg-surface-container p-1 rounded transition-colors material-symbols-outlined">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Quick Action: MX Records (Bento Small) -->
+<div class="md:col-span-4 glass-card rounded-xl p-6 relative overflow-hidden flex flex-col justify-between group">
+<div class="absolute top-0 right-0 p-4 opacity-10 group-hover:opacity-20 transition-opacity">
+<span class="material-symbols-outlined text-9xl">mail</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm mb-4">MX Records</h2>
+<p class="text-text-muted font-body-sm text-body-sm mb-6">Configure your mail exchange records to route emails through OmniPlatform's secure relay servers.</p>
+</div>
+<div class="space-y-3 relative z-10">
+<div class="bg-surface-container-low p-3 rounded-lg border border-border-subtle flex justify-between items-center">
+<code class="font-code text-code text-primary">mx1.omni.com</code>
+<span class="text-xs bg-primary text-white px-2 py-0.5 rounded">Priority 10</span>
+</div>
+<button class="w-full border-2 border-primary text-primary py-2 rounded-lg font-bold hover:bg-primary hover:text-white transition-all">Copy Setup Guide</button>
+</div>
+</div>
+<!-- Custom Email Addresses (Bento Medium) -->
+<div class="md:col-span-5 glass-card rounded-xl p-6 flex flex-col">
+<h2 class="font-headline-sm text-headline-sm mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">alternate_email</span>
+          Custom Email Addresses
+        </h2>
+<div class="space-y-4 mb-6">
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary font-bold">AL</div>
+<div>
+<p class="font-bold text-text-main text-sm">alex@omniplatform.io</p>
+<p class="text-xs text-text-muted">Marketing Manager</p>
+</div>
+<span class="ml-auto material-symbols-outlined text-text-muted text-sm cursor-pointer hover:text-primary">edit</span>
+</div>
+<div class="flex items-center gap-3 p-3 bg-surface-container-lowest rounded-lg border border-border-subtle">
+<div class="w-10 h-10 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold">JD</div>
+<div>
+<p class="font-bold text-text-main text-sm">jordan@omniplatform.io</p>
+<p class="text-xs text-text-muted">Admin / Founder</p>
+</div>
+<span class="ml-auto material-symbols-outlined text-text-muted text-sm cursor-pointer hover:text-primary">edit</span>
+</div>
+</div>
+<button class="mt-auto w-full flex items-center justify-center gap-2 text-primary font-bold hover:underline">
+<span class="material-symbols-outlined">add</span> Create new alias
+        </button>
+</div>
+<!-- Security Settings (Bento Wide) -->
+<div class="md:col-span-7 glass-card rounded-xl p-6">
+<div class="flex items-center justify-between mb-6">
+<h2 class="font-headline-sm text-headline-sm">Security &amp; Protection</h2>
+<span class="material-symbols-outlined text-success-green animate-pulse">security</span>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+<div class="p-4 border border-border-subtle rounded-xl bg-surface-bright flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined bg-secondary-fixed p-2 rounded-lg text-secondary">vibration</span>
+<div class="relative inline-block w-10 h-6 transition duration-200 ease-in-out bg-success-green rounded-full">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<h3 class="font-bold text-text-main">2FA Enforcement</h3>
+<p class="text-xs text-text-muted">Require all users on the @omniplatform.io domain to use two-factor authentication.</p>
+</div>
+<div class="p-4 border border-border-subtle rounded-xl bg-surface-bright flex flex-col gap-3">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined bg-primary-fixed p-2 rounded-lg text-primary">radar</span>
+<div class="relative inline-block w-10 h-6 transition duration-200 ease-in-out bg-success-green rounded-full">
+<div class="absolute right-1 top-1 w-4 h-4 bg-white rounded-full"></div>
+</div>
+</div>
+<h3 class="font-bold text-text-main">Phishing Protection</h3>
+<p class="text-xs text-text-muted">AI-driven link scanning and sender verification for all incoming business mail.</p>
+</div>
+</div>
+</div>
+<!-- Admin Access Control (Bento Bottom) -->
+<div class="md:col-span-12 glass-card rounded-xl p-8 flex flex-col md:flex-row items-center gap-8">
+<div class="flex-shrink-0">
+<div class="w-24 h-24 rounded-full border-4 border-secondary-fixed flex items-center justify-center bg-white shadow-inner animate-float">
+<span class="material-symbols-outlined text-5xl text-secondary">admin_panel_settings</span>
+</div>
+</div>
+<div class="flex-grow text-center md:text-left">
+<h2 class="font-headline-md text-headline-md text-text-main mb-2">Admin Access Control</h2>
+<p class="text-text-muted max-w-xl">Configure who can manage DNS settings, billing, and global email policies. We recommend at least two global admins for enterprise resilience.</p>
+</div>
+<div class="flex flex-wrap gap-3 justify-center">
+<button class="bg-surface-container-high text-primary px-5 py-2.5 rounded-lg font-bold hover:bg-surface-container-highest transition-colors">Manage Permissions</button>
+<button class="bg-primary text-on-primary px-5 py-2.5 rounded-lg font-bold hover:shadow-lg transition-shadow">Audit Logs</button>
+</div>
+</div>
+</div>
+<!-- Visual Divider & Decorative Section -->
+<section class="mt-section-padding relative h-64 rounded-3xl overflow-hidden shadow-2xl">
+<div class="absolute inset-0 z-0">
+<div class="w-full h-full bg-cover bg-center" data-alt="A high-end 3D abstract visualization of global data networks spanning across a dark digital globe. The style is sleek, corporate, and modern, using primary navy and secondary red light streaks to represent information flow. Soft ambient lighting and deep shadows create a sense of professional security and immense scale." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDs1PGo1P8LKIEpxa9PHl2gGKB0iK9n-lruuDox2nxf6OAfBdRD7eVWFgHlZ2g8AMBkOYhK-UZMzOmYQkCU5yRbIjMMGE6q-nJIV5d9SsoH2VZQBrWQP-nHWlcI_Q1BO-wJT-Ya-k1bLU-Nq1qrSQqfvlTEYdpA2yEuszQiDaFd4Kzzbn_-3dSys7iP3md_CwnIEaHESYtrwKgyc09ViBSs2hl0PCUZoygKGiUP_ltqCCQqhrhoLgDbF-OgXGz7YjWPPNIjetcvZS9M')"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/90 to-transparent"></div>
+</div>
+<div class="relative z-10 h-full flex flex-col justify-center px-12 text-white">
+<h3 class="font-headline-lg text-headline-lg mb-2">Enterprise-Grade Resilience</h3>
+<p class="font-body-lg text-body-lg max-w-md text-on-primary/80">Every domain managed on OmniPlatform is backed by our 99.99% DNS uptime SLA and integrated DDoS protection.</p>
+</div>
+</section>
+</main>
+<!-- Interaction Script -->
+<script>
+    // Micro-interaction: Active Navigation Switcher
+    const navItems = document.querySelectorAll('nav a');
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        navItems.forEach(i => {
+          i.classList.remove('text-secondary', 'border-b-2', 'border-secondary');
+          i.classList.add('text-on-primary/80');
+        });
+        item.classList.add('text-secondary', 'border-b-2', 'border-secondary');
+        item.classList.remove('text-on-primary/80');
+      });
+    });
+
+    // Toggle logic placeholder for security switches
+    const switches = document.querySelectorAll('.bg-success-green.rounded-full');
+    switches.forEach(sw => {
+      sw.addEventListener('click', () => {
+        const dot = sw.querySelector('div');
+        if(sw.classList.contains('bg-success-green')) {
+          sw.classList.replace('bg-success-green', 'bg-outline-variant');
+          dot.classList.replace('right-1', 'left-1');
+        } else {
+          sw.classList.replace('bg-outline-variant', 'bg-success-green');
+          dot.classList.replace('left-1', 'right-1');
+        }
+      });
+    });
+  </script>
+</body></html>

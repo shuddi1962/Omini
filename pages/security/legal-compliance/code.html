@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform | Legal Command Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#493f00",
+                    "on-secondary-fixed": "#410008",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e5e9eb",
+                    "on-background": "#181c1e",
+                    "error-container": "#ffdad6",
+                    "text-main": "#121C2D",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-secondary-container": "#fffbff",
+                    "surface-dark": "#06142E",
+                    "secondary-fixed": "#ffdad9",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#c3ab00",
+                    "secondary": "#ba002a",
+                    "on-primary-fixed": "#001b3d",
+                    "on-primary-container": "#6f87b0",
+                    "secondary-container": "#e2213c",
+                    "outline-variant": "#c4c6cf",
+                    "surface-bright": "#f7fafc",
+                    "tertiary-fixed": "#ffe241",
+                    "surface": "#f7fafc",
+                    "on-secondary-fixed-variant": "#92001f",
+                    "surface-container-low": "#f1f4f6",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d7dadc",
+                    "on-primary-fixed-variant": "#2f476d",
+                    "tertiary-fixed-dim": "#e2c600",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-primary": "#afc7f4",
+                    "background": "#f7fafc",
+                    "outline": "#74777f",
+                    "on-tertiary-fixed-variant": "#524700",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-surface-variant": "#44474e",
+                    "on-tertiary-fixed": "#211b00",
+                    "border-subtle": "#E1E8ED",
+                    "surface-tint": "#475f86",
+                    "surface-container": "#ebeef0",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#afc7f4",
+                    "primary": "#000513",
+                    "tertiary": "#6d5e00",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#001e42",
+                    "success-green": "#00A91C",
+                    "text-muted": "#52667A",
+                    "on-surface": "#181c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "section-padding": "80px",
+                    "container-max": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "code": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #f7fafc;
+            color: #181c1e;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #E1E8ED;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-primary dark:bg-surface-dark text-on-primary dark:text-inverse-primary flex justify-between items-center px-gutter z-50 shadow-sm">
+<div class="flex items-center gap-base">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<span class="ml-4 px-2 py-0.5 bg-secondary text-on-secondary rounded-full font-label-md text-[10px]">LEGAL</span>
+</div>
+<div class="flex-1 max-w-md ml-12">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50">search</span>
+<input class="w-full bg-white/10 border-none rounded-lg py-2 pl-10 pr-4 text-on-primary placeholder-on-primary/50 focus:ring-2 focus:ring-secondary/50 transition-all" placeholder="Search legal repository..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined p-2 text-on-primary/70 hover:bg-primary-container/50 rounded-full transition-colors cursor-pointer active:opacity-80">notifications</button>
+<button class="material-symbols-outlined p-2 text-on-primary/70 hover:bg-primary-container/50 rounded-full transition-colors cursor-pointer active:opacity-80">settings</button>
+<button class="material-symbols-outlined p-2 text-on-primary/70 hover:bg-primary-container/50 rounded-full transition-colors cursor-pointer active:opacity-80">help</button>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed overflow-hidden border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female general counsel in a minimalist, modern office setting with warm architectural lighting and corporate aesthetics. The colors are dominated by navy blue and crisp white, reflecting enterprise-grade reliability and legal professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB77puJZN60bQoIIB7-O4k6dpKO97wL3wpbYxUmfabU17JDYHqhd2crIJyxqJhlhFuP2AeAVa2W8z6RZRcMUyKVi_H7uiSDPjxudnm7T3HzJLedczvMm5rG4iy9FxFyLlvXCkyiib8nujhCFHEV1vU6d_S4xSBcgXqUI0gDpwi_jRWly6WEHodw-xiwFCefGL7CpIxPwwmMGcoko6arSvl3_wtiHoWwo2g2S_G9ZzDLTCxXdsG7zvgc3SpyoavvsDgfsvmgD5uZv2os"/>
+</div>
+</div>
+</header>
+<div class="flex min-h-screen pt-16">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flex flex-col h-full py-base px-4 overflow-y-auto z-40">
+<div class="mb-8 mt-2 px-2">
+<h2 class="font-headline-sm text-headline-sm font-black text-primary dark:text-primary-fixed">OmniPlatform</h2>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">chat</span>
+<span>Communications</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Files</span>
+</div>
+<!-- Active Item for Infrastructure/Legal module -->
+<div class="flex items-center gap-3 px-3 py-2 bg-secondary text-on-secondary rounded-lg font-semibold cursor-pointer active:scale-95 font-label-md shadow-sm">
+<span class="material-symbols-outlined">dns</span>
+<span>Infrastructure</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">campaign</span>
+<span>Marketing</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span>Automations</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</div>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-1 pb-4">
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">contact_support</span>
+<span>Support</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 cursor-pointer active:scale-95 rounded-lg font-label-md">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span>Account</span>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="ml-64 flex-1 p-gutter bg-background min-w-0">
+<!-- Header Section -->
+<div class="mb-gutter flex justify-between items-end">
+<div>
+<nav class="flex items-center gap-2 text-text-muted font-label-md mb-2">
+<span>Legal</span>
+<span class="material-symbols-outlined text-sm">chevron_right</span>
+<span class="text-primary font-bold">Command Center</span>
+</nav>
+<h1 class="font-display-lg text-display-lg tracking-tight text-primary">Legal Command Center</h1>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-label-md flex items-center gap-2 hover:opacity-90 transition-opacity active:scale-95">
+<span class="material-symbols-outlined text-lg">add</span>
+                        New Document
+                    </button>
+<button class="bg-surface-container-highest border border-border-subtle px-6 py-2.5 rounded-lg font-label-md flex items-center gap-2 hover:bg-surface-dim transition-colors active:scale-95">
+<span class="material-symbols-outlined text-lg" style="font-variation-settings: 'FILL' 1;">file_download</span>
+                        Export Report
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid -->
+<div class="grid grid-cols-12 gap-gutter">
+<!-- Compliance Monitor (Left Column - 1/3) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-gutter">
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm p-6 overflow-hidden relative">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+                                Compliance Monitor
+                            </h3>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded font-label-md text-[10px] uppercase tracking-wider animate-pulse">Audit Live</span>
+</div>
+<div class="space-y-4">
+<!-- SOC2 -->
+<div class="p-4 rounded-lg bg-surface-container-low border border-border-subtle hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-headline-sm text-sm text-primary">SOC2 Type II</p>
+<p class="text-xs text-text-muted">Last Audit: Oct 2023</p>
+</div>
+<span class="bg-success-green/10 text-success-green px-3 py-1 rounded-full text-[11px] font-bold">COMPLIANT</span>
+</div>
+<div class="w-full bg-border-subtle h-1.5 rounded-full overflow-hidden">
+<div class="bg-success-green h-full w-[100%]"></div>
+</div>
+</div>
+<!-- GDPR -->
+<div class="p-4 rounded-lg bg-surface-container-low border border-border-subtle hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-headline-sm text-sm text-primary">GDPR / Data Privacy</p>
+<p class="text-xs text-text-muted">Next Review: 12 Days</p>
+</div>
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-3 py-1 rounded-full text-[11px] font-bold">IN REVIEW</span>
+</div>
+<div class="w-full bg-border-subtle h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full w-[65%]"></div>
+</div>
+</div>
+<!-- HIPAA -->
+<div class="p-4 rounded-lg bg-surface-container-low border border-border-subtle hover:border-primary transition-colors cursor-pointer group">
+<div class="flex justify-between items-start mb-2">
+<div>
+<p class="font-headline-sm text-sm text-primary">HIPAA Standards</p>
+<p class="text-xs text-text-muted">Data Room Active</p>
+</div>
+<span class="bg-success-green/10 text-success-green px-3 py-1 rounded-full text-[11px] font-bold">COMPLIANT</span>
+</div>
+<div class="w-full bg-border-subtle h-1.5 rounded-full overflow-hidden">
+<div class="bg-success-green h-full w-[98%]"></div>
+</div>
+</div>
+</div>
+<button class="mt-6 w-full py-3 text-primary font-bold text-sm border-t border-border-subtle hover:bg-surface-container transition-colors">
+                            View Full Compliance Matrix
+                        </button>
+</div>
+<!-- IP Vault Small Card -->
+<div class="bg-surface-dark rounded-xl shadow-lg p-6 text-on-primary">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-sm text-headline-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-tertiary-fixed">shield</span>
+                                IP Vault
+                            </h3>
+<span class="text-on-primary/50 font-label-md">24 Active Items</span>
+</div>
+<div class="space-y-3">
+<div class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary/60">copyright</span>
+<span class="text-sm">Trademarks</span>
+</div>
+<span class="font-code">12</span>
+</div>
+<div class="flex items-center justify-between p-3 rounded bg-white/5 border border-white/10">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-on-primary/60">lightbulb</span>
+<span class="text-sm">Patents (Pending)</span>
+</div>
+<span class="font-code">04</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Contract Management (Middle/Right Column - 2/3) -->
+<div class="col-span-12 lg:col-span-8 flex flex-col gap-gutter">
+<!-- Contract High-Density Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm p-6 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary">Active Contracts</h3>
+<div class="flex gap-2">
+<span class="bg-surface-container-high px-3 py-1 rounded text-xs font-medium">12 Signed</span>
+<span class="bg-secondary/10 text-secondary px-3 py-1 rounded text-xs font-medium">4 Pending</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-border-subtle">
+<th class="pb-4 font-label-md text-text-muted text-[10px] uppercase tracking-wider">Agreement Name</th>
+<th class="pb-4 font-label-md text-text-muted text-[10px] uppercase tracking-wider">Party</th>
+<th class="pb-4 font-label-md text-text-muted text-[10px] uppercase tracking-wider">Status</th>
+<th class="pb-4 font-label-md text-text-muted text-[10px] uppercase tracking-wider">Expiry</th>
+<th class="pb-4"></th>
+</tr>
+</thead>
+<tbody class="text-sm">
+<tr class="border-b border-border-subtle hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-medium text-primary">Master Service Agreement 2024</td>
+<td class="py-4 text-text-muted">Stellar Cloud Systems</td>
+<td class="py-4">
+<span class="bg-success-green/10 text-success-green px-2 py-1 rounded text-[11px] font-bold">SIGNED</span>
+</td>
+<td class="py-4 text-text-muted">Dec 12, 2025</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-medium text-primary">NDA - Project Phoenix</td>
+<td class="py-4 text-text-muted">Apex Dynamics Inc.</td>
+<td class="py-4">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed px-2 py-1 rounded text-[11px] font-bold">AWAITING SIGNATURE</span>
+</td>
+<td class="py-4 text-text-muted">Jan 05, 2024</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-medium text-primary">Employment Agreement - VP Eng</td>
+<td class="py-4 text-text-muted">Internal</td>
+<td class="py-4">
+<span class="bg-success-green/10 text-success-green px-2 py-1 rounded text-[11px] font-bold">SIGNED</span>
+</td>
+<td class="py-4 text-text-muted">Indefinite</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+<tr class="border-b border-border-subtle hover:bg-surface-container-low transition-colors group">
+<td class="py-4 font-medium text-primary">IP Assignment - Q3 2023</td>
+<td class="py-4 text-text-muted">Research Partners LLC</td>
+<td class="py-4">
+<span class="bg-secondary/10 text-secondary px-2 py-1 rounded text-[11px] font-bold">IN REDLINE</span>
+</td>
+<td class="py-4 text-text-muted">Nov 22, 2023</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- General Counsel Task Queue -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm p-6 flex-1">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary">General Counsel Task Queue</h3>
+<button class="text-secondary font-bold text-xs hover:underline">Clear All</button>
+</div>
+<div class="space-y-1">
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-colors group">
+<input class="w-5 h-5 rounded border-border-subtle text-secondary focus:ring-secondary cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="font-medium text-primary text-sm">Review Series B Funding Term Sheet</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="material-symbols-outlined text-secondary text-xs" style="font-variation-settings: 'FILL' 1;">priority_high</span>
+<span class="text-xs text-secondary font-bold uppercase tracking-wider">Urgent</span>
+<span class="text-xs text-text-muted ml-2">Due in 4h</span>
+</div>
+</div>
+<div class="flex -space-x-2">
+<div class="w-6 h-6 rounded-full border-2 border-white bg-on-primary-container text-[8px] flex items-center justify-center text-white font-bold">JD</div>
+<div class="w-6 h-6 rounded-full border-2 border-white bg-secondary text-[8px] flex items-center justify-center text-white font-bold">AL</div>
+</div>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-colors group border-t border-border-subtle">
+<input class="w-5 h-5 rounded border-border-subtle text-secondary focus:ring-secondary cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="font-medium text-primary text-sm">Approve Marketing Spend Disclaimers</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-xs text-text-muted">Marketing Ops</span>
+<span class="text-xs text-text-muted px-2 border-l border-border-subtle">Due Tomorrow</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">open_in_new</span>
+</div>
+<div class="flex items-center gap-4 p-4 hover:bg-surface-container-low rounded-lg transition-colors group border-t border-border-subtle">
+<input class="w-5 h-5 rounded border-border-subtle text-secondary focus:ring-secondary cursor-pointer" type="checkbox"/>
+<div class="flex-1">
+<p class="font-medium text-primary text-sm">Update Privacy Policy for EU Expansion</p>
+<div class="flex items-center gap-2 mt-1">
+<span class="text-xs text-text-muted">Compliance</span>
+<span class="text-xs text-text-muted px-2 border-l border-border-subtle">Due Friday</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity cursor-pointer">open_in_new</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bento Bottom Row: IP Repository & Quick Links -->
+<div class="grid grid-cols-12 gap-gutter mt-gutter">
+<div class="col-span-12 lg:col-span-12 bg-white rounded-xl border border-border-subtle shadow-sm p-6 overflow-hidden flex flex-col md:flex-row gap-gutter">
+<div class="flex-1">
+<div class="flex items-center gap-3 mb-4">
+<span class="material-symbols-outlined bg-primary text-on-primary p-2 rounded-lg">history</span>
+<h3 class="font-headline-sm text-headline-sm text-primary">Filing History</h3>
+</div>
+<div class="flex gap-4">
+<div class="flex-1 p-4 rounded-xl bg-surface-container-low border-2 border-dashed border-border-subtle flex flex-col items-center justify-center group cursor-pointer hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-text-muted text-3xl mb-2 group-hover:text-primary transition-colors">upload_file</span>
+<p class="text-xs font-bold text-text-muted group-hover:text-primary">Drag to Upload Case File</p>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="flex items-center justify-between py-1 border-b border-border-subtle">
+<span class="text-xs">Patent_APP_2024_02.pdf</span>
+<span class="text-[10px] text-success-green font-bold">SUCCESS</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-border-subtle">
+<span class="text-xs">TR_Renewal_Omni.docx</span>
+<span class="text-[10px] text-text-muted">2h ago</span>
+</div>
+<div class="flex items-center justify-between py-1 border-b border-border-subtle">
+<span class="text-xs">Board_Meeting_Minutes.pdf</span>
+<span class="text-[10px] text-text-muted">Yesterday</span>
+</div>
+</div>
+</div>
+</div>
+<div class="w-full md:w-px bg-border-subtle"></div>
+<div class="w-full md:w-80">
+<h4 class="font-label-md text-text-muted mb-4">LEGAL TOOLS &amp; DIRECTORIES</h4>
+<div class="grid grid-cols-2 gap-2">
+<a class="flex flex-col items-center justify-center p-3 bg-surface-container-low rounded-lg hover:bg-primary hover:text-on-primary transition-all group" href="#">
+<span class="material-symbols-outlined mb-1">gavel</span>
+<span class="text-[10px] font-bold">Outside Counsel</span>
+</a>
+<a class="flex flex-col items-center justify-center p-3 bg-surface-container-low rounded-lg hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1">policy</span>
+<span class="text-[10px] font-bold">Law Library</span>
+</a>
+<a class="flex flex-col items-center justify-center p-3 bg-surface-container-low rounded-lg hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1">receipt_long</span>
+<span class="text-[10px] font-bold">Legal Billing</span>
+</a>
+<a class="flex flex-col items-center justify-center p-3 bg-surface-container-low rounded-lg hover:bg-primary hover:text-on-primary transition-all" href="#">
+<span class="material-symbols-outlined mb-1">diversity_3</span>
+<span class="text-[10px] font-bold">Ethics Hotline</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction script -->
+<script>
+        document.querySelectorAll('tr').forEach(row => {
+            row.addEventListener('click', () => {
+                row.classList.add('bg-primary-container/20');
+                setTimeout(() => {
+                    row.classList.remove('bg-primary-container/20');
+                }, 300);
+            });
+        });
+
+        // Simple animation logic for the 'Audit Live' tag
+        setInterval(() => {
+            const badge = document.querySelector('.animate-pulse');
+            if(badge) {
+                badge.style.opacity = badge.style.opacity === '0.5' ? '1' : '0.5';
+            }
+        }, 1000);
+    </script>
+</body></html>

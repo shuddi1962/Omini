@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniDrive | Enterprise File Management</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-secondary-fixed-variant": "#92001f",
+                    "surface": "#f7fafc",
+                    "surface-container-low": "#f1f4f6",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d7dadc",
+                    "on-primary-fixed-variant": "#2f476d",
+                    "tertiary-fixed-dim": "#e2c600",
+                    "inverse-primary": "#afc7f4",
+                    "primary-fixed": "#d6e3ff",
+                    "surface-bright": "#f7fafc",
+                    "tertiary-fixed": "#ffe241",
+                    "outline-variant": "#c4c6cf",
+                    "surface-dark": "#06142E",
+                    "secondary-fixed": "#ffdad9",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#c3ab00",
+                    "on-primary-fixed": "#001b3d",
+                    "on-primary-container": "#6f87b0",
+                    "secondary": "#ba002a",
+                    "secondary-container": "#e2213c",
+                    "text-main": "#121C2D",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-secondary-container": "#fffbff",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e5e9eb",
+                    "error-container": "#ffdad6",
+                    "on-background": "#181c1e",
+                    "on-tertiary-container": "#493f00",
+                    "on-secondary-fixed": "#410008",
+                    "success-green": "#00A91C",
+                    "text-muted": "#52667A",
+                    "on-surface": "#181c1e",
+                    "tertiary": "#6d5e00",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#001e42",
+                    "primary": "#000513",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#afc7f4",
+                    "on-tertiary-fixed": "#211b00",
+                    "border-subtle": "#E1E8ED",
+                    "surface-tint": "#475f86",
+                    "surface-container": "#ebeef0",
+                    "error": "#ba1a1a",
+                    "inverse-surface": "#2d3133",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-surface-variant": "#44474e",
+                    "surface-variant": "#e0e3e5",
+                    "outline": "#74777f",
+                    "on-tertiary-fixed-variant": "#524700",
+                    "background": "#f7fafc"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "80px",
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "display-lg": ["Inter"],
+                    "code": ["JetBrains Mono"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E1E8ED;
+            border-radius: 10px;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-on-background min-h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-primary dark:bg-primary-container shadow-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<div class="hidden md:flex items-center bg-white/10 rounded-lg px-3 py-1.5 w-96">
+<span class="material-symbols-outlined text-on-primary/70 mr-2">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-on-primary placeholder:text-on-primary/50 w-full font-body-sm" placeholder="Search files, folders, and shared spaces..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="material-symbols-outlined text-on-primary/80 hover:bg-primary-container/20 transition-colors p-2 rounded-full">notifications</button>
+<button class="material-symbols-outlined text-on-primary/80 hover:bg-primary-container/20 transition-colors p-2 rounded-full">settings</button>
+<button class="material-symbols-outlined text-on-primary/80 hover:bg-primary-container/20 transition-colors p-2 rounded-full">help</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-on-primary/20">
+<img alt="User profile" data-alt="A professional headshot of a software engineer in a modern office, characterized by soft natural lighting and a minimalist background with cool tones. The individual has a friendly expression, wearing a navy blue polo shirt that aligns with the corporate color palette. The image quality is crisp with a subtle bokeh effect on the office interior." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB1b-W1o1YUjz6uAeYzrD-Mvt8q2ZqtD48LWWkezOhP0R4dat0012kTyb0sf8P1JopQx18vEH-VCZejMW66JdMH9a0zMHpCHQsWZZl55R_9JERtP8whwDuHZjJXu2ap4IXRlTKBXGAJvZ7J1J9aV7JCmFQSzEDCyCbdDF7w_6AilcqOCXS5hvbTSkcIXvu4fvHiWfUclDxBdUH6yzkRe-cCurGHwza-TQGSiVAOKXCxa5WxHaFK2Y4sAmpif32dJjDpIH2csJz306Po"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-border-subtle dark:border-outline-variant bg-surface dark:bg-surface-dark flex flex-col py-4 px-3 space-y-2">
+<div class="px-3 mb-6">
+<div class="flex items-center gap-3 mb-4">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary">cloud</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-black text-primary">Global Workspace</h2>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Plan</p>
+</div>
+</div>
+<button class="w-full bg-secondary hover:opacity-90 text-on-secondary py-3 rounded-lg font-bold flex items-center justify-center gap-2 active:scale-95 duration-150 shadow-md">
+<span class="material-symbols-outlined">add</span>
+                New Project
+            </button>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span class="font-label-md text-label-md">Communications</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+<span class="font-label-md text-label-md">Files</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Marketing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">autorenew</span>
+<span class="font-label-md text-label-md">Automations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">delete</span>
+<span class="font-label-md text-label-md">Trash</span>
+</a>
+</nav>
+<!-- Storage Indicator -->
+<div class="mt-auto px-3 py-4 border-t border-border-subtle">
+<div class="flex justify-between items-center mb-2">
+<span class="text-xs font-bold text-text-main">Storage</span>
+<span class="text-xs text-text-muted">75% used</span>
+</div>
+<div class="w-full bg-surface-container-highest rounded-full h-2 mb-3">
+<div class="bg-secondary h-2 rounded-full" style="width: 75%"></div>
+</div>
+<p class="text-[10px] text-text-muted mb-4 leading-tight">1.5 TB of 2 TB used. Your team has 500GB remaining before the next tier upgrade.</p>
+<div class="space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Content -->
+<main class="pl-64 pt-16 min-h-screen">
+<div class="p-8 max-w-7xl mx-auto">
+<!-- Header Actions -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-text-main">OmniDrive</h1>
+<p class="text-text-muted font-body-sm">Manage, share and collaborate on enterprise-grade assets.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-bold flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined">upload</span>
+                        Upload
+                    </button>
+<button class="bg-white border border-border-subtle text-text-main px-4 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">create_new_folder</span>
+                        New Folder
+                    </button>
+<button class="bg-white border border-border-subtle text-text-main px-4 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">share</span>
+                        Share
+                    </button>
+</div>
+</div>
+<!-- Toolbar -->
+<div class="flex items-center justify-between py-4 mb-6 border-b border-border-subtle">
+<div class="flex items-center gap-6">
+<button class="font-bold text-primary border-b-2 border-primary pb-4 -mb-[17px]">My Files</button>
+<button class="font-semibold text-text-muted hover:text-primary pb-4 -mb-[17px] transition-colors">Shared with me</button>
+<button class="font-semibold text-text-muted hover:text-primary pb-4 -mb-[17px] transition-colors">Recent</button>
+<button class="font-semibold text-text-muted hover:text-primary pb-4 -mb-[17px] transition-colors">Starred</button>
+</div>
+<div class="flex items-center gap-2 bg-surface-container-low p-1 rounded-lg">
+<button class="p-1.5 rounded-md bg-white shadow-sm text-primary transition-all" id="grid-view-btn">
+<span class="material-symbols-outlined">grid_view</span>
+</button>
+<button class="p-1.5 rounded-md text-text-muted hover:bg-white/50 transition-all" id="list-view-btn">
+<span class="material-symbols-outlined">view_list</span>
+</button>
+</div>
+</div>
+<!-- Explorer Canvas (Grid View Default) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 gap-6" id="explorer-canvas">
+<!-- Folder Row 1 -->
+<div class="group bg-white p-4 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer">
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">folder</span>
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<h3 class="font-bold text-text-main truncate">Marketing Assets 2024</h3>
+<p class="text-xs text-text-muted mt-1">124 files • 4.2 GB</p>
+</div>
+<div class="group bg-white p-4 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer">
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">folder</span>
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<h3 class="font-bold text-text-main truncate">User Research (Q3)</h3>
+<p class="text-xs text-text-muted mt-1">56 files • 1.1 GB</p>
+</div>
+<div class="group bg-white p-4 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer">
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">folder</span>
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<h3 class="font-bold text-text-main truncate">Product Screenshots</h3>
+<p class="text-xs text-text-muted mt-1">210 files • 890 MB</p>
+</div>
+<div class="group bg-white p-4 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer">
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">folder_shared</span>
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<h3 class="font-bold text-text-main truncate">Team Shared Space</h3>
+<p class="text-xs text-text-muted mt-1">1.2k files • 15.4 GB</p>
+</div>
+<div class="group bg-white p-4 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer">
+<div class="flex items-start justify-between mb-4">
+<span class="material-symbols-outlined text-secondary text-4xl" style="font-variation-settings: 'FILL' 1;">folder</span>
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100 transition-opacity">more_vert</button>
+</div>
+<h3 class="font-bold text-text-main truncate">Draft Archives</h3>
+<p class="text-xs text-text-muted mt-1">12 files • 45 MB</p>
+</div>
+<!-- File Row -->
+<div class="group bg-white p-2 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer overflow-hidden">
+<div class="h-32 rounded-lg mb-3 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A clean, professional 3D render of a brand guideline presentation with minimalist typography. The design features a palette of navy blue and soft gray with a single accent of bold red. The lighting is soft and studio-quality, emphasizing high-end product design and corporate reliability. The overall vibe is futuristic and organized." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhJkeJ3_n6aqDzlcFZLL_r-va8hmz__ZvWwnyR8InUbMWYoeCCL6ua_BUJ5vKkgg7ZFCrn1P7uK-P-a6bF-h83NNxYTMdlMjTWgbGKNWiwCoAMnA98dE9ZRyAQmWiXoDOcUG_MmH2MlokuFW_AyLqOJczjBenATIzmIqvaGBnR4_M60rYZ22L2kKlCfaQIj19kZ2WXo88tno-q4-uiWyKMMsLeyrl4sLwQbyHu5SrQfkdEwfD8tVOECk33zheGtoSIE-bjBhfuHAxk"/>
+</div>
+<div class="px-2 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-text-main truncate">Brand_Guidelines.pdf</h3>
+<span class="material-symbols-outlined text-text-muted text-lg">picture_as_pdf</span>
+</div>
+<p class="text-[10px] text-text-muted mt-1">Edited 2h ago • 14.2 MB</p>
+</div>
+</div>
+<div class="group bg-white p-2 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer overflow-hidden">
+<div class="h-32 rounded-lg mb-3 bg-surface-container overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="An intricate dashboard UI screenshot featuring complex data visualizations, bar charts, and circular progress indicators. The layout is clean and corporate, dominated by a white and light-gray background with professional navy blue and success-green color highlights. High resolution, high contrast, and perfectly aligned UI elements." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1bWT3Id9TunncgC6UEM43ZZ0PRAgs2lH4nnlHIjlbafm8ICYy-HxAqQrzM7CEjWuDs1KewqtVkR1jNqOZZfOzbR99QeA7LTRLdTdrQ14BUxpelT-BjOIi84Tl7HsysoD9HNF_iiH_eco2hOAEat29G5Tb7NptzKPf6_pR_sMDnR2LWZg1BYMofREt3DiWZZFbgq4dOSfm6sshyxNDE0gxKSl0D8ZP5x-GxOi9BelT0-ph8ts4rcCzoM5b6eJOq9uaLjbjazYKqpbu"/>
+</div>
+<div class="px-2 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-text-main truncate">Dashboard_Final.png</h3>
+<span class="material-symbols-outlined text-text-muted text-lg">image</span>
+</div>
+<p class="text-[10px] text-text-muted mt-1">Edited 5h ago • 3.1 MB</p>
+</div>
+</div>
+<div class="group bg-white p-2 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer overflow-hidden">
+<div class="h-32 rounded-lg mb-3 flex items-center justify-center bg-primary-container">
+<span class="material-symbols-outlined text-on-primary-container text-4xl">description</span>
+</div>
+<div class="px-2 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-text-main truncate">Project_Scope.docx</h3>
+<span class="material-symbols-outlined text-text-muted text-lg">article</span>
+</div>
+<p class="text-[10px] text-text-muted mt-1">Edited yesterday • 1.2 MB</p>
+</div>
+</div>
+<div class="group bg-white p-2 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer overflow-hidden">
+<div class="h-32 rounded-lg mb-3 flex items-center justify-center bg-surface-container-highest">
+<span class="material-symbols-outlined text-secondary text-4xl">video_library</span>
+</div>
+<div class="px-2 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-text-main truncate">Onboarding_Video.mp4</h3>
+<span class="material-symbols-outlined text-text-muted text-lg">movie</span>
+</div>
+<p class="text-[10px] text-text-muted mt-1">Edited 3 days ago • 840 MB</p>
+</div>
+</div>
+<div class="group bg-white p-2 rounded-xl border border-border-subtle hover:shadow-xl hover:shadow-primary-container/5 transition-all cursor-pointer overflow-hidden">
+<div class="h-32 rounded-lg mb-3 flex items-center justify-center bg-tertiary/10">
+<span class="material-symbols-outlined text-tertiary text-4xl">table_chart</span>
+</div>
+<div class="px-2 pb-2">
+<div class="flex items-center justify-between">
+<h3 class="font-bold text-sm text-text-main truncate">Q4_Revenue.xlsx</h3>
+<span class="material-symbols-outlined text-text-muted text-lg">grid_on</span>
+</div>
+<p class="text-[10px] text-text-muted mt-1">Edited 1 week ago • 2.5 MB</p>
+</div>
+</div>
+</div>
+<!-- List View (Hidden by Default) -->
+<div class="hidden overflow-x-auto" id="list-canvas">
+<table class="w-full text-left">
+<thead>
+<tr class="text-text-muted font-label-md border-b border-border-subtle">
+<th class="py-3 font-semibold">Name</th>
+<th class="py-3 font-semibold">Last Modified</th>
+<th class="py-3 font-semibold">File Size</th>
+<th class="py-3 font-semibold">Owner</th>
+<th class="py-3 font-semibold"></th>
+</tr>
+</thead>
+<tbody class="font-body-sm text-text-main">
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span>Marketing Assets 2024</span>
+</td>
+<td class="py-4 text-text-muted">Today, 2:45 PM</td>
+<td class="py-4 text-text-muted">4.2 GB</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-on-primary">JS</div>
+<span>Jordan S.</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100">more_horiz</button>
+</td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary" style="font-variation-settings: 'FILL' 1;">folder</span>
+<span>User Research (Q3)</span>
+</td>
+<td class="py-4 text-text-muted">Yesterday, 9:12 AM</td>
+<td class="py-4 text-text-muted">1.1 GB</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-secondary flex items-center justify-center text-[10px] text-on-primary">AM</div>
+<span>Alex M.</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100">more_horiz</button>
+</td>
+</tr>
+<tr class="border-b border-border-subtle/50 hover:bg-surface-container-low transition-colors group cursor-pointer">
+<td class="py-4 flex items-center gap-3">
+<span class="material-symbols-outlined text-text-muted">picture_as_pdf</span>
+<span>Brand_Guidelines.pdf</span>
+</td>
+<td class="py-4 text-text-muted">Today, 11:30 AM</td>
+<td class="py-4 text-text-muted">14.2 MB</td>
+<td class="py-4 flex items-center gap-2">
+<div class="w-6 h-6 rounded-full bg-tertiary flex items-center justify-center text-[10px] text-on-primary">RH</div>
+<span>R. Harris</span>
+</td>
+<td class="py-4 text-right">
+<button class="material-symbols-outlined text-text-muted opacity-0 group-hover:opacity-100">more_horiz</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- Floating Action Button (FAB) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-all z-50 md:hidden">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+<script>
+        const gridViewBtn = document.getElementById('grid-view-btn');
+        const listViewBtn = document.getElementById('list-view-btn');
+        const explorerCanvas = document.getElementById('explorer-canvas');
+        const listCanvas = document.getElementById('list-canvas');
+
+        gridViewBtn.addEventListener('click', () => {
+            explorerCanvas.classList.remove('hidden');
+            listCanvas.classList.add('hidden');
+            gridViewBtn.classList.add('bg-white', 'shadow-sm', 'text-primary');
+            gridViewBtn.classList.remove('text-text-muted', 'hover:bg-white/50');
+            listViewBtn.classList.add('text-text-muted', 'hover:bg-white/50');
+            listViewBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+        });
+
+        listViewBtn.addEventListener('click', () => {
+            explorerCanvas.classList.add('hidden');
+            listCanvas.classList.remove('hidden');
+            listViewBtn.classList.add('bg-white', 'shadow-sm', 'text-primary');
+            listViewBtn.classList.remove('text-text-muted', 'hover:bg-white/50');
+            gridViewBtn.classList.add('text-text-muted', 'hover:bg-white/50');
+            gridViewBtn.classList.remove('bg-white', 'shadow-sm', 'text-primary');
+        });
+
+        // Micro-interactions for folders
+        document.querySelectorAll('.group').forEach(item => {
+            item.addEventListener('mouseenter', () => {
+                item.style.transform = 'translateY(-2px)';
+            });
+            item.addEventListener('mouseleave', () => {
+                item.style.transform = 'translateY(0)';
+            });
+        });
+    </script>
+</body></html>

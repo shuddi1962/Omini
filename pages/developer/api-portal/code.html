@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform | Developer API Documentation</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-container": "#fffbff",
+                        "on-background": "#181c1e",
+                        "text-main": "#121C2D",
+                        "surface-container-highest": "#e0e3e5",
+                        "on-error": "#ffffff",
+                        "surface-container-low": "#f1f4f6",
+                        "surface-bright": "#f7fafc",
+                        "tertiary-container": "#c3ab00",
+                        "inverse-surface": "#2d3133",
+                        "tertiary": "#6d5e00",
+                        "surface-container": "#ebeef0",
+                        "primary-fixed": "#d6e3ff",
+                        "on-primary-container": "#6f87b0",
+                        "error": "#ba1a1a",
+                        "surface-variant": "#e0e3e5",
+                        "on-error-container": "#93000a",
+                        "surface": "#f7fafc",
+                        "primary": "#000513",
+                        "primary-fixed-dim": "#afc7f4",
+                        "on-surface-variant": "#44474e",
+                        "inverse-primary": "#afc7f4",
+                        "inverse-on-surface": "#eef1f3",
+                        "tertiary-fixed-dim": "#e2c600",
+                        "primary-container": "#001e42",
+                        "on-tertiary": "#ffffff",
+                        "surface-dark": "#06142E",
+                        "on-secondary-fixed-variant": "#92001f",
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "on-tertiary-fixed-variant": "#524700",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed": "#211b00",
+                        "secondary-fixed": "#ffdad9",
+                        "outline": "#74777f",
+                        "background": "#f7fafc",
+                        "text-muted": "#52667A",
+                        "surface-container-high": "#e5e9eb",
+                        "error-container": "#ffdad6",
+                        "tertiary-fixed": "#ffe241",
+                        "on-primary": "#ffffff",
+                        "border-subtle": "#E1E8ED",
+                        "on-surface": "#181c1e",
+                        "secondary-container": "#e2213c",
+                        "on-secondary-fixed": "#410008",
+                        "on-primary-fixed": "#001b3d",
+                        "outline-variant": "#c4c6cf",
+                        "on-tertiary-container": "#493f00",
+                        "on-primary-fixed-variant": "#2f476d",
+                        "on-secondary": "#ffffff",
+                        "surface-tint": "#475f86",
+                        "surface-dim": "#d7dadc",
+                        "success-green": "#00A91C",
+                        "secondary": "#ba002a"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "section-padding": "80px",
+                        "margin-mobile": "16px",
+                        "base": "8px",
+                        "container-max": "1280px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "label-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .code-container { font-family: 'JetBrains Mono', monospace; }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E1E8ED; border-radius: 10px; }
+        .tab-active { border-bottom: 2px solid #ba002a; color: #ba002a; }
+        .code-block { background-color: #000513; color: #afc7f4; border-radius: 8px; padding: 16px; overflow-x: auto; }
+        .gradient-mesh { background: radial-gradient(at 0% 0%, rgba(186, 0, 42, 0.05) 0px, transparent 50%), radial-gradient(at 100% 100%, rgba(0, 5, 19, 0.05) 0px, transparent 50%); }
+    </style>
+</head>
+<body class="bg-background text-text-main antialiased selection:bg-secondary-fixed selection:text-on-secondary-fixed">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-primary dark:bg-surface-dark text-on-primary dark:text-inverse-primary shadow-sm z-50 flex justify-between items-center px-gutter">
+<div class="flex items-center gap-6">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</h1>
+<nav class="hidden md:flex gap-6 items-center">
+<a class="text-on-primary font-bold border-b-2 border-secondary font-body-md text-body-md py-1" href="#">Docs</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors py-1 px-2 rounded-md font-body-md text-body-md" href="#">API Reference</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors py-1 px-2 rounded-md font-body-md text-body-md" href="#">Changelog</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50">search</span>
+<input class="bg-primary-container text-on-primary text-sm rounded-lg pl-10 pr-4 py-2 border-none focus:ring-2 focus:ring-secondary w-64" placeholder="Quick search..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined p-2 cursor-pointer active:opacity-80 hover:bg-primary-container/50 rounded-full">notifications</button>
+<button class="material-symbols-outlined p-2 cursor-pointer active:opacity-80 hover:bg-primary-container/50 rounded-full">settings</button>
+<div class="w-8 h-8 rounded-full bg-secondary-fixed overflow-hidden border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a software engineer in a modern office, soft lighting, minimalist background, Corporate Modern aesthetic with deep primary navy and subtle red tones." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCw5bP6EFJIa_XysSmq4rohG5gbqt5b5M3FxA52U_05S262CoGOX0BCgDZavzSEz-IDAPA6NyRex8cTon0jShiRgQFZlTre3Si0-Wq5FvbTznMLx18B5ZG2AmfxCPrudFuuF8T-PpSTsIrzZRstogd13sR0v7DMHgGcRLTiYYfehewPcXxXGy9smSKVXIAuA_fBfrN2OL0p_mVRxM7F14JK35AknZRlCcYCI1gCydyyQZGtsYMWuX4NU4_mssjW6eXJzfZH9VX7ea2Y"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flex flex-col py-base px-4 overflow-y-auto hidden lg:flex">
+<div class="mb-6 flex items-center gap-3 px-2">
+<div class="w-10 h-10 bg-primary flex items-center justify-center rounded-lg">
+<span class="material-symbols-outlined text-on-primary" data-weight="fill">developer_mode_tv</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-black text-primary dark:text-primary-fixed">Developer</p>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Suite</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="text-label-md text-text-muted uppercase tracking-widest font-semibold px-2 py-3">Getting Started</div>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg group" href="#">
+<span class="material-symbols-outlined text-sm">rocket_launch</span>
+<span class="font-label-md text-label-md">Introduction</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 bg-secondary text-on-secondary rounded-lg font-semibold transition-all duration-200" href="#">
+<span class="material-symbols-outlined text-sm">vpn_key</span>
+<span class="font-label-md text-label-md">Authentication</span>
+</a>
+<div class="text-label-md text-text-muted uppercase tracking-widest font-semibold px-2 py-3 mt-4">API Endpoints</div>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">chat</span>
+<span class="font-label-md text-label-md">Communications</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+<span class="font-label-md text-label-md">Files</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">campaign</span>
+<span class="font-label-md text-label-md">Marketing</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">settings_suggest</span>
+<span class="font-label-md text-label-md">Automations</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">dns</span>
+<span class="font-label-md text-label-md">Infrastructure</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-1">
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-2 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg" href="#">
+<span class="material-symbols-outlined text-sm">manage_accounts</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Layout -->
+<main class="lg:ml-64 pt-16 min-h-screen gradient-mesh">
+<div class="flex flex-col xl:flex-row h-full">
+<!-- Documentation Left Panel -->
+<div class="flex-1 px- gutter py-10 lg:px-12 border-r border-border-subtle bg-surface-container-lowest/50">
+<nav class="mb-8 flex gap-2 text-label-md text-text-muted items-center">
+<a class="hover:text-primary" href="#">Docs</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<a class="hover:text-primary" href="#">Authentication</a>
+<span class="material-symbols-outlined text-[10px]">chevron_right</span>
+<span class="text-primary font-bold">API Keys</span>
+</nav>
+<article class="prose max-w-3xl">
+<h2 class="font-headline-lg text-headline-lg text-primary mb-4">Authentication Overview</h2>
+<p class="font-body-lg text-body-lg text-text-muted mb-8">
+                        The OmniPlatform API uses API keys to authenticate requests. You can view and manage your API keys in the <span class="text-secondary font-semibold">Developer Dashboard</span>.
+                    </p>
+<section class="mb-12">
+<div class="bg-primary-container/5 border-l-4 border-primary p-6 rounded-r-xl mb-8">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-weight="fill">info</span>
+<h4 class="font-headline-sm text-headline-sm text-primary">Security Note</h4>
+</div>
+<p class="font-body-md text-body-md text-text-main">
+                                Your API keys carry many privileges, so be sure to keep them secure! Do not share your secret API keys in publicly accessible areas such as GitHub, client-side code, and so forth.
+                            </p>
+</div>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">API Key Management</h3>
+<p class="font-body-md text-body-md text-text-muted mb-6">
+                            All API requests must be made over HTTPS. Calls made over plain HTTP will fail. API requests without authentication will also fail.
+                        </p>
+<!-- Key Management UI Section -->
+<div class="bg-white rounded-xl shadow-sm border border-border-subtle p-6 mb-8 overflow-hidden">
+<div class="flex justify-between items-center mb-6">
+<h4 class="font-headline-sm text-headline-sm text-primary">Active API Keys</h4>
+<button class="bg-secondary text-on-secondary px-4 py-2 rounded-lg font-label-md text-label-md flex items-center gap-2 hover:opacity-90 transition-all active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span> Create New Key
+                                </button>
+</div>
+<div class="space-y-4">
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-border-subtle">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-success-green/10 flex items-center justify-center rounded-full text-success-green">
+<span class="material-symbols-outlined" data-weight="fill">verified_user</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-main font-bold">Production Main Key</p>
+<p class="font-code text-code text-text-muted">omni_live_••••••••••••3a9x</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-success-green/20 text-success-green rounded-full text-[10px] font-bold uppercase tracking-wider">Active</span>
+<button class="material-symbols-outlined text-text-muted hover:text-primary transition-colors">content_copy</button>
+<button class="material-symbols-outlined text-text-muted hover:text-error transition-colors">delete</button>
+</div>
+</div>
+<div class="flex items-center justify-between p-4 bg-surface-container-low rounded-lg border border-border-subtle">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 bg-tertiary-fixed-dim/30 flex items-center justify-center rounded-full text-tertiary">
+<span class="material-symbols-outlined">destruction</span>
+</div>
+<div>
+<p class="font-label-md text-label-md text-text-main font-bold">Staging / Test Key</p>
+<p class="font-code text-code text-text-muted">omni_test_••••••••••••92fk</p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-2 py-1 bg-surface-container-highest text-text-muted rounded-full text-[10px] font-bold uppercase tracking-wider">Test</span>
+<button class="material-symbols-outlined text-text-muted hover:text-primary transition-colors">content_copy</button>
+<button class="material-symbols-outlined text-text-muted hover:text-error transition-colors">delete</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section>
+<h3 class="font-headline-md text-headline-md text-primary mb-4">Request Format</h3>
+<p class="font-body-md text-body-md text-text-muted mb-4">
+                            You provide your API key in the <code>Authorization</code> header using the <code>Bearer</code> scheme.
+                        </p>
+<div class="bg-surface-container-highest/30 rounded-lg p-4 font-code text-code border border-border-subtle">
+                            Authorization: Bearer <span class="text-secondary font-bold">YOUR_API_KEY</span>
+</div>
+</section>
+</article>
+</div>
+<!-- Code Examples Right Panel -->
+<div class="w-full xl:w-[480px] bg-primary-container text-on-primary-container p-6 lg:p-8 min-h-screen sticky top-16 border-l border-primary/20">
+<div class="flex items-center justify-between mb-8">
+<div class="flex gap-4">
+<button class="tab-btn pb-2 font-label-md text-label-md tab-active transition-all" id="tab-curl" onclick="switchTab('curl')">cURL</button>
+<button class="tab-btn pb-2 font-label-md text-label-md text-on-primary-container/60 hover:text-on-primary-container transition-all" id="tab-python" onclick="switchTab('python')">Python</button>
+<button class="tab-btn pb-2 font-label-md text-label-md text-on-primary-container/60 hover:text-on-primary-container transition-all" id="tab-nodejs" onclick="switchTab('nodejs')">Node.js</button>
+</div>
+<button class="flex items-center gap-2 text-on-primary-container/60 hover:text-on-primary-container transition-all">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+<span class="text-[12px] font-bold uppercase">Copy Code</span>
+</button>
+</div>
+<!-- Code Blocks -->
+<div class="code-content block" id="code-curl">
+<div class="code-block font-code text-body-sm leading-relaxed">
+<span class="text-tertiary-fixed">curl</span> -X GET <span class="text-success-green">"https://api.omni.com/v1/user"</span> \<br/>
+                          -H <span class="text-success-green">"Authorization: Bearer YOUR_API_KEY"</span> \<br/>
+                          -H <span class="text-success-green">"Content-Type: application/json"</span>
+</div>
+<div class="mt-10">
+<p class="font-label-md text-label-md text-on-primary-container/50 uppercase mb-4 tracking-widest">Example Response</p>
+<div class="code-block bg-primary text-on-primary font-code text-body-sm">
+<pre>{
+  "id": "usr_94821",
+  "status": "active",
+  "created_at": 1672531200,
+  "role": "admin",
+  "meta": {
+    "organization": "OmniSuite",
+    "region": "us-east-1"
+  }
+}</pre>
+</div>
+</div>
+</div>
+<div class="code-content hidden" id="code-python">
+<div class="code-block font-code text-body-sm leading-relaxed">
+<span class="text-secondary-fixed-dim">import</span> requests<br/><br/>
+                        url = <span class="text-success-green">"https://api.omni.com/v1/user"</span><br/>
+                        headers = {<br/>
+                          <span class="text-success-green">"Authorization"</span>: <span class="text-success-green">"Bearer YOUR_API_KEY"</span><br/>
+                        }<br/><br/>
+                        response = requests.get(url, headers=headers)<br/>
+<span class="text-secondary-fixed-dim">print</span>(response.json())
+                    </div>
+</div>
+<div class="code-content hidden" id="code-nodejs">
+<div class="code-block font-code text-body-sm leading-relaxed">
+<span class="text-secondary-fixed-dim">const</span> https = <span class="text-secondary-fixed-dim">require</span>(<span class="text-success-green">'https'</span>);<br/><br/>
+<span class="text-secondary-fixed-dim">const</span> options = {<br/>
+                          hostname: <span class="text-success-green">'api.omni.com'</span>,<br/>
+                          path: <span class="text-success-green">'/v1/user'</span>,<br/>
+                          method: <span class="text-success-green">'GET'</span>,<br/>
+                          headers: {<br/>
+                            <span class="text-success-green">'Authorization'</span>: <span class="text-success-green">'Bearer YOUR_API_KEY'</span><br/>
+                          }<br/>
+                        };<br/><br/>
+<span class="text-secondary-fixed-dim">const</span> req = https.request(options, (res) =&gt; { ... });<br/>
+                        req.end();
+                    </div>
+</div>
+<!-- Bento Grid Style Info Cards -->
+<div class="mt-12 grid grid-cols-1 gap-4">
+<div class="p-6 bg-white/5 border border-on-primary/10 rounded-xl">
+<h5 class="text-on-primary font-headline-sm text-headline-sm mb-2">SDK Availability</h5>
+<p class="text-on-primary/60 font-body-sm text-body-sm mb-4">Official SDKs are available for deep integration with built-in retry logic.</p>
+<div class="flex gap-2">
+<span class="px-3 py-1 bg-primary rounded-full text-[12px] font-bold border border-white/10">Go</span>
+<span class="px-3 py-1 bg-primary rounded-full text-[12px] font-bold border border-white/10">Ruby</span>
+<span class="px-3 py-1 bg-primary rounded-full text-[12px] font-bold border border-white/10">PHP</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB for Support (Only shown on desktop documentation context as per rule) -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full shadow-lg flex items-center justify-center hover:scale-105 active:scale-95 transition-all z-[60] lg:hidden">
+<span class="material-symbols-outlined">help</span>
+</button>
+<script>
+        function switchTab(lang) {
+            // Hide all code contents
+            document.querySelectorAll('.code-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('.code-content').forEach(el => el.classList.remove('block'));
+            
+            // Show selected
+            document.getElementById('code-' + lang).classList.remove('hidden');
+            document.getElementById('code-' + lang).classList.add('block');
+
+            // Update UI tabs
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('tab-active');
+                btn.classList.add('text-on-primary-container/60');
+            });
+            document.getElementById('tab-' + lang).classList.add('tab-active');
+            document.getElementById('tab-' + lang).classList.remove('text-on-primary-container/60');
+        }
+
+        // Search highlight micro-interaction
+        const searchInput = document.querySelector('input[type="text"]');
+        searchInput.addEventListener('focus', () => {
+            searchInput.parentElement.classList.add('scale-105');
+            searchInput.parentElement.classList.add('transition-transform');
+        });
+        searchInput.addEventListener('blur', () => {
+            searchInput.parentElement.classList.remove('scale-105');
+        });
+    </script>
+</body></html>

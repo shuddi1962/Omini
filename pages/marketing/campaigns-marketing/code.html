@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniCampaigns | Marketing Automation Center</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#92001f",
+                        "surface": "#f7fafc",
+                        "surface-container-low": "#f1f4f6",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d7dadc",
+                        "on-primary-fixed-variant": "#2f476d",
+                        "tertiary-fixed-dim": "#e2c600",
+                        "inverse-primary": "#afc7f4",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-bright": "#f7fafc",
+                        "tertiary-fixed": "#ffe241",
+                        "outline-variant": "#c4c6cf",
+                        "surface-dark": "#06142E",
+                        "secondary-fixed": "#ffdad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c3ab00",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary-container": "#6f87b0",
+                        "secondary": "#ba002a",
+                        "secondary-container": "#e2213c",
+                        "text-main": "#121C2D",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-high": "#e5e9eb",
+                        "error-container": "#ffdad6",
+                        "on-background": "#181c1e",
+                        "on-tertiary-container": "#493f00",
+                        "on-secondary-fixed": "#410008",
+                        "success-green": "#00A91C",
+                        "text-muted": "#52667A",
+                        "on-surface": "#181c1e",
+                        "tertiary": "#6d5e00",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#001e42",
+                        "primary": "#000513",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#afc7f4",
+                        "on-tertiary-fixed": "#211b00",
+                        "border-subtle": "#E1E8ED",
+                        "surface-tint": "#475f86",
+                        "surface-container": "#ebeef0",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "on-surface-variant": "#44474e",
+                        "surface-variant": "#e0e3e5",
+                        "outline": "#74777f",
+                        "on-tertiary-fixed-variant": "#524700",
+                        "background": "#f7fafc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding": "80px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .workflow-line {
+            position: absolute;
+            background: repeating-linear-gradient(90deg, #E1E8ED 0, #E1E8ED 4px, transparent 4px, transparent 8px);
+            height: 2px;
+            z-index: 0;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E1E8ED;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface font-body-md text-text-main antialiased overflow-x-hidden">
+<!-- Top Navigation Bar -->
+<header class="fixed top-0 w-full z-50 shadow-md bg-primary flex justify-between items-center px-6 h-16">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary tracking-tight">OmniPlatform</h1>
+<div class="hidden md:flex items-center gap-6">
+<nav class="flex gap-4">
+<a class="font-body-md text-body-md text-secondary border-b-2 border-secondary duration-200 ease-in-out" href="#">Marketing</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:bg-primary-container/20 transition-colors duration-200 ease-in-out px-2" href="#">Communications</a>
+<a class="font-body-md text-body-md text-on-primary/80 hover:bg-primary-container/20 transition-colors duration-200 ease-in-out px-2" href="#">Files</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/60">search</span>
+<input class="bg-primary-container/40 border-none rounded-lg pl-10 pr-4 py-2 text-on-primary placeholder-on-primary/40 focus:ring-2 focus:ring-secondary w-64" placeholder="Search campaigns..." type="text"/>
+</div>
+<button class="material-symbols-outlined text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-primary hover:bg-primary-container/20 p-2 rounded-full transition-colors">settings</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-on-primary/20 bg-surface-container">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate marketing executive, soft studio lighting, sharp focus on eyes, neutral modern background, high-end photography style consistent with enterprise software branding." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBLWdxuLfXaZ_Bf0SCLGactox8tnEH81Yt8gtbrG6KGdS-gpqoGtarhGiLWmC5zV4_J_fK4Y5hzyamIPiofQVB-_TQUWb39eLlfKOd-qoG15tr1UnPyKWq3PlNChbWqHaNVpWEsprZnRlOMKOnI7HulIMkMbA3fINIey3M_3iGs7WNKudF4oKqx40hTcB1efWlGCYEZJBRhs_QSGe5BqQ1BWi550xjkN-flQj8-IOa9oTCMBZ0_bNTK7_61kGEjvKhy8XKe_4iTRiFm"/>
+</div>
+</div>
+</header>
+<!-- Side Navigation -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-border-subtle bg-surface flex flex-col py-4 px-3 space-y-2 hidden lg:flex">
+<div class="px-3 mb-6">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" style="font-variation-settings: 'FILL' 1;">campaign</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-black text-primary leading-tight">OmniCampaigns</p>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Suite</p>
+</div>
+</div>
+</div>
+<button class="w-full bg-secondary-container text-on-secondary-container font-bold rounded-lg flex items-center gap-3 py-3 px-4 active:scale-95 duration-150 mb-4">
+<span class="material-symbols-outlined">add_circle</span>
+<span>New Campaign</span>
+</button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg bg-surface-container-high text-secondary font-bold transition-all" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">mail</span>
+<span class="font-label-md">Email Campaigns</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">autorenew</span>
+<span class="font-label-md">Automations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="font-label-md">Audience</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-label-md">Workflows</span>
+</a>
+</nav>
+<div class="pt-4 border-t border-border-subtle space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-text-muted hover:bg-surface-container-low transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="lg:ml-64 pt-24 px-6 pb-12 min-h-screen bg-surface">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary mb-1">Campaign Performance</h2>
+<p class="text-text-muted">Real-time overview of your marketing orchestration across all channels.</p>
+</div>
+<div class="flex gap-3">
+<button class="bg-primary text-on-primary px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 hover:opacity-90 transition-opacity">
+<span class="material-symbols-outlined text-[20px]">ios_share</span>
+                        Export Data
+                    </button>
+<button class="bg-secondary text-on-secondary px-6 py-2.5 rounded-lg font-semibold flex items-center gap-2 shadow-md hover:-translate-y-0.5 transition-all">
+<span class="material-symbols-outlined text-[20px]">rocket_launch</span>
+                        Launch Wizard
+                    </button>
+</div>
+</div>
+<!-- Bento Grid Stats -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg text-primary">
+<span class="material-symbols-outlined">send</span>
+</div>
+<span class="bg-success-green/10 text-success-green text-[12px] font-bold px-2 py-0.5 rounded-full">+12.5%</span>
+</div>
+<p class="text-text-muted font-label-md uppercase tracking-wider mb-1">Total Sent</p>
+<p class="text-3xl font-bold text-primary">1,284,092</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary/5 rounded-lg text-secondary">
+<span class="material-symbols-outlined">drafts</span>
+</div>
+<span class="bg-success-green/10 text-success-green text-[12px] font-bold px-2 py-0.5 rounded-full">Optimal</span>
+</div>
+<p class="text-text-muted font-label-md uppercase tracking-wider mb-1">Avg. Open Rate</p>
+<p class="text-3xl font-bold text-primary">24.8%</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary/10 rounded-lg text-tertiary">
+<span class="material-symbols-outlined">ads_click</span>
+</div>
+<span class="bg-error/10 text-error text-[12px] font-bold px-2 py-0.5 rounded-full">-2.1%</span>
+</div>
+<p class="text-text-muted font-label-md uppercase tracking-wider mb-1">Click-Through</p>
+<p class="text-3xl font-bold text-primary">3.12%</p>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.04)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary/5 rounded-lg text-primary">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="bg-success-green/10 text-success-green text-[12px] font-bold px-2 py-0.5 rounded-full">+44%</span>
+</div>
+<p class="text-text-muted font-label-md uppercase tracking-wider mb-1">Campaign ROI</p>
+<p class="text-3xl font-bold text-primary">$14.2k</p>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Active Campaigns List -->
+<div class="lg:col-span-2">
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)] overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary">Active Campaigns</h3>
+<button class="text-secondary font-semibold text-body-sm hover:underline">View All</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left">
+<thead class="bg-surface-container-low text-text-muted font-label-md">
+<tr>
+<th class="px-6 py-3 font-semibold uppercase">Campaign Name</th>
+<th class="px-6 py-3 font-semibold uppercase">Status</th>
+<th class="px-6 py-3 font-semibold uppercase text-right">Opens</th>
+<th class="px-6 py-3 font-semibold uppercase text-right">Clicks</th>
+<th class="px-6 py-3 font-semibold uppercase text-center">Action</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-blue-100 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-bold text-primary">Q4 Product Launch</p>
+<p class="text-text-muted text-[12px]">Last updated 2h ago</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-success-green/10 text-success-green px-3 py-1 rounded-full text-[12px] font-bold">Running</span>
+</td>
+<td class="px-6 py-5 text-right font-code text-primary">28.4%</td>
+<td class="px-6 py-5 text-right font-code text-primary">4.2%</td>
+<td class="px-6 py-5 text-center">
+<button class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-purple-100 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined">sms</span>
+</div>
+<div>
+<p class="font-bold text-primary">SMS Flash Sale</p>
+<p class="text-text-muted text-[12px]">Scheduled for 10:00 AM</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-tertiary/10 text-tertiary px-3 py-1 rounded-full text-[12px] font-bold">Scheduled</span>
+</td>
+<td class="px-6 py-5 text-right font-code text-primary">--</td>
+<td class="px-6 py-5 text-right font-code text-primary">--</td>
+<td class="px-6 py-5 text-center">
+<button class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</button>
+</td>
+</tr>
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-orange-100 flex items-center justify-center text-orange-600">
+<span class="material-symbols-outlined">auto_fix_high</span>
+</div>
+<div>
+<p class="font-bold text-primary">Nurture Sequence #4</p>
+<p class="text-text-muted text-[12px]">Automated workflow</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5">
+<span class="bg-success-green/10 text-success-green px-3 py-1 rounded-full text-[12px] font-bold">Running</span>
+</td>
+<td class="px-6 py-5 text-right font-code text-primary">42.1%</td>
+<td class="px-6 py-5 text-right font-code text-primary">12.5%</td>
+<td class="px-6 py-5 text-center">
+<button class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Workflow Preview Card -->
+<div class="lg:col-span-1">
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)] flex flex-col h-full overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
+<h3 class="font-headline-sm text-headline-sm text-primary">Active Workflow</h3>
+<span class="material-symbols-outlined text-secondary">insights</span>
+</div>
+<div class="p-6 bg-surface-container-low/30 relative flex-1">
+<!-- Visual Workflow Elements -->
+<div class="flex flex-col items-center gap-12 py-4 relative">
+<!-- Trigger Node -->
+<div class="w-full max-w-[200px] bg-white p-3 rounded-lg border-2 border-primary shadow-sm z-10 flex items-center gap-3">
+<div class="p-2 bg-primary rounded-md text-on-primary">
+<span class="material-symbols-outlined text-[18px]">person_add</span>
+</div>
+<div>
+<p class="text-[11px] uppercase font-bold text-text-muted tracking-tighter">Trigger</p>
+<p class="text-xs font-bold text-primary">New Signup</p>
+</div>
+</div>
+<!-- Step 1 Node -->
+<div class="w-full max-w-[200px] bg-white p-3 rounded-lg border border-border-subtle shadow-sm z-10 flex items-center gap-3">
+<div class="p-2 bg-secondary rounded-md text-on-primary">
+<span class="material-symbols-outlined text-[18px]">forward_to_inbox</span>
+</div>
+<div>
+<p class="text-[11px] uppercase font-bold text-text-muted tracking-tighter">Action</p>
+<p class="text-xs font-bold text-primary">Welcome Email</p>
+</div>
+</div>
+<!-- Condition Node -->
+<div class="w-full max-w-[200px] bg-white p-3 rounded-lg border border-border-subtle shadow-sm z-10 flex items-center gap-3">
+<div class="p-2 bg-tertiary rounded-md text-on-tertiary">
+<span class="material-symbols-outlined text-[18px]">alt_route</span>
+</div>
+<div>
+<p class="text-[11px] uppercase font-bold text-text-muted tracking-tighter">Decision</p>
+<p class="text-xs font-bold text-primary">Opened Email?</p>
+</div>
+</div>
+<!-- Connecting Lines (Simplified via CSS pseudo-elements/absolute divs) -->
+<div class="absolute top-[52px] bottom-[52px] w-[2px] bg-border-subtle left-1/2 -translate-x-1/2"></div>
+</div>
+</div>
+<div class="p-4 border-t border-border-subtle">
+<button class="w-full border-2 border-primary text-primary font-bold py-2 rounded-lg hover:bg-primary hover:text-on-primary transition-all">Edit Automation</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Campaign Wizard Entry Point (Large Card) -->
+<section class="mt-10 grid grid-cols-1 md:grid-cols-2 gap-8 bg-primary rounded-2xl overflow-hidden shadow-xl">
+<div class="p-10 flex flex-col justify-center">
+<span class="inline-block bg-secondary text-on-secondary px-3 py-1 rounded-full text-label-md mb-4 w-fit">AI POWERED</span>
+<h2 class="font-display-lg text-display-lg text-on-primary mb-6">Create your next masterpiece in seconds.</h2>
+<p class="text-on-primary-container text-body-lg mb-8">Our new smart campaign builder uses predictive modeling to suggest content, optimal delivery times, and audience segments based on your goals.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white text-primary px-8 py-3 rounded-lg font-bold text-body-md hover:scale-105 transition-transform">Start Building</button>
+<button class="border border-on-primary-container text-on-primary px-8 py-3 rounded-lg font-bold text-body-md hover:bg-white/5 transition-all">Watch Demo</button>
+</div>
+</div>
+<div class="relative h-64 md:h-auto min-h-[350px]">
+<img class="w-full h-full object-cover" data-alt="A sleek, modern high-tech workspace with multiple monitors showing abstract colorful marketing data visualizations. Minimalist aesthetic, cool blues and deep blacks, soft focused lighting from high-end equipment, professional enterprise photography." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBS4dHbnVBCKq3LejI0yTOUoCe8xV-tsCPJR1I3p5bVm63UzxWo22az3wMdMZy62_F7-T0fW2O7MSShK9Nf55JK04eoQYqPOnbJoP5kK1ieFFkYnpnDdWl6dYDivaUAW1dppgelpozusv03eUGxm88E65AhlCOVvSyBQ4W63dNopoKphQmfiM1nNRvJZrUCDASGzXZ2U3vt-DhcJM0_V8VLRqr5hfcTsOowYd9Pn76-IAys164hx100drHjFCtRcdQ-j6efK8z0Eg11"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary to-transparent opacity-60"></div>
+</div>
+</section>
+</div>
+</main>
+<!-- Bottom Mobile Nav (Only visible on mobile) -->
+<nav class="fixed bottom-0 left-0 w-full bg-surface-container-lowest border-t border-border-subtle flex justify-around items-center h-16 md:hidden z-50 px-2">
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Dash</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-bold">Campaigns</span>
+</button>
+<div class="relative -top-4">
+<button class="bg-secondary text-on-secondary w-12 h-12 rounded-full shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+</div>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">autorenew</span>
+<span class="text-[10px] font-bold">Automate</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="text-[10px] font-bold">Stats</span>
+</button>
+</nav>
+<!-- Micro-interactions Script -->
+<script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hover effect for table rows
+            const rows = document.querySelectorAll('tbody tr');
+            rows.forEach(row => {
+                row.addEventListener('mouseenter', () => {
+                    row.classList.add('shadow-sm');
+                });
+                row.addEventListener('mouseleave', () => {
+                    row.classList.remove('shadow-sm');
+                });
+            });
+
+            // Smooth appear for stats
+            const stats = document.querySelectorAll('.bg-surface-container-lowest');
+            stats.forEach((stat, index) => {
+                stat.style.opacity = '0';
+                stat.style.transform = 'translateY(10px)';
+                stat.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+                setTimeout(() => {
+                    stat.style.opacity = '1';
+                    stat.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body></html>

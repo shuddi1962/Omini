@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform Unified Inbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-secondary-fixed-variant": "#92001f",
+                        "surface": "#f7fafc",
+                        "surface-container-low": "#f1f4f6",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d7dadc",
+                        "on-primary-fixed-variant": "#2f476d",
+                        "tertiary-fixed-dim": "#e2c600",
+                        "inverse-primary": "#afc7f4",
+                        "primary-fixed": "#d6e3ff",
+                        "surface-bright": "#f7fafc",
+                        "tertiary-fixed": "#ffe241",
+                        "outline-variant": "#c4c6cf",
+                        "surface-dark": "#06142E",
+                        "secondary-fixed": "#ffdad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c3ab00",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary-container": "#6f87b0",
+                        "secondary": "#ba002a",
+                        "secondary-container": "#e2213c",
+                        "text-main": "#121C2D",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-high": "#e5e9eb",
+                        "error-container": "#ffdad6",
+                        "on-background": "#181c1e",
+                        "on-tertiary-container": "#493f00",
+                        "on-secondary-fixed": "#410008",
+                        "success-green": "#00A91C",
+                        "text-muted": "#52667A",
+                        "on-surface": "#181c1e",
+                        "tertiary": "#6d5e00",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#001e42",
+                        "primary": "#000513",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#afc7f4",
+                        "on-tertiary-fixed": "#211b00",
+                        "border-subtle": "#E1E8ED",
+                        "surface-tint": "#475f86",
+                        "surface-container": "#ebeef0",
+                        "error": "#ba1a1a",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "on-surface-variant": "#44474e",
+                        "surface-variant": "#e0e3e5",
+                        "outline": "#74777f",
+                        "on-tertiary-fixed-variant": "#524700",
+                        "background": "#f7fafc"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding": "80px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "display-lg": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: transparent; }
+        ::-webkit-scrollbar-thumb { background: #E1E8ED; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #c4c6cf; }
+        .glass-effect { backdrop-filter: blur(8px); background-color: rgba(255, 255, 255, 0.8); }
+    </style>
+</head>
+<body class="bg-surface text-text-main font-body-md overflow-hidden h-screen flex flex-col">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 shadow-md bg-primary flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<!-- Search Bar (on_left as per JSON) -->
+<div class="relative w-96 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/60">search</span>
+<input class="w-full bg-primary-container border-none text-on-primary placeholder:text-on-primary/50 pl-10 pr-4 py-2 rounded-lg focus:ring-2 focus:ring-secondary transition-all" placeholder="Search across all channels..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<nav class="flex gap-1">
+<!-- Intent mapping: This is "Communications" tab -->
+<button class="px-4 py-5 text-secondary border-b-2 border-secondary font-bold duration-200 ease-in-out">
+                    Inbox
+                </button>
+<button class="px-4 py-5 text-on-primary/80 hover:bg-primary-container/20 transition-colors duration-200 ease-in-out">
+                    Workspace
+                </button>
+</nav>
+<div class="flex items-center gap-2 ml-4">
+<button class="p-2 text-on-primary hover:bg-primary-container/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-primary hover:bg-primary-container/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 text-on-primary hover:bg-primary-container/20 rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-[1px] bg-on-primary/20 mx-2"></div>
+<img class="w-8 h-8 rounded-full border border-on-primary/20" data-alt="A clean professional headshot of a user with a friendly expression, wearing business casual attire, set against a neutral soft gray background in a modern studio lighting setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBaaW6Zkep1UiviJcJSgJh2FJuPXzK-AkPg3x7CUn-VFhpdWHvQ0GHM1sB0PlYN6e_ei0xAqllrD72QnQHL4H2FB12OQB7lISm5onI84UBwHmAV751Ps7hbhGEySjO7DLikbl4I3pJ1uRGnT74bjZac5rxN_7TPjFDORHQK0_4yZ_JNy-b-EDOo8dr9hxbHud6-SbEz-99pUBQDUEMilsuyCP9WHhJQ_hAOBlrfP-fbcbhKeIXyfXZvJsHSQWjmwheeg-UHHiq52Jy6"/>
+</div>
+</div>
+</header>
+<div class="flex flex-1 pt-16 h-full overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 border-r border-border-subtle bg-surface flex flex-col py-4 px-3 space-y-2 z-40 hidden md:flex">
+<div class="flex items-center gap-3 px-3 mb-6">
+<div class="w-10 h-10 bg-primary-container rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">hub</span>
+</div>
+<div>
+<p class="font-headline-sm text-headline-sm font-black text-primary leading-tight">Workspace</p>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Plan</p>
+</div>
+</div>
+<button class="w-full bg-secondary text-on-secondary py-2.5 rounded-lg font-bold flex items-center justify-center gap-2 active:scale-95 duration-150 shadow-sm mb-4">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                New Message
+            </button>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">chat</span>
+                    Communications
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">folder_shared</span>
+                    Files
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">campaign</span>
+                    Marketing
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">autorenew</span>
+                    Automations
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+                    Analytics
+                </a>
+<div class="pt-4 pb-2 px-3">
+<p class="text-[10px] font-bold uppercase tracking-widest text-text-muted opacity-50">Channels</p>
+</div>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-blue-500">mail</span>
+                    Email
+                    <span class="ml-auto text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">12</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-green-500">sms</span>
+                    SMS
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined text-emerald-600">chat_bubble</span>
+                    WhatsApp
+                    <span class="ml-auto text-[10px] bg-secondary-container text-on-secondary-container px-2 py-0.5 rounded-full">4</span>
+</a>
+</nav>
+<div class="border-t border-border-subtle pt-4 mt-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+                    Support
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">person</span>
+                    Account
+                </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-low rounded-lg transition-all" href="#">
+<span class="material-symbols-outlined">delete</span>
+                    Trash
+                </a>
+</div>
+</aside>
+<!-- Main Content Canvas (Three Pane Layout) -->
+<main class="ml-0 md:ml-64 flex-1 flex overflow-hidden">
+<!-- Pane 2: Message List -->
+<section class="w-full md:w-96 border-r border-border-subtle bg-surface-container-lowest flex flex-col">
+<div class="p-4 border-b border-border-subtle flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-primary">Unified Inbox</h2>
+<button class="p-2 hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">filter_list</span>
+</button>
+</div>
+<div class="overflow-y-auto flex-1"><div class="p-4 border-b border-border-subtle bg-surface-container-low hover:bg-surface-container-high cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-1">
+<div class="flex items-center gap-2">
+<div class="w-6 h-6 bg-primary rounded flex items-center justify-center text-[10px] text-on-primary font-bold">A</div>
+<span class="font-bold text-primary">Acme Cloud</span>
+</div>
+<span class="text-[10px] font-bold uppercase tracking-widest text-secondary bg-secondary-container/20 px-1.5 py-0.5 rounded">Sponsored</span>
+</div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-text-muted text-[16px]">campaign</span>
+<span class="text-xs font-bold uppercase tracking-wider text-text-muted">Promotion</span>
+</div>
+<h3 class="font-bold text-sm truncate">Scale your team with Acme Cloud</h3>
+<p class="text-sm text-text-muted line-clamp-2">Get 50% off your first 6 months of enterprise-grade cloud infrastructure. Limited time offer.</p>
+</div>
+<!-- Message Item 1 (Selected) -->
+<div class="p-4 border-b border-border-subtle bg-primary-container/5 border-l-4 border-secondary cursor-pointer">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-primary">Alex Rivera</span>
+<span class="text-[12px] text-text-muted">10:42 AM</span>
+</div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-emerald-600 text-[16px]">chat_bubble</span>
+<span class="text-xs font-bold uppercase tracking-wider text-emerald-600">WhatsApp</span>
+</div>
+<h3 class="font-bold text-sm truncate">Project Timeline Update</h3>
+<p class="text-sm text-text-muted line-clamp-2">Hey team, I've updated the roadmap for the Q4 launch. Please review the shared folder...</p>
+</div>
+<!-- Message Item 2 -->
+<div class="p-4 border-b border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-primary">Stripe</span>
+<span class="text-[12px] text-text-muted">09:15 AM</span>
+</div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-blue-500 text-[16px]">mail</span>
+<span class="text-xs font-bold uppercase tracking-wider text-blue-500">Email</span>
+</div>
+<h3 class="font-medium text-sm truncate">Your weekly payout summary</h3>
+<p class="text-sm text-text-muted line-clamp-2">Success! Your payout of $12,450.00 is on its way to your bank account...</p>
+</div>
+<!-- Message Item 3 -->
+<div class="p-4 border-b border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-primary">Jordan Smith</span>
+<span class="text-[12px] text-text-muted">Yesterday</span>
+</div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-green-500 text-[16px]">sms</span>
+<span class="text-xs font-bold uppercase tracking-wider text-green-500">SMS</span>
+</div>
+<h3 class="font-medium text-sm truncate">Meeting location change</h3>
+<p class="text-sm text-text-muted line-clamp-2">We moved the lunch to the rooftop garden instead of the bistro. See you at 1...</p>
+</div>
+<!-- Message Item 4 -->
+<div class="p-4 border-b border-border-subtle hover:bg-surface-container-low cursor-pointer transition-colors">
+<div class="flex justify-between items-start mb-1">
+<span class="font-bold text-primary">Sarah Chen</span>
+<span class="text-[12px] text-text-muted">Yesterday</span>
+</div>
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-emerald-600 text-[16px]">chat_bubble</span>
+<span class="text-xs font-bold uppercase tracking-wider text-emerald-600">WhatsApp</span>
+</div>
+<h3 class="font-medium text-sm truncate">Design feedback docs</h3>
+<p class="text-sm text-text-muted line-clamp-2">Just sent over the Figma comments. Let me know if the redlines make sense...</p>
+</div>
+</div>
+</section>
+<!-- Pane 3: Message Preview -->
+<section class="flex-1 hidden md:flex flex-col bg-surface relative">
+<!-- Toolbar -->
+<div class="h-16 px-6 border-b border-border-subtle flex items-center justify-between">
+<div class="flex items-center gap-2">
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-surface-container-high rounded-lg text-text-muted transition-all">
+<span class="material-symbols-outlined text-[20px]">reply</span>
+<span class="font-bold text-sm">Reply</span>
+</button>
+<button class="flex items-center gap-2 px-3 py-1.5 hover:bg-surface-container-high rounded-lg text-text-muted transition-all">
+<span class="material-symbols-outlined text-[20px]">forward</span>
+<span class="font-bold text-sm">Forward</span>
+</button>
+<div class="h-6 w-[1px] bg-border-subtle mx-2"></div>
+<button class="p-2 hover:bg-surface-container-high rounded-full text-text-muted transition-all" title="Archive">
+<span class="material-symbols-outlined">archive</span>
+</button>
+<button class="p-2 hover:bg-surface-container-high rounded-full text-error transition-all" title="Delete">
+<span class="material-symbols-outlined">delete</span>
+</button>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 hover:bg-surface-container-high rounded-full text-text-muted transition-all">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Message Body -->
+<div class="flex-1 overflow-y-auto p-8 max-w-4xl mx-auto w-full">
+<div class="flex items-center gap-4 mb-8">
+<img class="w-14 h-14 rounded-full shadow-sm" data-alt="A portrait of a male professional with short dark hair, wearing a white button-down shirt, looking directly at the camera with a confident smile, sharp focus, professional office lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAcE-3xGd3k3RLpFwY6Uzf6i3--y8M7_HD5STY_H_SP9a4mDuZOSgsQZNxQRSNzLW0ILNN3JRWqNiK0hQoLMy5wIjWzWm7mSoXIOkwjg0QYu7uVUy7f0oCxiy4-7CBnNBF05PHHI7uUOUMUJF993qSeyUdvWKVndGRM2qGZgqRjsm9DedKGRFpHQ22XkGy2OUKa-9tTUqXikKvIbt-s5VZjC7ukjPHJ_runYa_c5Llwzvcoumi039me068MyM1S_zAl2aYpIk7uJZga"/>
+<div>
+<div class="flex items-center gap-2">
+<h1 class="font-headline-md text-headline-md text-primary">Alex Rivera</h1>
+<span class="bg-surface-container-high text-text-muted px-2 py-0.5 rounded text-[10px] font-bold">CONTACT</span>
+</div>
+<p class="text-text-muted">via WhatsApp • <span class="text-emerald-600 font-bold">+1 (555) 012-3456</span></p>
+</div>
+<div class="ml-auto text-right">
+<p class="text-sm font-bold text-text-muted">Oct 24, 2023</p>
+<p class="text-xs text-text-muted opacity-60">10:42 AM (2 hours ago)</p>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-8 rounded-2xl border border-border-subtle shadow-sm mb-6">
+<h2 class="font-headline-sm text-headline-sm text-primary mb-4">Project Timeline Update</h2>
+<div class="space-y-4 text-body-lg text-on-surface-variant leading-relaxed">
+<p>Hey team,</p>
+<p>I've just finished updating the roadmap for the Q4 launch. I've taken into account the feedback from yesterday's stakeholder meeting regarding the API integration delays.</p>
+<p>Key changes include:</p>
+<ul class="list-disc pl-5 space-y-2">
+<li>Beta release pushed to Nov 15th</li>
+<li>Security audit prioritized for week of Nov 1st</li>
+<li>Marketing assets finalization by end of Oct</li>
+</ul>
+<p>Please review the detailed docs in the shared workspace folder under <code class="bg-surface-container-high px-2 py-1 rounded font-code text-sm">/projects/Q4-launch/roadmap_v2.pdf</code>.</p>
+<p>Let me know if you have any questions before the stand-up tomorrow.</p>
+<p>Best,<br/><span class="font-bold text-primary">Alex</span></p>
+</div>
+</div>
+<!-- Attachment Preview Card -->
+<div class="bg-surface-container-low border border-border-subtle p-4 rounded-xl flex items-center gap-4 hover:border-primary/30 transition-all cursor-pointer group">
+<div class="w-12 h-12 bg-red-100 text-secondary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined">picture_as_pdf</span>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm text-primary group-hover:text-secondary transition-colors">roadmap_v2.pdf</p>
+<p class="text-xs text-text-muted">2.4 MB • PDF Document</p>
+</div>
+<button class="p-2 hover:bg-white rounded-full transition-all">
+<span class="material-symbols-outlined">download</span>
+</button>
+</div>
+</div>
+<!-- Quick Reply Box -->
+<div class="p-6 border-t border-border-subtle bg-surface-container-lowest">
+<div class="relative">
+<textarea class="w-full min-h-[100px] bg-surface border border-border-subtle rounded-xl p-4 focus:ring-2 focus:ring-secondary focus:border-transparent transition-all resize-none" placeholder="Type your reply..."></textarea>
+<div class="absolute bottom-3 right-3 flex items-center gap-2">
+<button class="p-2 text-text-muted hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">attach_file</span>
+</button>
+<button class="p-2 text-text-muted hover:bg-surface-container-high rounded-full transition-all">
+<span class="material-symbols-outlined">sentiment_satisfied</span>
+</button>
+<button class="bg-secondary text-on-secondary px-6 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-on-secondary-fixed-variant transition-all shadow-md">
+                                Send
+                                <span class="material-symbols-outlined text-[18px]">send</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Mobile Navigation (Visible only on small screens) -->
+<div class="md:hidden fixed bottom-0 left-0 w-full bg-surface border-t border-border-subtle px-6 h-16 flex items-center justify-between z-50">
+<button class="flex flex-col items-center gap-1 text-secondary">
+<span class="material-symbols-outlined">inbox</span>
+<span class="text-[10px] font-bold">Inbox</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">search</span>
+<span class="text-[10px] font-bold">Search</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">chat</span>
+<span class="text-[10px] font-bold">Chat</span>
+</button>
+<button class="flex flex-col items-center gap-1 text-text-muted">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</div>
+<!-- Floating Action Button (Only for relevant screens) -->
+<button class="fixed bottom-20 right-6 md:bottom-8 md:right-8 w-14 h-14 bg-secondary text-on-secondary rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all z-50">
+<span class="material-symbols-outlined text-[28px]" style="font-variation-settings: 'FILL' 1;">edit</span>
+</button>
+<script>
+        // Simple interaction for message selection simulation
+        document.querySelectorAll('.cursor-pointer').forEach(item => {
+            item.addEventListener('click', function() {
+                // Remove active classes from others
+                document.querySelectorAll('.cursor-pointer').forEach(i => {
+                    i.classList.remove('bg-primary-container/5', 'border-l-4', 'border-secondary');
+                    i.classList.add('hover:bg-surface-container-low');
+                });
+                // Add active classes to this
+                this.classList.add('bg-primary-container/5', 'border-l-4', 'border-secondary');
+                this.classList.remove('hover:bg-surface-container-low');
+            });
+        });
+    </script>
+</body></html>

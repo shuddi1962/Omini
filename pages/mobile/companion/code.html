@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform Mobile Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#493f00",
+                        "on-secondary-fixed": "#410008",
+                        "on-secondary": "#ffffff",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e0e3e5",
+                        "surface-container-high": "#e5e9eb",
+                        "on-background": "#181c1e",
+                        "error-container": "#ffdad6",
+                        "text-main": "#121C2D",
+                        "inverse-on-surface": "#eef1f3",
+                        "on-secondary-container": "#fffbff",
+                        "surface-dark": "#06142E",
+                        "secondary-fixed": "#ffdad9",
+                        "on-primary": "#ffffff",
+                        "tertiary-container": "#c3ab00",
+                        "secondary": "#ba002a",
+                        "on-primary-fixed": "#001b3d",
+                        "on-primary-container": "#6f87b0",
+                        "secondary-container": "#e2213c",
+                        "outline-variant": "#c4c6cf",
+                        "surface-bright": "#f7fafc",
+                        "tertiary-fixed": "#ffe241",
+                        "surface": "#f7fafc",
+                        "on-secondary-fixed-variant": "#92001f",
+                        "surface-container-low": "#f1f4f6",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#d7dadc",
+                        "on-primary-fixed-variant": "#2f476d",
+                        "tertiary-fixed-dim": "#e2c600",
+                        "primary-fixed": "#d6e3ff",
+                        "inverse-primary": "#afc7f4",
+                        "background": "#f7fafc",
+                        "outline": "#74777f",
+                        "on-tertiary-fixed-variant": "#524700",
+                        "surface-variant": "#e0e3e5",
+                        "inverse-surface": "#2d3133",
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "on-surface-variant": "#44474e",
+                        "on-tertiary-fixed": "#211b00",
+                        "border-subtle": "#E1E8ED",
+                        "surface-tint": "#475f86",
+                        "surface-container": "#ebeef0",
+                        "error": "#ba1a1a",
+                        "surface-container-lowest": "#ffffff",
+                        "primary-fixed-dim": "#afc7f4",
+                        "primary": "#000513",
+                        "tertiary": "#6d5e00",
+                        "on-tertiary": "#ffffff",
+                        "primary-container": "#001e42",
+                        "success-green": "#00A91C",
+                        "text-muted": "#52667A",
+                        "on-surface": "#181c1e"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "section-padding": "80px",
+                        "container-max": "1280px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "body-md": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "headline-sm": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "code": ["JetBrains Mono"]
+                    },
+                    "fontSize": {
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(225, 232, 237, 0.5);
+        }
+        .scroll-hide::-webkit-scrollbar {
+            display: none;
+        }
+        .active-pulse {
+            animation: pulse-ring 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.95); opacity: 0.5; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+            100% { transform: scale(0.95); opacity: 0.5; }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen pb-24">
+<!-- Top Navigation Bar -->
+<nav class="fixed top-0 w-full h-16 bg-primary z-50 flex justify-between items-center px-4 shadow-sm">
+<div class="flex items-center gap-3">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-on-primary relative cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-0 right-0 block h-2.5 w-2.5 rounded-full bg-secondary ring-2 ring-primary"></span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional business headshot of a software executive in a sleek, minimalist tech office environment. High-key lighting, soft shadows, and a clean professional aesthetic using a palette of deep navy and crisp whites to match the OmniPlatform brand identity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJMYMCm_r4jlCiepQHvrRS2_R9qStXBWzznQIhsQ8ow4qTKhVx8pK0OeIoPqpdf_YNPk-d9xPZt19WCL3EAJtxR_Mp6xjsr_DQPJQcNMW7RZ7GOP-FES65EX5I6_2-LNKm2MDcJsaIiiax8bLy3tNWiEfCYTEfRLT7tVPKRGaRAXr30ycxeF2vMKZn_l9ZYPhni9voHhGxOVwZ8qu6NzM2jsHrzYGfh44iwYNrhsTJYlGfcwmKY3gsaPBnKYMjsEwQ9DMRVBF6N0PQ"/>
+</div>
+</div>
+</nav>
+<main class="pt-20 px-4 space-y-6 max-w-md mx-auto">
+<!-- System Status Indicator -->
+<section class="mt-4">
+<div class="glass-card rounded-xl p-4 flex items-center justify-between shadow-sm">
+<div class="flex items-center gap-3">
+<div class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success-green opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-success-green"></span>
+</div>
+<div>
+<h2 class="font-label-md text-label-md text-text-muted uppercase tracking-wider">System Status</h2>
+<p class="font-headline-sm text-headline-sm text-text-main">All Systems Operational</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-muted">chevron_right</span>
+</div>
+</section>
+<!-- Quick Actions Grid -->
+<section class="space-y-3">
+<h3 class="font-label-md text-label-md text-text-muted px-1">QUICK ACTIONS</h3>
+<div class="grid grid-cols-3 gap-3">
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-white rounded-xl shadow-sm border border-border-subtle active:scale-95 transition-transform">
+<div class="w-12 h-12 rounded-full bg-primary-fixed flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<span class="font-label-md text-label-md text-center">New Message</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-white rounded-xl shadow-sm border border-border-subtle active:scale-95 transition-transform">
+<div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-container">
+<span class="material-symbols-outlined">settings_suggest</span>
+</div>
+<span class="font-label-md text-label-md text-center">Trigger Workflow</span>
+</button>
+<button class="flex flex-col items-center justify-center gap-2 p-4 bg-white rounded-xl shadow-sm border border-border-subtle active:scale-95 transition-transform">
+<div class="w-12 h-12 rounded-full bg-secondary-fixed flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">receipt_long</span>
+</div>
+<span class="font-label-md text-label-md text-center">Approve Invoice</span>
+</button>
+</div>
+</section>
+<!-- Infrastructure Health (Asymmetric Layout) -->
+<section class="space-y-3">
+<h3 class="font-label-md text-label-md text-text-muted px-1">INFRASTRUCTURE HEALTH</h3>
+<div class="grid grid-cols-2 gap-4">
+<div class="col-span-2 glass-card rounded-2xl p-5 shadow-sm overflow-hidden relative">
+<div class="relative z-10">
+<p class="font-label-md text-label-md text-text-muted">CPU LOAD</p>
+<p class="font-display-lg-mobile text-display-lg-mobile text-primary">24.8<span class="text-headline-sm font-medium">%</span></p>
+<div class="mt-4 flex items-center gap-2 text-success-green">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span class="font-label-md text-label-md">Optimized</span>
+</div>
+</div>
+<div class="absolute right-0 bottom-0 w-32 h-32 opacity-20 translate-x-4 translate-y-4">
+<span class="material-symbols-outlined text-[120px] text-primary">dns</span>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-4 shadow-sm">
+<p class="font-label-md text-label-md text-text-muted">MEMORY</p>
+<p class="font-headline-md text-headline-md text-text-main">4.2 GB</p>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3">
+<div class="bg-primary h-1.5 rounded-full w-[42%]"></div>
+</div>
+</div>
+<div class="glass-card rounded-2xl p-4 shadow-sm">
+<p class="font-label-md text-label-md text-text-muted">UPTIME</p>
+<p class="font-headline-md text-headline-md text-text-main">99.98%</p>
+<div class="w-full bg-surface-container-high h-1.5 rounded-full mt-3">
+<div class="bg-success-green h-1.5 rounded-full w-[99%]"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Communications -->
+<section class="space-y-3">
+<div class="flex justify-between items-center px-1">
+<h3 class="font-label-md text-label-md text-text-muted uppercase">RECENT COMMUNICATIONS</h3>
+<button class="text-primary font-label-md text-label-md">View All</button>
+</div>
+<div class="space-y-3">
+<!-- Chat Notification Card -->
+<div class="bg-white rounded-xl p-4 border border-border-subtle flex gap-4 shadow-sm items-start">
+<div class="w-10 h-10 rounded-full bg-surface-container-low flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">person</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-body-md text-body-md font-semibold text-text-main truncate">Sarah Connor</h4>
+<span class="font-label-md text-label-md text-text-muted">2m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted truncate">"The latest automation script needs a final review..."</p>
+<div class="mt-3 flex gap-2">
+<span class="px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-label-md text-label-md">Marketing</span>
+</div>
+</div>
+</div>
+<!-- System Alert Card -->
+<div class="bg-white rounded-xl p-4 border border-border-subtle flex gap-4 shadow-sm items-start">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed flex-shrink-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">warning</span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex justify-between items-center mb-1">
+<h4 class="font-body-md text-body-md font-semibold text-text-main truncate">Security Engine</h4>
+<span class="font-label-md text-label-md text-text-muted">15m ago</span>
+</div>
+<p class="font-body-sm text-body-sm text-text-muted truncate">New login detected from unusual location: London, UK</p>
+<div class="mt-3">
+<button class="text-secondary font-label-md text-label-md font-bold uppercase tracking-wide">Review Access</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Ecosystem Snapshot (Bento Style) -->
+<section class="space-y-3">
+<h3 class="font-label-md text-label-md text-text-muted px-1">ECOSYSTEM SNAPSHOT</h3>
+<div class="grid grid-cols-2 gap-3 h-48">
+<div class="bg-primary rounded-2xl p-4 text-on-primary flex flex-col justify-between shadow-lg relative overflow-hidden group">
+<div class="absolute inset-0 opacity-10 group-hover:opacity-20 transition-opacity">
+
+</div>
+<span class="material-symbols-outlined text-primary-fixed">folder_open</span>
+<div>
+<p class="font-headline-md text-headline-md font-bold">12.8 TB</p>
+<p class="font-label-md text-label-md opacity-80 uppercase">Storage Used</p>
+</div>
+</div>
+<div class="grid grid-rows-2 gap-3">
+<div class="bg-tertiary-fixed rounded-2xl p-3 flex items-center justify-between text-on-tertiary-fixed shadow-sm">
+<div>
+<p class="font-label-md text-label-md opacity-80 uppercase">Active Ads</p>
+<p class="font-headline-sm text-headline-sm font-bold">24</p>
+</div>
+<span class="material-symbols-outlined">campaign</span>
+</div>
+<div class="bg-secondary rounded-2xl p-3 flex items-center justify-between text-on-secondary shadow-sm">
+<div>
+<p class="font-label-md text-label-md opacity-80 uppercase">Automation</p>
+<p class="font-headline-sm text-headline-sm font-bold">Live</p>
+</div>
+<span class="material-symbols-outlined">bolt</span>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Navigation Bar -->
+<nav class="fixed bottom-0 w-full bg-white border-t border-border-subtle px-6 py-2 pb-6 z-50 shadow-[0_-4px_20px_rgba(0,30,66,0.08)] flex justify-between items-center">
+<!-- Dashboard (Active) -->
+<div class="flex flex-col items-center gap-1 group cursor-pointer">
+<div class="bg-secondary text-on-secondary rounded-lg px-4 py-1 flex items-center justify-center transition-all duration-200">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+</div>
+<span class="font-label-md text-label-md text-primary font-semibold">Dashboard</span>
+</div>
+<!-- Communications -->
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-text-muted hover:text-text-main transition-all">
+<div class="px-4 py-1 flex items-center justify-center">
+<span class="material-symbols-outlined">chat</span>
+</div>
+<span class="font-label-md text-label-md">Comms</span>
+</div>
+<!-- Analytics -->
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-text-muted hover:text-text-main transition-all">
+<div class="px-4 py-1 flex items-center justify-center">
+<span class="material-symbols-outlined">analytics</span>
+</div>
+<span class="font-label-md text-label-md">Analytics</span>
+</div>
+<!-- More -->
+<div class="flex flex-col items-center gap-1 group cursor-pointer text-text-muted hover:text-text-main transition-all">
+<div class="px-4 py-1 flex items-center justify-center">
+<span class="material-symbols-outlined">grid_view</span>
+</div>
+<span class="font-label-md text-label-md">More</span>
+</div>
+</nav>
+<!-- Micro-interaction Script -->
+<script>
+        document.querySelectorAll('button, .cursor-pointer').forEach(el => {
+            el.addEventListener('touchstart', function() {
+                this.classList.add('opacity-70');
+            });
+            el.addEventListener('touchend', function() {
+                this.classList.remove('opacity-70');
+            });
+        });
+    </script>
+</body></html>

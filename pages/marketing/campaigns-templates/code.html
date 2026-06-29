@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform | OmniCampaigns Template Library</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<!-- Tailwind Configuration -->
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary": "#ffffff",
+                    "tertiary": "#6d5e00",
+                    "primary-container": "#001e42",
+                    "text-muted": "#52667A",
+                    "on-surface": "#181c1e",
+                    "success-green": "#00A91C",
+                    "error": "#ba1a1a",
+                    "border-subtle": "#E1E8ED",
+                    "on-tertiary-fixed": "#211b00",
+                    "surface-container": "#ebeef0",
+                    "surface-tint": "#475f86",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#afc7f4",
+                    "primary": "#000513",
+                    "surface-variant": "#e0e3e5",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-surface-variant": "#44474e",
+                    "inverse-surface": "#2d3133",
+                    "background": "#f7fafc",
+                    "on-tertiary-fixed-variant": "#524700",
+                    "outline": "#74777f",
+                    "tertiary-fixed": "#ffe241",
+                    "surface-bright": "#f7fafc",
+                    "tertiary-fixed-dim": "#e2c600",
+                    "on-primary-fixed-variant": "#2f476d",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-primary": "#afc7f4",
+                    "surface-container-low": "#f1f4f6",
+                    "on-error": "#ffffff",
+                    "surface": "#f7fafc",
+                    "on-secondary-fixed-variant": "#92001f",
+                    "surface-dim": "#d7dadc",
+                    "outline-variant": "#c4c6cf",
+                    "on-secondary-container": "#fffbff",
+                    "text-main": "#121C2D",
+                    "inverse-on-surface": "#eef1f3",
+                    "secondary-container": "#e2213c",
+                    "secondary": "#ba002a",
+                    "on-primary-fixed": "#001b3d",
+                    "on-primary-container": "#6f87b0",
+                    "surface-dark": "#06142E",
+                    "secondary-fixed": "#ffdad9",
+                    "tertiary-container": "#c3ab00",
+                    "on-primary": "#ffffff",
+                    "on-tertiary-container": "#493f00",
+                    "on-secondary-fixed": "#410008",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e5e9eb",
+                    "on-background": "#181c1e",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "on-secondary": "#ffffff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "80px",
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "margin-mobile": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "code": ["JetBrains Mono"],
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .sidebar-transition { transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .card-hover-effect:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px rgba(0, 30, 66, 0.12);
+        }
+    </style>
+</head>
+<body class="bg-background text-text-main font-body-md overflow-x-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-primary dark:bg-surface-dark text-on-primary dark:text-inverse-primary shadow-sm flex justify-between items-center px-gutter z-50">
+<div class="flex items-center gap-base">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<div class="hidden md:flex ml-8 gap-gutter items-center">
+<a class="text-on-primary font-bold border-b-2 border-secondary h-16 flex items-center px-2" href="#">Library</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors px-2 rounded cursor-pointer" href="#">Campaigns</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors px-2 rounded cursor-pointer" href="#">Analytics</a>
+</div>
+</div>
+<div class="flex items-center gap-gutter">
+<div class="relative hidden lg:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50">search</span>
+<input class="bg-white/10 border-none rounded-lg pl-10 pr-4 py-2 w-64 focus:ring-2 focus:ring-secondary text-on-primary placeholder-on-primary/50 text-body-sm" placeholder="Search templates..." type="text"/>
+</div>
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined cursor-pointer hover:bg-primary-container/50 p-2 rounded-full transition-colors" data-icon="notifications">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:bg-primary-container/50 p-2 rounded-full transition-colors" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden border border-white/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a female executive in a modern tech office setting. High-quality corporate portrait with soft studio lighting, shallow depth of field, and a clean, minimalist background of white and navy blue tones. The mood is confident and professional, fitting the OmniPlatform enterprise suite aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRFfTkSmI8rm3B1AxH7Mr2hiS-FS47KPKqnjEVEJ0urcgN7Rk1Yw7CfDBnWhP739EZ2K2NmHfPprKLLlDnM_6vl47XQRfzGZcNa0QDgoMpKT6ds835DHVoOhocovpRcvk5pn94r-vr7uG1piQJG42vNGZbqKmxlzKqtGAPAtR4QZw7oIy3Lp5eZ5QVBUCyuBqipF9q32h3Wvi-CdTbm1IgyYoqv3XDyqerAjLXxQHQexT0oRfG2xqcAxVHLWtTszmlOJGRVHz71Ybs"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flex flex-col h-full py-base px-4 overflow-y-auto z-40 hidden md:flex">
+<div class="mb-gutter mt-2">
+<div class="flex items-center gap-3 px-2">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm" data-icon="campaign">campaign</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-black text-primary dark:text-primary-fixed leading-none">Marketing</h2>
+<p class="text-label-md font-label-md text-text-muted">Enterprise Suite</p>
+</div>
+</div>
+</div>
+<nav class="flex-grow space-y-1">
+<div class="text-label-md font-label-md text-text-muted px-2 py-2 tracking-wider">CHANNELS</div>
+<a class="bg-secondary text-on-secondary rounded-lg font-semibold flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="campaign">campaign</span>
+                Marketing
+            </a>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="chat">chat</span>
+                Communications
+            </a>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+                Files
+            </a>
+<div class="pt-6 text-label-md font-label-md text-text-muted px-2 py-2 tracking-wider">SYSTEM</div>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="settings_suggest">settings_suggest</span>
+                Automations
+            </a>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="dns">dns</span>
+                Infrastructure
+            </a>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200 active:scale-95" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+                Analytics
+            </a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 pb-2">
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="contact_support">contact_support</span>
+                Support
+            </a>
+<a class="text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg flex items-center gap-3 px-3 py-2 cursor-pointer transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="manage_accounts">manage_accounts</span>
+                Account
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-16 min-h-screen">
+<div class="max-w-[1280px] mx-auto px-gutter py-8">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
+<div>
+<h1 class="font-display-lg text-display-lg-mobile md:text-display-lg text-text-main mb-2">Template Library</h1>
+<p class="text-body-lg text-text-muted max-w-2xl">Start from a high-converting template or create your own masterpiece from scratch using our drag-and-drop builder.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:translate-y-[-2px] transition-all shadow-md active:scale-95">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    Create from Scratch
+                </button>
+</div>
+<!-- Filters & Categories -->
+<div class="flex flex-wrap items-center justify-between gap-4 mb-8 bg-white p-4 rounded-xl shadow-sm border border-border-subtle">
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 bg-primary text-on-primary rounded-full text-body-sm font-semibold transition-colors">All Templates</button>
+<button class="px-4 py-2 bg-surface-container-low text-text-muted hover:bg-surface-container-high rounded-full text-body-sm font-semibold transition-colors">E-commerce</button>
+<button class="px-4 py-2 bg-surface-container-low text-text-muted hover:bg-surface-container-high rounded-full text-body-sm font-semibold transition-colors">SaaS</button>
+<button class="px-4 py-2 bg-surface-container-low text-text-muted hover:bg-surface-container-high rounded-full text-body-sm font-semibold transition-colors">Events</button>
+<button class="px-4 py-2 bg-surface-container-low text-text-muted hover:bg-surface-container-high rounded-full text-body-sm font-semibold transition-colors">Lead Gen</button>
+</div>
+<div class="flex items-center gap-3">
+<select class="bg-surface-container-low border-none rounded-lg text-body-sm font-medium focus:ring-2 focus:ring-primary py-2 px-4">
+<option>Industry: All</option>
+<option>Retail</option>
+<option>Technology</option>
+<option>Education</option>
+<option>Healthcare</option>
+</select>
+<select class="bg-surface-container-low border-none rounded-lg text-body-sm font-medium focus:ring-2 focus:ring-primary py-2 px-4">
+<option>Goal: All</option>
+<option>Retention</option>
+<option>Acquisition</option>
+<option>Awareness</option>
+</select>
+</div>
+</div>
+<!-- Bento Template Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-gutter">
+<!-- Card 1: E-commerce Product Launch -->
+<div class="card-hover-effect group bg-white rounded-xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-surface-variant">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A clean, minimalist product launch email template preview. Features a large high-resolution product photo of a sleek digital watch on a neutral gray background. Bold typography with a striking red Call to Action button. Modern white space and balanced layout designed for high conversion." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTBudGP464ZmID_1TxbFaUU9G3mq5WSNUtm6o63Lor9envNrAtfMb29TWY7AnmIyntwwXbAt2mG2hCaiO2JMBzF-Uy6XOD_vNRxAbnEltF73kQdW8UwLr4t7aeKGKK72syOLr1tytByUxpc4xb06mJ-J7xyRcmghFJs-5yR7xD8l7Bbiu7CvcKSChWgikIMLIfRBKWnakKNeVgjh0kg_i7U9V75iYwtFTFZXbzBTZ02_5RuKlcWcOUh-zFsk9W2LCtphyndai6RU8I"/>
+<div class="absolute top-3 left-3 z-20 flex gap-1">
+<span class="bg-tertiary-fixed text-on-tertiary-fixed text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">New</span>
+</div>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center gap-1 text-[11px] font-bold text-secondary uppercase tracking-widest">
+<span class="material-symbols-outlined !text-[14px]" data-icon="shopping_cart">shopping_cart</span>
+                                E-commerce
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">Spring Collection Launch</h3>
+<p class="text-body-sm text-text-muted mb-4 line-clamp-2">High-impact visual layout for showcasing multiple products with dynamic pricing tags.</p>
+<div class="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-text-muted" data-icon="mail">mail</span>
+<span class="material-symbols-outlined text-text-muted" data-icon="sms">sms</span>
+</div>
+<button class="text-primary font-bold text-body-sm hover:underline flex items-center gap-1">
+                                Preview
+                                <span class="material-symbols-outlined !text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 2: SaaS New Feature -->
+<div class="card-hover-effect group bg-white rounded-xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-surface-variant">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Professional SaaS software announcement email template. Features abstract geometric shapes in shades of navy blue and primary blue. A centered screen recording mockup of a dashboard interface. Clean sans-serif typography with high contrast white text for clarity and professionalism." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCkg_tvTyqjv3x3GaYT7A8YqtApivdgkLkmwe8TP84HvDtTo5crtDLX-hxHNYFiG8Qtu-A0ItvyqIWKSyYNaoyRrLsmpfbzxhUyrYXYrc5HpNyvIGAGeMzEMen6-j_l8w4tViVFguBhvb_klGOt9bJ8HAl7j7ze6AzXORDTBA6S5wdU0aroSJN1hUgKPHWdZ3lt1MUyLVFjnyuM15oglf1fARoXGviC-qtvDn2HVqjgGcdkMmanqL3jxwyqYMUt9J2EK_o7_9wafStR"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center gap-1 text-[11px] font-bold text-primary uppercase tracking-widest">
+<span class="material-symbols-outlined !text-[14px]" data-icon="developer_board">developer_board</span>
+                                SaaS
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">Feature Deep-Dive</h3>
+<p class="text-body-sm text-text-muted mb-4 line-clamp-2">Informative educational layout with secondary CTAs for knowledge base articles.</p>
+<div class="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-text-muted" data-icon="mail">mail</span>
+</div>
+<button class="text-primary font-bold text-body-sm hover:underline flex items-center gap-1">
+                                Preview
+                                <span class="material-symbols-outlined !text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Events Webinar Invite -->
+<div class="card-hover-effect group bg-white rounded-xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-surface-variant">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Vibrant webinar invitation template for an online event. Modern design with colorful gradients, a circular portrait frame for the speaker, and clear calendar invitation details. Large, friendly bold typography with a countdown timer visual element. Bright and engaging professional style." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzGB-l0MrWfUqFAYX0GzFZWXO-5JSQuusAhpTxTGgmfjMA8qByBqy7tUI4JoZkGZhn0IhMlHwFzEJ5vxoPjRCIaxrsGtPqMyHpsfVk61Pi6cJH6FLtZ9ArOJS4hImGh19tFTV-qQuAXaj5a99B76B_T4GA5oI6P6Gl79MiN81j8AVp9WI5lOmT7yl8ECIP_n5F9ty4A0JPrY43rMbzCJNT6VNeVG_UDGm3SoTNp-4A89Vgi8xE4QX8T2Q_9xckb6s9naef898pog3q"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center gap-1 text-[11px] font-bold text-success-green uppercase tracking-widest">
+<span class="material-symbols-outlined !text-[14px]" data-icon="event">event</span>
+                                Events
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">Live Workshop Invitation</h3>
+<p class="text-body-sm text-text-muted mb-4 line-clamp-2">Engagement-focused layout with speaker bios and integrated RSVP forms.</p>
+<div class="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-text-muted" data-icon="mail">mail</span>
+<span class="material-symbols-outlined text-text-muted" data-icon="sms">sms</span>
+</div>
+<button class="text-primary font-bold text-body-sm hover:underline flex items-center gap-1">
+                                Preview
+                                <span class="material-symbols-outlined !text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 4: E-commerce Abandoned Cart -->
+<div class="card-hover-effect group bg-white rounded-xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-surface-variant">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Minimalist abandoned cart recovery email template. Displays a single product hero shot with 'Did you forget something?' headline in elegant serif font. Uses a sophisticated color palette of cream, charcoal, and a soft red button. Designed to feel helpful rather than pushy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1L80syC9mQKEA7WarywpVE8bw7gL_dHpoudrgeWSKF-jnSP2Gsqr1B1ICJ-Ix0wjxO4Ob8wcmMx4OAa12qL5dOvO7DzCtGpSoTYT2JN4DVb_wabYyIWcgfWO1Ppqs1rhNWLXVlla4Fx6xskT_ILEP7cjGw5qKY3wi50vXMqz4UNJ8eYeTSrNQ1UZJdN9FO_F7s7CcFVuU1-mzLNPeETbV4fmK8oRHMnVkNtDzjZEL8qqE4s71fmubynglQU805RMK5U8ya5rrhnZS"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center gap-1 text-[11px] font-bold text-secondary uppercase tracking-widest">
+<span class="material-symbols-outlined !text-[14px]" data-icon="shopping_cart">shopping_cart</span>
+                                E-commerce
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">Cart Recovery Series</h3>
+<p class="text-body-sm text-text-muted mb-4 line-clamp-2">Multi-step recovery flow with discount code insertion and product grid.</p>
+<div class="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-text-muted" data-icon="mail">mail</span>
+</div>
+<button class="text-primary font-bold text-body-sm hover:underline flex items-center gap-1">
+                                Preview
+                                <span class="material-symbols-outlined !text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 5: SaaS Welcome Series -->
+<div class="card-hover-effect group bg-white rounded-xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col h-full">
+<div class="relative h-48 overflow-hidden bg-surface-variant">
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent z-10"></div>
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="Onboarding welcome email for a tech platform. Friendly, approachable design with illustrated iconography and a clear 1-2-3 step guide for users. Balanced layout with a strong sense of visual hierarchy and trustworthy blue tones. Professional yet welcoming aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDUKTyAN1TuPlYe7i6NL6RmBKZ_1VAWS-C4czFVteO8WKiVuMKTbhSSbM0ZOE_Y9eqj4FDJO_ueoi-Nz_eCl5gF5ejJ7D-u5QH51KCBpBNxLKFr3zUbB-DVkiyFk9g-0AU-l2Auf8kCA8dFPBlv-HloX5omc142gb7yI8eOenHt8doGUAJCNO2lDbtlWQBEamG6sHv7IrSWHpLd7H5zWTY2gh3f2hXchEJhPODMVcq65dlUW7Y2NYzI0jP4BrSyFU0CB6GCwS0e9pGn"/>
+</div>
+<div class="p-5 flex flex-col flex-grow">
+<div class="flex items-center gap-2 mb-2">
+<span class="flex items-center gap-1 text-[11px] font-bold text-primary uppercase tracking-widest">
+<span class="material-symbols-outlined !text-[14px]" data-icon="developer_board">developer_board</span>
+                                SaaS
+                            </span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">User Onboarding flow</h3>
+<p class="text-body-sm text-text-muted mb-4 line-clamp-2">Sequential template set designed to activate new users through core feature adoption.</p>
+<div class="mt-auto flex items-center justify-between border-t border-border-subtle pt-4">
+<div class="flex gap-2">
+<span class="material-symbols-outlined text-text-muted" data-icon="mail">mail</span>
+</div>
+<button class="text-primary font-bold text-body-sm hover:underline flex items-center gap-1">
+                                Preview
+                                <span class="material-symbols-outlined !text-[18px]" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Card 6: Custom Blank Slate -->
+<div class="group bg-surface-container-low rounded-xl overflow-hidden border-2 border-dashed border-border-subtle flex flex-col h-full cursor-pointer hover:border-primary transition-colors">
+<div class="flex flex-col items-center justify-center flex-grow p-8 text-center">
+<div class="w-16 h-16 bg-white rounded-full flex items-center justify-center shadow-sm mb-4 group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="edit_note">edit_note</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm text-text-main mb-2">Custom Canvas</h3>
+<p class="text-body-sm text-text-muted mb-6">Build your campaign from the ground up using our advanced grid system.</p>
+<span class="inline-flex items-center px-4 py-2 bg-primary text-on-primary rounded-lg text-body-sm font-bold">Start Building</span>
+</div>
+</div>
+</div>
+<!-- Pagination / Load More -->
+<div class="mt-12 flex flex-col items-center gap-4">
+<button class="bg-white border border-border-subtle text-text-main px-8 py-3 rounded-lg font-bold hover:bg-surface-container-low transition-colors active:scale-95 shadow-sm">
+                    Load More Templates
+                </button>
+<p class="text-body-sm text-text-muted">Showing 5 of 128 professional templates</p>
+</div>
+</div>
+</main>
+<!-- Footer Space for Mobile Navigation -->
+<div class="h-16 md:hidden"></div>
+<!-- BottomNavBar (Mobile only) -->
+<nav class="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-border-subtle flex md:hidden items-center justify-around z-50">
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined" data-icon="campaign" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="text-[10px] font-bold">Templates</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined" data-icon="bar_chart">bar_chart</span>
+<span class="text-[10px]">Reports</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined" data-icon="groups">groups</span>
+<span class="text-[10px]">Audience</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px]">Settings</span>
+</button>
+</nav>
+<!-- Micro-interaction Scripts -->
+<script>
+        // Simple filter button active state toggle
+        const filterButtons = document.querySelectorAll('.flex-wrap button');
+        filterButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                filterButtons.forEach(b => {
+                    b.classList.remove('bg-primary', 'text-on-primary');
+                    b.classList.add('bg-surface-container-low', 'text-text-muted');
+                });
+                btn.classList.add('bg-primary', 'text-on-primary');
+                btn.classList.remove('bg-surface-container-low', 'text-text-muted');
+            });
+        });
+
+        // Hover animation for cards using vanilla JS for extra spice if needed
+        const cards = document.querySelectorAll('.card-hover-effect');
+        cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // Potential for adding canvas particle effects or more complex interactions here
+            });
+        });
+    </script>
+</body></html>

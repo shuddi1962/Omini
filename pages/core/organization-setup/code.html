@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform - Team &amp; Permissions Onboarding</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-tertiary-container": "#493f00",
+                    "on-secondary-fixed": "#410008",
+                    "on-secondary": "#ffffff",
+                    "on-error-container": "#93000a",
+                    "surface-container-highest": "#e0e3e5",
+                    "surface-container-high": "#e5e9eb",
+                    "on-background": "#181c1e",
+                    "error-container": "#ffdad6",
+                    "text-main": "#121C2D",
+                    "inverse-on-surface": "#eef1f3",
+                    "on-secondary-container": "#fffbff",
+                    "surface-dark": "#06142E",
+                    "secondary-fixed": "#ffdad9",
+                    "on-primary": "#ffffff",
+                    "tertiary-container": "#c3ab00",
+                    "secondary": "#ba002a",
+                    "on-primary-fixed": "#001b3d",
+                    "on-primary-container": "#6f87b0",
+                    "secondary-container": "#e2213c",
+                    "outline-variant": "#c4c6cf",
+                    "surface-bright": "#f7fafc",
+                    "tertiary-fixed": "#ffe241",
+                    "surface": "#f7fafc",
+                    "on-secondary-fixed-variant": "#92001f",
+                    "surface-container-low": "#f1f4f6",
+                    "on-error": "#ffffff",
+                    "surface-dim": "#d7dadc",
+                    "on-primary-fixed-variant": "#2f476d",
+                    "tertiary-fixed-dim": "#e2c600",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-primary": "#afc7f4",
+                    "background": "#f7fafc",
+                    "outline": "#74777f",
+                    "on-tertiary-fixed-variant": "#524700",
+                    "surface-variant": "#e0e3e5",
+                    "inverse-surface": "#2d3133",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-surface-variant": "#44474e",
+                    "on-tertiary-fixed": "#211b00",
+                    "border-subtle": "#E1E8ED",
+                    "surface-tint": "#475f86",
+                    "surface-container": "#ebeef0",
+                    "error": "#ba1a1a",
+                    "surface-container-lowest": "#ffffff",
+                    "primary-fixed-dim": "#afc7f4",
+                    "primary": "#000513",
+                    "tertiary": "#6d5e00",
+                    "on-tertiary": "#ffffff",
+                    "primary-container": "#001e42",
+                    "success-green": "#00A91C",
+                    "text-muted": "#52667A",
+                    "on-surface": "#181c1e"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin-mobile": "16px",
+                    "gutter": "24px",
+                    "section-padding": "80px",
+                    "container-max": "1280px",
+                    "base": "8px"
+            },
+            "fontFamily": {
+                    "headline-md": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "display-lg-mobile": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "code": ["JetBrains Mono"]
+            },
+            "fontSize": {
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                    "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                    "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+        .step-active {
+            box-shadow: 0 0 0 4px rgba(0, 5, 19, 0.1);
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #f1f4f6;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #c4c6cf;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body class="bg-surface-container-low font-body-md text-on-surface min-h-screen flex flex-col">
+<!-- Top Navigation Anchor (Minimalist for Onboarding) -->
+<header class="fixed top-0 w-full h-16 bg-primary z-50 flex justify-between items-center px-gutter shadow-sm">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 bg-secondary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary text-sm" style="font-variation-settings: 'FILL' 1;">cloud</span>
+</div>
+<span class="font-headline-md text-headline-md font-bold text-on-primary tracking-tight">OmniPlatform</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="hidden md:block text-on-primary/60 font-label-md text-label-md">
+                Need help? <span class="text-on-primary cursor-pointer hover:underline">Support Center</span>
+</div>
+<button class="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-on-primary/10 text-on-primary hover:bg-on-primary/20 transition-all cursor-pointer">
+<span class="material-symbols-outlined text-sm">exit_to_app</span>
+<span class="font-label-md text-label-md">Save &amp; Exit</span>
+</button>
+</div>
+</header>
+<!-- Background Atmospheric Effect -->
+<div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+<div class="absolute -top-[10%] -left-[10%] w-[40%] h-[40%] bg-primary/5 rounded-full blur-[120px]"></div>
+<div class="absolute -bottom-[10%] -right-[10%] w-[30%] h-[30%] bg-secondary/5 rounded-full blur-[100px]"></div>
+</div>
+<!-- Main Content Canvas -->
+<main class="flex-grow pt-24 pb-12 px-margin-mobile md:px-gutter z-10">
+<div class="max-w-[1000px] mx-auto w-full">
+<!-- Progress Stepper -->
+<nav class="mb-12">
+<div class="flex items-center justify-between w-full relative">
+<!-- Progress Line Background -->
+<div class="absolute top-5 left-0 w-full h-0.5 bg-outline-variant z-0"></div>
+<!-- Progress Line Active -->
+<div class="absolute top-5 left-0 w-[66%] h-0.5 bg-primary z-0 transition-all duration-700 ease-out"></div>
+<!-- Step 1 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="mt-2 font-label-md text-label-md text-primary">Org Details</span>
+</div>
+<!-- Step 2 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary transition-all">
+<span class="material-symbols-outlined text-sm">check</span>
+</div>
+<span class="mt-2 font-label-md text-label-md text-primary">Domain Setup</span>
+</div>
+<!-- Step 3 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-primary flex items-center justify-center text-on-primary step-active transition-all ring-4 ring-primary-fixed">
+<span class="material-symbols-outlined text-sm">groups</span>
+</div>
+<span class="mt-2 font-label-md text-label-md text-primary font-bold">Team &amp; Permissions</span>
+</div>
+<!-- Step 4 -->
+<div class="relative z-10 flex flex-col items-center group">
+<div class="w-10 h-10 rounded-full bg-surface-container-highest border-2 border-outline-variant flex items-center justify-center text-outline transition-all">
+<span class="material-symbols-outlined text-sm">grid_view</span>
+</div>
+<span class="mt-2 font-label-md text-label-md text-text-muted">Module Selection</span>
+</div>
+</div>
+</nav>
+<!-- Main Interactive Card -->
+<div class="bg-surface-container-lowest border border-border-subtle rounded-xl shadow-lg overflow-hidden flex flex-col md:flex-row min-h-[600px]">
+<!-- Left Column: Invite & Manage -->
+<div class="w-full md:w-3/5 p-8 border-r border-border-subtle flex flex-col">
+<div class="mb-8">
+<h1 class="font-headline-lg text-headline-lg text-text-main">Assemble Your Team</h1>
+<p class="mt-2 text-text-muted font-body-md text-body-md">Invite collaborators to OmniPlatform. Roles determine their level of access across the enterprise suite.</p>
+</div>
+<!-- Add Team Members Input Area -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant/30 mb-8">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+<div class="md:col-span-7">
+<label class="block font-label-md text-label-md text-text-muted mb-2">Email Address</label>
+<input class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest transition-all font-body-md" placeholder="teammate@company.com" type="email"/>
+</div>
+<div class="md:col-span-3">
+<label class="block font-label-md text-label-md text-text-muted mb-2">Role</label>
+<select class="w-full px-4 py-3 rounded-lg border border-border-subtle focus:ring-2 focus:ring-primary focus:outline-none bg-surface-container-lowest transition-all font-body-md appearance-none">
+<option>Analyst</option>
+<option>Developer</option>
+<option>Admin</option>
+<option>Manager</option>
+</select>
+</div>
+<div class="md:col-span-2 flex items-end">
+<button class="w-full bg-secondary text-on-secondary px-4 py-3 rounded-lg font-label-md text-label-md hover:bg-secondary-container transition-all flex items-center justify-center gap-2 active:scale-95">
+<span class="material-symbols-outlined text-sm">add</span>
+<span>Add</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Invitation List -->
+<div class="flex-grow">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-headline-sm text-headline-sm text-text-main">Pending Invites</h3>
+<span class="px-3 py-1 bg-tertiary-fixed text-on-tertiary-fixed rounded-full font-label-md text-label-md">3 Added</span>
+</div>
+<div class="space-y-3 max-h-[280px] overflow-y-auto custom-scrollbar pr-2">
+<!-- Team Member Row 1 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle rounded-lg hover:border-primary-fixed-dim transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                        JD
+                                    </div>
+<div>
+<div class="font-label-md text-label-md text-text-main">jane.doe@acmecorp.com</div>
+<div class="text-xs text-text-muted">Invited as <span class="text-primary font-semibold">Admin</span></div>
+</div>
+</div>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+<!-- Team Member Row 2 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle rounded-lg hover:border-primary-fixed-dim transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                        MS
+                                    </div>
+<div>
+<div class="font-label-md text-label-md text-text-main">m.smith@acmecorp.com</div>
+<div class="text-xs text-text-muted">Invited as <span class="text-primary font-semibold">Developer</span></div>
+</div>
+</div>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+<!-- Team Member Row 3 -->
+<div class="flex items-center justify-between p-4 bg-surface-container-lowest border border-border-subtle rounded-lg hover:border-primary-fixed-dim transition-all">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-surface-container-high flex items-center justify-center text-primary font-bold">
+                                        RL
+                                    </div>
+<div>
+<div class="font-label-md text-label-md text-text-main">robert.lee@acmecorp.com</div>
+<div class="text-xs text-text-muted">Invited as <span class="text-primary font-semibold">Analyst</span></div>
+</div>
+</div>
+<button class="p-2 text-outline hover:text-error transition-colors">
+<span class="material-symbols-outlined text-xl">delete</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="mt-8 pt-6 border-t border-border-subtle flex justify-between items-center">
+<button class="px-6 py-3 rounded-lg font-label-md text-label-md text-primary hover:bg-surface-container-high transition-all">
+                            Back to Domains
+                        </button>
+<button class="bg-primary text-on-primary px-8 py-3 rounded-lg font-label-md text-label-md hover:opacity-90 shadow-md transition-all flex items-center gap-2">
+<span>Confirm &amp; Next Step</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Right Column: Visual Guide / Context -->
+<div class="w-full md:w-2/5 bg-primary-container p-8 relative overflow-hidden flex flex-col justify-center">
+<!-- Background Visual Pattern -->
+<div class="absolute inset-0 opacity-10 pointer-events-none">
+<div class="grid grid-cols-6 h-full gap-2 p-4">
+<div class="bg-on-primary-container rounded h-full"></div>
+<div class="bg-on-primary-container rounded h-full mt-12"></div>
+<div class="bg-on-primary-container rounded h-full mt-4"></div>
+<div class="bg-on-primary-container rounded h-full mt-20"></div>
+<div class="bg-on-primary-container rounded h-full mt-8"></div>
+<div class="bg-on-primary-container rounded h-full"></div>
+</div>
+</div>
+<div class="relative z-10 space-y-8">
+<div>
+<div class="w-12 h-12 rounded-xl bg-on-primary-container flex items-center justify-center mb-6">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">shield_person</span>
+</div>
+<h2 class="font-headline-md text-headline-md text-on-primary font-bold">Role Definitions</h2>
+<p class="mt-4 text-on-primary-container/80 font-body-md leading-relaxed">
+                                Understanding permissions is critical for enterprise security. Here is how OmniPlatform manages access:
+                            </p>
+</div>
+<div class="space-y-4">
+<div class="flex gap-4 p-4 rounded-xl bg-on-primary-container/5 border border-on-primary-container/10">
+<span class="material-symbols-outlined text-secondary text-xl">admin_panel_settings</span>
+<div>
+<span class="block font-bold text-on-primary">Admin</span>
+<span class="text-sm text-on-primary-container/80">Full control over billing, modules, and team management.</span>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-on-primary-container/5 border border-on-primary-container/10">
+<span class="material-symbols-outlined text-secondary text-xl">terminal</span>
+<div>
+<span class="block font-bold text-on-primary">Developer</span>
+<span class="text-sm text-on-primary-container/80">Can manage infrastructure, code deployments, and APIs.</span>
+</div>
+</div>
+<div class="flex gap-4 p-4 rounded-xl bg-on-primary-container/5 border border-on-primary-container/10">
+<span class="material-symbols-outlined text-secondary text-xl">analytics</span>
+<div>
+<span class="block font-bold text-on-primary">Analyst</span>
+<span class="text-sm text-on-primary-container/80">Read-only access to reporting and analytics dashboards.</span>
+</div>
+</div>
+</div>
+<div class="pt-4">
+<div class="flex items-center gap-2 text-tertiary-fixed text-sm font-semibold">
+<span class="material-symbols-outlined text-base">info</span>
+<span>Roles can be modified at any time from Settings.</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Contextual Footer -->
+<div class="mt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-text-muted">
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors text-xs font-label-md" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors text-xs font-label-md" href="#">Terms of Service</a>
+<a class="hover:text-primary transition-colors text-xs font-label-md" href="#">Enterprise Security</a>
+</div>
+<div class="text-xs font-body-sm italic">
+                    Powered by OmniPlatform Enterprise Core v4.2
+                </div>
+</div>
+</div>
+</main>
+<script>
+        // Simple Interaction logic for adding team members visual feedback
+        document.querySelector('button.bg-secondary').addEventListener('click', function() {
+            const emailInput = document.querySelector('input[type="email"]');
+            const roleSelect = document.querySelector('select');
+            
+            if(emailInput.value && emailInput.value.includes('@')) {
+                // Mock adding animation
+                this.classList.add('opacity-50', 'pointer-events-none');
+                this.innerHTML = '<span class="material-symbols-outlined animate-spin text-sm">autorenew</span><span>Adding...</span>';
+                
+                setTimeout(() => {
+                    this.classList.remove('opacity-50', 'pointer-events-none');
+                    this.innerHTML = '<span class="material-symbols-outlined text-sm">add</span><span>Add</span>';
+                    
+                    // Create new element (simplified for demo)
+                    const container = document.querySelector('.space-y-3.max-h-\\[280px\\]');
+                    const newRow = document.createElement('div');
+                    newRow.className = 'flex items-center justify-between p-4 bg-surface-container-lowest border border-success-green/30 rounded-lg animate-pulse';
+                    newRow.innerHTML = `
+                        <div class="flex items-center gap-4">
+                            <div class="w-10 h-10 rounded-full bg-success-green/10 flex items-center justify-center text-success-green font-bold">
+                                ${emailInput.value.substring(0,2).toUpperCase()}
+                            </div>
+                            <div>
+                                <div class="font-label-md text-label-md text-text-main">${emailInput.value}</div>
+                                <div class="text-xs text-text-muted">Invited as <span class="text-primary font-semibold">${roleSelect.value}</span></div>
+                            </div>
+                        </div>
+                        <button class="p-2 text-outline hover:text-error transition-colors">
+                            <span class="material-symbols-outlined text-xl">delete</span>
+                        </button>
+                    `;
+                    container.prepend(newRow);
+                    emailInput.value = '';
+                    
+                    setTimeout(() => newRow.classList.remove('animate-pulse', 'border-success-green/30'), 2000);
+                }, 800);
+            } else {
+                emailInput.classList.add('ring-2', 'ring-error');
+                setTimeout(() => emailInput.classList.remove('ring-2', 'ring-error'), 2000);
+            }
+        });
+
+        // Delegate delete events
+        document.querySelector('.space-y-3').addEventListener('click', function(e) {
+            if(e.target.closest('button.text-outline')) {
+                const row = e.target.closest('div.flex.items-center.justify-between');
+                row.style.opacity = '0';
+                row.style.transform = 'translateX(20px)';
+                setTimeout(() => row.remove(), 300);
+            }
+        });
+    </script>
+</body></html>

@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniCampaigns Overview | OmniPlatform</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#ffffff",
+                      "tertiary": "#6d5e00",
+                      "primary-container": "#001e42",
+                      "text-muted": "#52667A",
+                      "on-surface": "#181c1e",
+                      "success-green": "#00A91C",
+                      "error": "#ba1a1a",
+                      "border-subtle": "#E1E8ED",
+                      "on-tertiary-fixed": "#211b00",
+                      "surface-container": "#ebeef0",
+                      "surface-tint": "#475f86",
+                      "surface-container-lowest": "#ffffff",
+                      "primary-fixed-dim": "#afc7f4",
+                      "primary": "#000513",
+                      "surface-variant": "#e0e3e5",
+                      "secondary-fixed-dim": "#ffb3b2",
+                      "on-surface-variant": "#44474e",
+                      "inverse-surface": "#2d3133",
+                      "background": "#f7fafc",
+                      "on-tertiary-fixed-variant": "#524700",
+                      "outline": "#74777f",
+                      "tertiary-fixed": "#ffe241",
+                      "surface-bright": "#f7fafc",
+                      "tertiary-fixed-dim": "#e2c600",
+                      "on-primary-fixed-variant": "#2f476d",
+                      "primary-fixed": "#d6e3ff",
+                      "inverse-primary": "#afc7f4",
+                      "surface-container-low": "#f1f4f6",
+                      "on-error": "#ffffff",
+                      "surface": "#f7fafc",
+                      "on-secondary-fixed-variant": "#92001f",
+                      "surface-dim": "#d7dadc",
+                      "outline-variant": "#c4c6cf",
+                      "on-secondary-container": "#fffbff",
+                      "text-main": "#121C2D",
+                      "inverse-on-surface": "#eef1f3",
+                      "secondary-container": "#e2213c",
+                      "secondary": "#ba002a",
+                      "on-primary-fixed": "#001b3d",
+                      "on-primary-container": "#6f87b0",
+                      "surface-dark": "#06142E",
+                      "secondary-fixed": "#ffdad9",
+                      "tertiary-container": "#c3ab00",
+                      "on-primary": "#ffffff",
+                      "on-tertiary-container": "#493f00",
+                      "on-secondary-fixed": "#410008",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-container-high": "#e5e9eb",
+                      "on-background": "#181c1e",
+                      "error-container": "#ffdad6",
+                      "on-error-container": "#93000a",
+                      "on-secondary": "#ffffff"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-padding": "80px",
+                      "container-max": "1280px",
+                      "base": "8px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px"
+              },
+              "fontFamily": {
+                      "headline-lg": ["Inter"],
+                      "headline-sm": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "code": ["JetBrains Mono"],
+                      "headline-md": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-lg": ["Inter"],
+                      "body-md": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "label-md": ["Inter"]
+              },
+              "fontSize": {
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+            text-transform: none;
+            letter-spacing: normal;
+            word-wrap: normal;
+            white-space: nowrap;
+            direction: ltr;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #E1E8ED;
+            border-radius: 10px;
+        }
+        body {
+            background-color: #f7fafc;
+        }
+    </style>
+</head>
+<body class="font-body-md text-text-main antialiased overflow-hidden">
+<!-- TopNavBar Shell -->
+<header class="fixed top-0 w-full h-16 bg-primary dark:bg-surface-dark text-on-primary dark:text-inverse-primary shadow-sm flex justify-between items-center px-gutter w-full z-50">
+<div class="flex items-center gap-8">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<div class="hidden md:flex gap-6 items-center">
+<nav class="flex gap-6">
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors px-2 py-1 rounded" href="#">Dashboard</a>
+<a class="text-on-primary font-bold border-b-2 border-secondary px-2 py-1" href="#">Marketing</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors px-2 py-1 rounded" href="#">Infrastructure</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors px-2 py-1 rounded" href="#">Analytics</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50 text-sm">search</span>
+<input class="bg-primary-container/30 border-none rounded-lg pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-2 focus:ring-secondary text-on-primary placeholder:text-on-primary/40" placeholder="Search campaigns..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-primary-container/50 transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 rounded-full hover:bg-primary-container/50 transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="p-2 rounded-full hover:bg-primary-container/50 transition-colors cursor-pointer active:opacity-80">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full ml-2 overflow-hidden border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="Professional headshot of a female marketing executive with a confident smile, wearing corporate attire against a soft-focus office background, lit with warm natural lighting to maintain an approachable and powerful persona consistent with a modern corporate aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAOEWAePP2icl1Mj7FulPHxPEUqCfTJ8nFFdEASQ0JYM_wzhp_wEXl7dKNoLsDaSVTqqhMjX53TMhgdsFYCdMBxfYCjNi0AZKc82grbLmL_YTju5o6k2tcC7N_MidBZ8RZh9NPwK0AJI0CGRF6r2P9qDJ7Sp3pQt_5FM7a00dk8BfPAEgJeZKM4sl1f5I5l1lxiPfET6zVCYMw91Jxjw1Hj_5VsraGDQVxbi0KVlwbcidDnn0hUoka7Sf6-JxEl9FwckRLFuje4oKXi"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar Shell -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low dark:bg-inverse-surface text-primary dark:text-primary-fixed-dim border-r border-border-subtle dark:border-outline-variant flex flex-col h-full py-base px-4 overflow-y-auto hidden md:flex">
+<div class="py-4 px-2 mb-4">
+<h2 class="font-headline-sm text-headline-sm font-black text-primary dark:text-primary-fixed">Marketing</h2>
+<p class="font-label-md text-label-md text-text-muted">OmniCampaigns Suite</p>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">chat</span>
+<span>Communications</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">folder_open</span>
+<span>Files</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-secondary text-on-secondary rounded-lg font-semibold cursor-pointer active:scale-95 shadow-sm" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span>Marketing</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span>Automations</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">dns</span>
+<span>Infrastructure</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">analytics</span>
+<span>Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 pb-2 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+<span>Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md cursor-pointer active:scale-95" href="#">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span>Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="md:ml-64 mt-16 p-gutter h-[calc(100vh-64px)] overflow-y-auto custom-scrollbar">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-text-main">Campaign Overview</h1>
+<p class="font-body-md text-text-muted">Manage your cross-channel marketing strategies and performance metrics.</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-6 py-2.5 bg-primary text-on-primary rounded-lg font-semibold hover:translate-y-[-2px] transition-all shadow hover:shadow-lg active:scale-95">
+<span class="material-symbols-outlined text-lg">description</span>
+                        Manage Templates
+                    </button>
+<button class="flex items-center gap-2 px-6 py-2.5 bg-secondary text-on-secondary rounded-lg font-semibold hover:translate-y-[-2px] transition-all shadow hover:shadow-lg active:scale-95">
+<span class="material-symbols-outlined text-lg">add_circle</span>
+                        New Campaign
+                    </button>
+</div>
+</div>
+<!-- Dashboard Grid (Metrics) -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- Metric Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed rounded-lg text-primary">
+<span class="material-symbols-outlined">drafts</span>
+</div>
+<span class="text-success-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                            +12.5%
+                        </span>
+</div>
+<p class="font-label-md text-text-muted uppercase tracking-wider mb-1">Avg. Open Rate</p>
+<h3 class="font-display-lg text-headline-lg text-text-main">24.8%</h3>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-primary h-full w-[24.8%]"></div>
+</div>
+</div>
+<!-- Metric Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-secondary-fixed rounded-lg text-secondary">
+<span class="material-symbols-outlined">ads_click</span>
+</div>
+<span class="text-success-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                            +4.2%
+                        </span>
+</div>
+<p class="font-label-md text-text-muted uppercase tracking-wider mb-1">CTR Performance</p>
+<h3 class="font-display-lg text-headline-lg text-text-main">3.21%</h3>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-secondary h-full w-[35%]"></div>
+</div>
+</div>
+<!-- Metric Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm transition-transform hover:scale-[1.01]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-tertiary-fixed rounded-lg text-on-tertiary-fixed">
+<span class="material-symbols-outlined">payments</span>
+</div>
+<span class="text-success-green font-bold text-label-md flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">trending_up</span>
+                            +18.9%
+                        </span>
+</div>
+<p class="font-label-md text-text-muted uppercase tracking-wider mb-1">Revenue Generated</p>
+<h3 class="font-display-lg text-headline-lg text-text-main">$142,500</h3>
+<div class="w-full bg-surface-container h-1.5 rounded-full mt-4 overflow-hidden">
+<div class="bg-tertiary h-full w-[65%]"></div>
+</div>
+</div>
+</div>
+<!-- Recent Campaigns Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Main List View -->
+<div class="lg:col-span-8 bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm overflow-hidden flex flex-col">
+<div class="px-6 py-4 border-b border-border-subtle flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm">Recent Campaigns</h2>
+<div class="flex gap-2">
+<button class="p-1.5 border border-border-subtle rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-lg">filter_list</span>
+</button>
+<button class="p-1.5 border border-border-subtle rounded hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-lg">sort</span>
+</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low font-label-md text-text-muted">
+<th class="px-6 py-4 font-semibold">Campaign Name</th>
+<th class="px-6 py-4 font-semibold">Channel</th>
+<th class="px-6 py-4 font-semibold">Status</th>
+<th class="px-6 py-4 font-semibold text-right">Performance</th>
+<th class="px-6 py-4 font-semibold text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<!-- Row 1 (Live) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-primary/5 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">mail</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Summer Solstice Blast</p>
+<p class="text-xs text-text-muted">Sent to 45,000 customers</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm">Email Marketing</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-fixed text-on-tertiary-fixed animate-pulse">
+                                            Live
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<p class="font-bold text-text-main">32.4% Open</p>
+<p class="text-xs text-success-green">Above benchmark</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 (Completed) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-secondary/5 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined">sms</span>
+</div>
+<div>
+<p class="font-bold text-text-main">VIP Early Access</p>
+<p class="text-xs text-text-muted">Global SMS distribution</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm">Mobile SMS</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-success-green/10 text-success-green">
+                                            Completed
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<p class="font-bold text-text-main">18.2% CTR</p>
+<p class="text-xs text-text-muted">$42k Revenue</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 (Scheduled) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-on-primary-fixed-variant/10 flex items-center justify-center text-on-primary-fixed-variant">
+<span class="material-symbols-outlined">forum</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Annual Membership Renewal</p>
+<p class="text-xs text-text-muted">Automated workflow</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm">Omnichannel</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-fixed text-on-primary-fixed">
+                                            Scheduled
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<p class="font-bold text-text-main">Pending</p>
+<p class="text-xs text-text-muted">Starts June 24</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 (Draft) -->
+<tr class="hover:bg-surface-container-low/50 transition-colors group">
+<td class="px-6 py-5">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded bg-outline-variant/20 flex items-center justify-center text-outline">
+<span class="material-symbols-outlined">ad_group</span>
+</div>
+<div>
+<p class="font-bold text-text-main">Social Media Blitz - Q3</p>
+<p class="text-xs text-text-muted">Retargeting campaign</p>
+</div>
+</div>
+</td>
+<td class="px-6 py-5 text-sm">Social Paid</td>
+<td class="px-6 py-5">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-variant text-on-surface-variant">
+                                            Draft
+                                        </span>
+</td>
+<td class="px-6 py-5 text-right">
+<p class="font-bold text-text-main">--</p>
+<p class="text-xs text-text-muted">Last edited 2h ago</p>
+</td>
+<td class="px-6 py-5 text-right">
+<button class="p-2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-text-muted hover:text-primary">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="mt-auto px-6 py-4 bg-surface-container-low/50 text-center border-t border-border-subtle">
+<button class="text-primary font-bold text-sm hover:underline">View All Campaigns</button>
+</div>
+</div>
+<!-- Secondary Stats & Insights -->
+<div class="lg:col-span-4 flex flex-col gap-6">
+<!-- Template Quick View -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm p-6 overflow-hidden relative">
+<div class="flex justify-between items-center mb-6">
+<h3 class="font-headline-sm text-headline-sm">Top Templates</h3>
+<span class="material-symbols-outlined text-text-muted cursor-pointer hover:text-primary">arrow_forward</span>
+</div>
+<div class="space-y-4">
+<div class="p-4 border border-border-subtle rounded-lg flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="w-12 h-16 bg-surface-container-high rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A minimalist, high-end email template preview featuring a large heroic image of a luxury timepiece, sophisticated typography in navy blue and gold accents, and a clear call-to-action button, presented as a clean UI design pattern." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCLxYK7XGHpiS7DSx9F9EW2vDvlAqRAHW4kgf98HR-15dFjA3tHN7SfVuA1IdOuesSCb3pPypLrgcq1I7be6hn6vArGQlmPjkWuQ0hztT_Na_rHN_rzMJFT7qjqK6IH0a0Wh9N9R8rIQ2bj6g6xOg_ZhWavtIpWiVXZneE4kfEtAOHSbJgTuicFGirxWarthf26mtKdJDysFLj4njDVZj-O2nx4dPpZ5g39T9uP_bUO_AwAM37qKuNxCD_aPOCIWkw2JwCU3dV3_5oJ"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm text-text-main group-hover:text-primary transition-colors">Seasonal Promo V2</p>
+<p class="text-xs text-text-muted">Used 14 times this month</p>
+</div>
+</div>
+<div class="p-4 border border-border-subtle rounded-lg flex items-center gap-4 hover:border-primary/30 transition-colors cursor-pointer group">
+<div class="w-12 h-16 bg-surface-container-high rounded overflow-hidden flex-shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern product launch email template with an asymmetric layout, high-contrast black and white theme, vibrant red action buttons, and placeholder blocks for high-resolution technology product shots." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzKue3W2GBDNttwLfN8Twe4bwia8jBCUETnvn9Jh60PP1diwJHkkJeSBUYr6Q-ANrurSpdckdQ2jNCyTJ9rY7LybcH8H_cvQrXtjmQ_iWh9LtwFfyFuOPtbAUVZtAYCiTa8SO4ezWwBVEfzLuB1fb2lWPu99sYRa529eQcLRSfmAR7-aAd240AtFFBjb9oc44JqN88GObuaBA0FZlGEtZl0k-DOhUYReCj-56JoJ-ZSmpq-JN7eHfTy3QoYf09thAgDKCigBsuYlCi"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-sm text-text-main group-hover:text-primary transition-colors">Product Reveal</p>
+<p class="text-xs text-text-muted">High CTR performance</p>
+</div>
+</div>
+</div>
+<!-- Abstract Background Decoration -->
+<div class="absolute -bottom-8 -right-8 w-32 h-32 bg-primary/5 rounded-full blur-2xl -z-0"></div>
+</div>
+<!-- Channel Distribution Chart Mock -->
+<div class="bg-primary p-6 rounded-xl text-on-primary shadow-lg flex-1">
+<h3 class="font-headline-sm text-headline-sm mb-6">Channel Reach</h3>
+<div class="space-y-4">
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1 uppercase tracking-widest opacity-70">
+<span>Email</span>
+<span>62%</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-secondary w-[62%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1 uppercase tracking-widest opacity-70">
+<span>Social</span>
+<span>24%</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-tertiary-fixed w-[24%]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between text-xs font-semibold mb-1 uppercase tracking-widest opacity-70">
+<span>SMS / Push</span>
+<span>14%</span>
+</div>
+<div class="h-2 bg-on-primary/10 rounded-full overflow-hidden">
+<div class="h-full bg-primary-fixed w-[14%]"></div>
+</div>
+</div>
+</div>
+<div class="mt-8 pt-6 border-t border-on-primary/10">
+<div class="flex items-center gap-4">
+<div class="flex -space-x-2">
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Close-up avatar of a diverse team member, brightly lit studio portrait, modern professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUEqFswkg9WMAIZ0ZnjUMnk9shzeqJU3JMqfPTCFuFGGpBY6QgTI8jFJfVVMufMvd-cYs7u6IdPvl_DmYQiUQrs5l95qiC3V_3xemzozse02oA7ZJaljXb4j8FyYxOlUV5P-V267Nn-j-o2nxcnLGmbgjKzHYkoo1vLPa07rQaTzi1PQHWJ9Txs9kyQNcVo63AiOZivhK3Ced7azILbKZ21Qx1q29sNcUcVJLWJqzL2ecqj1jZ9g91ONronm_N5R5AbeXYqn4gvAhp"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Close-up avatar of a diverse team member, brightly lit studio portrait, modern professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBjEcDPqzPv-Q04ygy0qy53kOZEgkYDPeRmJygtZUpv9qC4U-Ygdifx08LK4F8pLcTzQbc8gH7d3pbmeuWDyeLPOKkiKr0ROyFWjWSa_-fzreLBF-FBjeNKlz3qkIZDRTM3ryaZxzDBqlBGt_yElagaJOHnvI6K0wFWSGTpqVSazgAWuT-mxrAAXKxmx0J6TjGHDRuKtHgDHkF8X0obITor-ePT2_mXMLbKW8lxGowodHd4iMHe3G1PU8P5fE67HZM6AyYDe0ZwDkNt"/>
+<img class="w-8 h-8 rounded-full border-2 border-primary object-cover" data-alt="Close-up avatar of a diverse team member, brightly lit studio portrait, modern professional aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZGqHSSSmx9UahsGQwdDuB2zz2d1utlKCkqhTy2oCwESfw49ezd1TqWatJd6UFlirZEPARTTmMKY8IFpZLS-RGqZH1TbFhWSUhSvtUcyZypEesMhA-41sPeQKnHJ2zzspOCXF8jbQ5J9gmv6GXdOB6MBxJ8o79oq1ZNifqDlOo3x93nSnEodAhzV04NXsE2csQ7pdq6M9EnQYmcmV7GwNZzrgBs3NnObWMhxrvLqgW8N8FzMDgr8mFKWmz755m0GlpAomlFNAlCKpH"/>
+<div class="w-8 h-8 rounded-full bg-primary-container border-2 border-primary flex items-center justify-center text-[10px] font-bold">+5</div>
+</div>
+<p class="text-xs opacity-70">Team active in campaigns</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Footer Spacing -->
+<div class="h-24"></div>
+</div>
+</main>
+<!-- Mobile Navigation Shell -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface-container-low border-t border-border-subtle flex justify-around items-center px-4 z-50">
+<button class="flex flex-col items-center gap-0.5 text-text-muted">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">campaign</span>
+<span class="text-[10px] font-bold">Campaigns</span>
+</button>
+<button class="bg-secondary text-on-secondary w-12 h-12 rounded-full -mt-10 shadow-lg flex items-center justify-center">
+<span class="material-symbols-outlined">add</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-text-muted">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-bold">Stats</span>
+</button>
+<button class="flex flex-col items-center gap-0.5 text-text-muted">
+<span class="material-symbols-outlined">person</span>
+<span class="text-[10px] font-bold">Profile</span>
+</button>
+</nav>
+<script>
+        // Simple Micro-interactions
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('mousedown', () => {
+                button.classList.add('scale-95');
+            });
+            button.addEventListener('mouseup', () => {
+                button.classList.remove('scale-95');
+            });</script></body></html>

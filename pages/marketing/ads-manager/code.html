@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Omni Ads Manager - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #E1E8ED;
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d7dadc;
+            border-radius: 10px;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "inverse-surface": "#2d3133",
+                      "background": "#f7fafc",
+                      "surface-container": "#ebeef0",
+                      "on-primary-fixed-variant": "#2f476d",
+                      "surface": "#f7fafc",
+                      "border-subtle": "#E1E8ED",
+                      "secondary-container": "#e2213c",
+                      "on-primary-fixed": "#001b3d",
+                      "inverse-primary": "#afc7f4",
+                      "inverse-on-surface": "#eef1f3",
+                      "on-tertiary-fixed": "#211b00",
+                      "primary": "#000513",
+                      "surface-dim": "#d7dadc",
+                      "on-secondary-fixed-variant": "#92001f",
+                      "on-error": "#ffffff",
+                      "primary-fixed-dim": "#afc7f4",
+                      "success-green": "#00A91C",
+                      "on-surface": "#181c1e",
+                      "secondary": "#ba002a",
+                      "primary-container": "#001e42",
+                      "surface-container-high": "#e5e9eb",
+                      "surface-tint": "#475f86",
+                      "on-secondary-fixed": "#410008",
+                      "surface-variant": "#e0e3e5",
+                      "outline-variant": "#c4c6cf",
+                      "text-muted": "#52667A",
+                      "surface-container-lowest": "#ffffff",
+                      "on-secondary-container": "#fffbff",
+                      "surface-container-low": "#f1f4f6",
+                      "on-primary": "#ffffff",
+                      "on-primary-container": "#6f87b0",
+                      "surface-dark": "#06142E",
+                      "on-tertiary-fixed-variant": "#524700",
+                      "on-tertiary": "#ffffff",
+                      "text-main": "#121C2D",
+                      "tertiary-fixed": "#ffe241",
+                      "error-container": "#ffdad6",
+                      "surface-container-highest": "#e0e3e5",
+                      "surface-bright": "#f7fafc",
+                      "on-secondary": "#ffffff",
+                      "outline": "#74777f",
+                      "tertiary": "#6d5e00",
+                      "on-surface-variant": "#44474e",
+                      "secondary-fixed-dim": "#ffb3b2",
+                      "on-error-container": "#93000a",
+                      "primary-fixed": "#d6e3ff",
+                      "tertiary-container": "#c3ab00",
+                      "on-background": "#181c1e",
+                      "tertiary-fixed-dim": "#e2c600",
+                      "error": "#ba1a1a",
+                      "secondary-fixed": "#ffdad9",
+                      "on-tertiary-container": "#493f00"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "section-padding": "80px",
+                      "margin-mobile": "16px",
+                      "gutter": "24px",
+                      "container-max": "1280px",
+                      "base": "8px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Inter"],
+                      "display-lg-mobile": ["Inter"],
+                      "headline-md": ["Inter"],
+                      "headline-lg": ["Inter"],
+                      "code": ["JetBrains Mono"],
+                      "label-md": ["Inter"],
+                      "display-lg": ["Inter"],
+                      "body-sm": ["Inter"],
+                      "body-md": ["Inter"],
+                      "headline-sm": ["Inter"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                      "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                      "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}]
+              }
+            },
+          },
+        }
+      </script>
+</head>
+<body class="bg-background text-on-surface font-body-md overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full h-16 bg-primary z-50 flex justify-between items-center px-gutter shadow-sm">
+<div class="flex items-center gap-8">
+<h1 class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</h1>
+<div class="hidden md:flex items-center gap-6">
+<span class="text-on-primary font-bold border-b-2 border-secondary h-16 flex items-center cursor-pointer transition-colors">Marketing</span>
+<span class="text-on-primary/70 font-medium hover:bg-primary-container/50 px-2 py-1 rounded transition-colors cursor-pointer">Analytics</span>
+<span class="text-on-primary/70 font-medium hover:bg-primary-container/50 px-2 py-1 rounded transition-colors cursor-pointer">Assets</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50">search</span>
+<input class="bg-primary-container/30 border-none text-on-primary text-body-sm pl-10 pr-4 py-2 rounded-lg w-64 focus:ring-2 focus:ring-secondary outline-none" placeholder="Search campaigns..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 text-on-primary/70 hover:bg-primary-container/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-on-primary/70 hover:bg-primary-container/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-variant overflow-hidden ml-2 cursor-pointer border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a business executive for a user profile avatar. The subject is a smiling woman in her 30s with professional attire, set against a clean, soft-focus office background. The lighting is bright and airy, matching a modern enterprise aesthetic with high-key illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAuhdFDRRCz24ktwAt2td4IAC_fM_N1_uQTipfYiq_5Qvsw6EmHw0mxx3-E5IwY99XICM7ghmQydzGBzYJCU0rRDfsK0fm9eNo39EGuWlAYUX83JeR4FZzP0gVTmbXAsHMlVIxL7y8xbAXFmDvr0QojczqSK-nwtEoNcyZS9eK4rjKXsm8KCmc2USvKk5k0iRLFziiEr8rPZ9is3eVchgcwiOUtlKBvM31Xp2i2FpZXkHVyXxHaAG0qvncv3C8EmBFzuI1f2oxV3IJ8"/>
+</div>
+</div>
+</div>
+</header>
+<div class="flex h-screen pt-16">
+<!-- SideNavBar -->
+<nav class="hidden md:flex flex-col w-64 bg-surface-container-low border-r border-border-subtle py-base px-4 overflow-y-auto">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 bg-primary rounded flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-sm">rocket_launch</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-black text-primary">Ads Manager</span>
+</div>
+<p class="text-label-md font-label-md text-text-muted">Enterprise Suite</p>
+</div>
+<div class="space-y-1 mb-auto">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Overview</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary text-on-secondary rounded-lg font-semibold cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">campaign</span>
+<span class="font-label-md text-label-md">Marketing</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">folder_open</span>
+<span class="font-label-md text-label-md">Files</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">settings_suggest</span>
+<span class="font-label-md text-label-md">Automations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">analytics</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer active:scale-95">
+<span class="material-symbols-outlined">dns</span>
+<span class="font-label-md text-label-md">Infrastructure</span>
+</a>
+</div>
+<div class="border-t border-border-subtle pt-4 mt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">contact_support</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high rounded-lg transition-all duration-200 cursor-pointer">
+<span class="material-symbols-outlined">manage_accounts</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</nav>
+<!-- Main Content Area -->
+<main class="flex-1 overflow-y-auto bg-background">
+<div class="max-w-[1280px] mx-auto p-gutter lg:p-10 space-y-8">
+<!-- Page Header & Action -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-headline-lg text-headline-lg text-primary">Ad Campaigns Overview</h2>
+<p class="text-text-muted font-body-md">Performance insights for Oct 1 - Oct 31, 2023</p>
+</div>
+<button class="flex items-center gap-2 bg-secondary text-on-secondary px-6 py-3 rounded-lg font-semibold hover:opacity-90 active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">add_circle</span>
+                        Create Campaign
+                    </button>
+</div>
+<!-- Performance Overview Cards -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-gutter">
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<span class="text-text-muted font-label-md uppercase tracking-wider">Total Spend</span>
+<span class="material-symbols-outlined text-primary">payments</span>
+</div>
+<div class="text-headline-md font-bold text-primary">$42,850.00</div>
+<div class="flex items-center gap-1 mt-2 text-success-green font-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>12.4% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<span class="text-text-muted font-label-md uppercase tracking-wider">Impressions</span>
+<span class="material-symbols-outlined text-primary">visibility</span>
+</div>
+<div class="text-headline-md font-bold text-primary">3.2M</div>
+<div class="flex items-center gap-1 mt-2 text-success-green font-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>8.1% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<span class="text-text-muted font-label-md uppercase tracking-wider">Total Clicks</span>
+<span class="material-symbols-outlined text-primary">touch_app</span>
+</div>
+<div class="text-headline-md font-bold text-primary">124,502</div>
+<div class="flex items-center gap-1 mt-2 text-secondary font-label-md">
+<span class="material-symbols-outlined text-sm">trending_down</span>
+<span>2.4% vs last month</span>
+</div>
+</div>
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm hover:shadow-md transition-shadow">
+<div class="flex items-center justify-between mb-4">
+<span class="text-text-muted font-label-md uppercase tracking-wider">Average CTR</span>
+<span class="material-symbols-outlined text-primary">ads_click</span>
+</div>
+<div class="text-headline-md font-bold text-primary">3.89%</div>
+<div class="flex items-center gap-1 mt-2 text-success-green font-label-md">
+<span class="material-symbols-outlined text-sm">trending_up</span>
+<span>0.5% vs last month</span>
+</div>
+</div>
+</div>
+<!-- Main Grid: Campaigns & Sidebar -->
+<div class="grid grid-cols-1 xl:grid-cols-12 gap-gutter">
+<!-- Campaigns Table & Chart Area -->
+<div class="xl:col-span-8 space-y-gutter">
+<!-- Daily Performance Trends Chart Placeholder -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm h-80 relative overflow-hidden">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary">Performance Trends</h3>
+<div class="flex gap-2">
+<button class="text-label-md font-label-md px-3 py-1 bg-surface-container-high rounded text-text-main">Impressions</button>
+<button class="text-label-md font-label-md px-3 py-1 text-text-muted hover:bg-surface-container-low rounded">Clicks</button>
+</div>
+</div>
+<div class="absolute inset-x-0 bottom-0 h-48 px-6 pb-4">
+
+<div class="relative w-full h-full border-b border-l border-border-subtle flex items-end justify-between px-4">
+<!-- Simulated Graph Bars for visual hierarchy -->
+<div class="w-4 bg-primary rounded-t opacity-40 h-[40%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[60%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[55%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[80%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[70%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[95%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[40%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[60%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[55%]"></div>
+<div class="w-4 bg-primary rounded-t opacity-40 h-[80%]"></div>
+</div>
+</div>
+</div>
+<!-- Campaigns Table -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-border-subtle flex items-center justify-between bg-surface-container-low/50">
+<h3 class="font-headline-sm text-headline-sm text-primary">Active Campaigns</h3>
+<button class="text-primary font-semibold text-body-sm flex items-center gap-1 hover:underline">
+                                    View All <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-lowest">
+<th class="px-6 py-4 text-label-md font-label-md text-text-muted border-b border-border-subtle">Campaign Name</th>
+<th class="px-6 py-4 text-label-md font-label-md text-text-muted border-b border-border-subtle">Status</th>
+<th class="px-6 py-4 text-label-md font-label-md text-text-muted border-b border-border-subtle">Budget</th>
+<th class="px-6 py-4 text-label-md font-label-md text-text-muted border-b border-border-subtle text-right">Spend</th>
+<th class="px-6 py-4 text-label-md font-label-md text-text-muted border-b border-border-subtle text-right">CTR</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-border-subtle">
+<tr class="hover:bg-surface-container-low/30 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="font-semibold text-text-main">Fall Product Launch</div>
+<div class="text-label-md text-text-muted">Omni Cloud Pro</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-success-green/10 text-success-green">
+                                                    Active
+                                                </span>
+</td>
+<td class="px-6 py-4 text-text-main">$500.00 / day</td>
+<td class="px-6 py-4 text-right font-code">$12,450.00</td>
+<td class="px-6 py-4 text-right font-code text-success-green">4.2%</td>
+</tr>
+<tr class="hover:bg-surface-container-low/30 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="font-semibold text-text-main">Holiday Retargeting</div>
+<div class="text-label-md text-text-muted">Omni E-commerce</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/20 text-tertiary">
+                                                    Draft
+                                                </span>
+</td>
+<td class="px-6 py-4 text-text-main">$1,200.00 / day</td>
+<td class="px-6 py-4 text-right font-code">$0.00</td>
+<td class="px-6 py-4 text-right font-code">-</td>
+</tr>
+<tr class="hover:bg-surface-container-low/30 transition-colors cursor-pointer">
+<td class="px-6 py-4">
+<div class="font-semibold text-text-main">Brand Awareness Q4</div>
+<div class="text-label-md text-text-muted">Global Enterprise</div>
+</td>
+<td class="px-6 py-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-surface-container-highest text-text-muted">
+                                                    Paused
+                                                </span>
+</td>
+<td class="px-6 py-4 text-text-main">$2,500.00 / day</td>
+<td class="px-6 py-4 text-right font-code">$45,200.00</td>
+<td class="px-6 py-4 text-right font-code">2.1%</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+<!-- Sidebar: Targeting & Creative Preview -->
+<div class="xl:col-span-4 space-y-gutter">
+<!-- Advanced Targeting Sidebar -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm">
+<h3 class="font-headline-sm text-headline-sm text-primary mb-6 flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">target</span>
+                                Target Audience
+                            </h3>
+<div class="space-y-6">
+<div>
+<label class="block text-label-md font-label-md text-text-muted mb-2">Demographics</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-surface-container-low border border-border-subtle rounded-full text-body-sm text-text-main">25-45 Years</span>
+<span class="px-3 py-1 bg-surface-container-low border border-border-subtle rounded-full text-body-sm text-text-main">United States</span>
+<span class="px-3 py-1 bg-surface-container-low border border-border-subtle rounded-full text-body-sm text-text-main">IT Professionals</span>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-text-muted mb-2">Interests</label>
+<div class="flex flex-wrap gap-2">
+<span class="px-3 py-1 bg-primary/5 border border-primary/20 rounded-full text-body-sm text-primary">Cloud Computing</span>
+<span class="px-3 py-1 bg-primary/5 border border-primary/20 rounded-full text-body-sm text-primary">SaaS UX</span>
+<span class="px-3 py-1 bg-primary/5 border border-primary/20 rounded-full text-body-sm text-primary">DevOps</span>
+</div>
+</div>
+<div>
+<label class="block text-label-md font-label-md text-text-muted mb-2">Placements</label>
+<div class="space-y-2">
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded transition-colors">
+<span class="text-body-sm flex items-center gap-2"><span class="material-symbols-outlined text-sm">feed</span> In-feed Ads</span>
+<span class="material-symbols-outlined text-success-green">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded transition-colors">
+<span class="text-body-sm flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> Email Digest</span>
+<span class="material-symbols-outlined text-success-green">check_circle</span>
+</div>
+<div class="flex items-center justify-between p-2 hover:bg-surface-container-low rounded transition-colors">
+<span class="text-body-sm flex items-center gap-2"><span class="material-symbols-outlined text-sm">side_navigation</span> Sidebar Banners</span>
+<span class="material-symbols-outlined text-outline">cancel</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Creative Preview Section -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-sm">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-headline-sm text-headline-sm text-primary">Creative Preview</h3>
+<div class="flex gap-1">
+<button class="p-1 hover:bg-surface-container-low rounded text-text-muted"><span class="material-symbols-outlined text-sm">smartphone</span></button>
+<button class="p-1 bg-surface-container-low rounded text-primary"><span class="material-symbols-outlined text-sm">desktop_windows</span></button>
+</div>
+</div>
+<div class="border border-border-subtle rounded-lg overflow-hidden bg-white group cursor-pointer relative">
+<div class="h-40 bg-surface-variant relative overflow-hidden">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A vibrant digital advertisement graphic for a cloud computing service. The design features sleek 3D isometric server icons, a glowing network grid, and bold typography 'Omni Cloud'. The background is a gradient of deep navy and electric red, consistent with a professional enterprise UI aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_d-yl456LxqhfbEZLkSHJ9wDEUtkPVu4djsW7Zl5M9Beih5Set19FPmJj0S2utlvBDydOZb_AvpRGw3vUcBEBC0kjobvc7WsSNm0w7geSV05yp3RehN4iVv0-9wu61ApsYDtSViwe3lBAk8REfthVAKfuS7OsmHgJul4WmJF5kTTC6H2P405xcm-bS8h4mCwYBrxRNQuTOrdXV02RziUw7IKI_8EPBozwyllWIbiHCtkaBUnGi7rB7gYSBPaDivqFb4CmVzRXEnpS"/>
+<div class="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors"></div>
+</div>
+<div class="p-4">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-6 h-6 rounded-full bg-primary flex items-center justify-center text-[10px] text-white">O</div>
+<span class="text-label-md font-bold text-primary">OmniPlatform</span>
+<span class="text-[10px] text-text-muted ml-auto bg-surface-container-high px-1 rounded">Sponsored</span>
+</div>
+<p class="text-body-sm text-text-main font-medium mb-1">Scale your enterprise effortlessly with Omni Cloud Pro.</p>
+<p class="text-label-md text-text-muted line-clamp-2">Built for high-performance teams. 99.9% uptime guaranteed.</p>
+<button class="w-full mt-4 py-2 border border-secondary text-secondary rounded-lg font-bold text-label-md hover:bg-secondary hover:text-white transition-all uppercase tracking-wide">Learn More</button>
+</div>
+</div>
+<div class="mt-4 flex gap-2 overflow-x-auto pb-2">
+<div class="shrink-0 w-20 h-20 rounded border-2 border-primary overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A professional business banner ad snippet for sidebar placement. It shows a minimalist abstract tech pattern in shades of navy blue and white with a subtle red accent line." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCdR-CbmG5eiN6dFFvZSXatSBciosbHtKBmHNzxDeczF2GBcDl8R5Ygcbknjba9pmo5RJXDyJTevwLtyqbIqS_eE3zIFfjQQZ73DQxc92-Y9gMBRnwcUlCOleX2Nj2r-4OqDmZxC3lmzcU3f6gPqnwap6ys_6K4MD6v2Cw4RyFRXAnKjKdxgz6hVejbZyieAsnop5UM4RFWH5-2OZgBa_sXWwd-x_p0glE9ujxvBAy2quUP3mQor6bMqRqCsudfsVrY34p5jENcpvfD"/>
+<div class="absolute bottom-0 inset-x-0 bg-primary/80 text-[8px] text-center text-white py-0.5">Sidebar</div>
+</div>
+<div class="shrink-0 w-20 h-20 rounded border border-border-subtle overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A clean, text-focused email newsletter advertisement. The graphic is minimal with a small light blue icon and grey placeholder text on a crisp white background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbje9RXe-ioSDWVNpPq-4024ILNAAMCJ2dhtNkUtTa4pER31SdYQjI538N6Cf1P3O8iFNu7p8Ddx5jOXgHTU2MEci_TZX4gxog30qXwBaCIGp3tAM6LXqhLqdEX_ZYcz9EMJt4kj0Nsj-n8LLF6Uhr7s83eVPZmSP3kwKgmmz86FsFiWbo94pwfKb7GU6bpq0cBSj-9aM1BW2VFK7BhNH5Fhb_QU67JgN_x8toVjz3K-X3vG7Jk10e-7wDbNWYqgg95xF0i__RkD9z"/>
+<div class="absolute bottom-0 inset-x-0 bg-black/50 text-[8px] text-center text-white py-0.5">Email</div>
+</div>
+<div class="shrink-0 w-20 h-20 rounded border border-border-subtle overflow-hidden relative">
+<img class="w-full h-full object-cover" data-alt="A vertical mobile feed advertisement showing a person using a tablet in a bright, modern glass-walled office environment. The style is professional and aspirational." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCWNvIKJ8OAS7r-8gnpaqcQDTjgd6GPBmv0vaRSGaZ3z3gwmgpxjCUzplFR3HcFjWoNNFO3a73oWW8ljRPzN0q701szWI9QF_pJ1jk9ShvxIEdgvQRb0RLrg4UCYCVfaE7pO3oEi6W-1mNWJKr3AQzumj10oum_hlaEeTN2RW3RnKAEn-isXYjYKPxuUveiRCYqMDRMUAXz9DySyOvN-yUztJAYVpordOTHq3dxjLUNqEUu22D0WOJwpDumPgGE95aZyTaDE-IQQEUs"/>
+<div class="absolute bottom-0 inset-x-0 bg-black/50 text-[8px] text-center text-white py-0.5">Mobile</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Micro-interaction JS -->
+<script>
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('click', function(e) {
+                const ripple = document.createElement('div');
+                ripple.classList.add('ripple');
+                this.appendChild(ripple);
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+
+        // Simple visibility observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1
+        };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('opacity-100', 'translate-y-0');
+                    entry.target.classList.remove('opacity-0', 'translate-y-4');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.bg-surface-container-lowest').forEach(card => {
+            card.classList.add('transition-all', 'duration-700', 'opacity-0', 'translate-y-4');
+            observer.observe(card);
+        });
+    </script>
+</body></html>

@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniAutomate - Workflow Builder</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "surface-container-highest": "#e0e3e5",
+                        "tertiary": "#6d5e00",
+                        "on-error": "#ffffff",
+                        "surface-tint": "#475f86",
+                        "surface-bright": "#f7fafc",
+                        "success-green": "#00A91C",
+                        "border-subtle": "#E1E8ED",
+                        "on-primary-container": "#6f87b0",
+                        "on-tertiary-fixed-variant": "#524700",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed": "#ffe241",
+                        "surface-variant": "#e0e3e5",
+                        "on-secondary-container": "#fffbff",
+                        "inverse-surface": "#2d3133",
+                        "error-container": "#ffdad6",
+                        "surface-dark": "#06142E",
+                        "inverse-primary": "#afc7f4",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed": "#410008",
+                        "inverse-on-surface": "#eef1f3",
+                        "outline-variant": "#c4c6cf",
+                        "surface-container-high": "#e5e9eb",
+                        "on-primary-fixed-variant": "#2f476d",
+                        "secondary-fixed": "#ffdad9",
+                        "on-background": "#181c1e",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#f1f4f6",
+                        "surface-container": "#ebeef0",
+                        "secondary-fixed-dim": "#ffb3b2",
+                        "on-tertiary-fixed": "#211b00",
+                        "tertiary-container": "#c3ab00",
+                        "text-main": "#121C2D",
+                        "primary": "#000513",
+                        "tertiary-fixed-dim": "#e2c600",
+                        "on-surface": "#181c1e",
+                        "primary-fixed-dim": "#afc7f4",
+                        "on-surface-variant": "#44474e",
+                        "text-muted": "#52667A",
+                        "secondary": "#ba002a",
+                        "primary-container": "#001e42",
+                        "on-secondary-fixed-variant": "#92001f",
+                        "outline": "#74777f",
+                        "surface": "#f7fafc",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#d7dadc",
+                        "primary-fixed": "#d6e3ff",
+                        "on-tertiary-container": "#493f00",
+                        "background": "#f7fafc",
+                        "secondary-container": "#e2213c",
+                        "on-primary-fixed": "#001b3d"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "container-max": "1280px",
+                        "section-padding": "80px",
+                        "margin-mobile": "16px",
+                        "gutter": "24px",
+                        "base": "8px"
+                    },
+                    "fontFamily": {
+                        "headline-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Inter"],
+                        "display-lg-mobile": ["Inter"],
+                        "code": ["JetBrains Mono"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "headline-md": ["Inter"],
+                        "display-lg": ["Inter"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "headline-lg": ["32px", {"lineHeight": "40px", "fontWeight": "600"}],
+                        "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "code": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                        "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .workflow-grid {
+            background-size: 40px 40px;
+            background-image: 
+                linear-gradient(to right, rgba(225, 232, 237, 0.4) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(225, 232, 237, 0.4) 1px, transparent 1px);
+        }
+        .node-active {
+            box-shadow: 0 0 0 2px #001e42, 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .canvas-container {
+            cursor: grab;
+        }
+        .canvas-container:active {
+            cursor: grabbing;
+        }
+        .connection-line {
+            stroke: #E1E8ED;
+            stroke-width: 2;
+            fill: none;
+            stroke-dasharray: 4;
+            animation: dash 20s linear infinite;
+        }
+        @keyframes dash {
+            to {
+                stroke-dashoffset: -1000;
+            }
+        }
+        .glass-panel {
+            backdrop-filter: blur(8px);
+            background-color: rgba(255, 255, 255, 0.85);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-background font-body-md overflow-hidden">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-primary dark:bg-primary-container text-on-primary dark:text-on-primary-container shadow-md flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<div class="h-6 w-px bg-on-primary/20 mx-2"></div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-primary/60 uppercase">Project</span>
+<span class="font-headline-sm text-headline-sm text-on-primary leading-tight">Lead Sync &amp; Enrichment</span>
+</div>
+<div class="ml-4 px-2 py-0.5 rounded-full bg-success-green/20 border border-success-green/30 flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-success-green animate-pulse"></span>
+<span class="text-[11px] font-bold text-white tracking-wider">ACTIVE</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2 mr-6">
+<button class="flex flex-col items-center justify-center h-10 w-10 rounded-lg hover:bg-primary-container/20 transition-colors text-on-primary/80">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex flex-col items-center justify-center h-10 w-10 rounded-lg hover:bg-primary-container/20 transition-colors text-on-primary/80">
+<span class="material-symbols-outlined">settings</span>
+</button>
+<button class="flex flex-col items-center justify-center h-10 w-10 rounded-lg hover:bg-primary-container/20 transition-colors text-on-primary/80">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<button class="px-6 py-2 bg-secondary text-white font-headline-sm text-[14px] rounded-lg shadow-lg hover:scale-105 transition-transform active:scale-95">
+                Publish Changes
+            </button>
+<div class="flex items-center gap-3 ml-2 pl-6 border-l border-on-primary/20">
+<div class="w-8 h-8 rounded-full bg-primary-fixed-dim flex items-center justify-center overflow-hidden border border-on-primary/10">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a dark navy suit against a clean, soft-grey minimalist background, conveying authority and approachability in an enterprise software context." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPW3J3UUfJB-u7Rwk-Ulmp1-_PbJYtMTNC3DpYjyfQT1lPikLYPD74FRYWs808mw2WPVXVt51PJ-CgaBGS5Ti5yDeeIrN9Xp1LmI5-c7497QCt7bh4J_NVvKCEALaDyhAQlZJ-gZSfa8zm2Gih1BvocZ2rY-ncrcnQmkE7cauoPuB_dJfxQBPc4T7aBPnRce5i3YFpspxCT3GslnQudcls3cUFUSaWrXTKrcrldt0Zd0YOnFEzfKpKvUbeLzO0m3DVLmpMbSw6E6oU"/>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Context: Automation App) -->
+<aside class="fixed left-0 top-16 h-[calc(100vh-64px)] w-64 bg-surface dark:bg-surface-dark border-r border-border-subtle dark:border-outline-variant flex flex-col py-4 px-3 space-y-2 z-40">
+<div class="flex items-center gap-3 px-3 py-4 mb-4 bg-surface-container-low rounded-xl">
+<div class="w-10 h-10 bg-primary rounded-lg flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined">autorenew</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-[16px] font-black text-primary">OmniAutomate</span>
+<span class="font-label-md text-label-md text-text-muted">Enterprise Plan</span>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md text-label-md">Workflows</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 bg-secondary-container text-on-secondary-container font-bold rounded-lg" href="#">
+<span class="material-symbols-outlined">mediation</span>
+<span class="font-label-md text-label-md">Builder</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">schedule</span>
+<span class="font-label-md text-label-md">Executions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">extension</span>
+<span class="font-label-md text-label-md">Integrations</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted dark:text-on-surface-variant hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-label-md text-label-md">Analytics</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">support_agent</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:bg-surface-container-high transition-all rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-64 mt-16 h-[calc(100vh-64px)] relative overflow-hidden">
+<!-- Nodes Library Sidebar -->
+<aside class="absolute left-6 top-6 bottom-6 w-72 glass-panel border border-border-subtle rounded-xl shadow-xl z-30 flex flex-col">
+<div class="p-4 border-b border-border-subtle">
+<div class="relative">
+<span class="absolute left-3 top-2.5 text-text-muted material-symbols-outlined text-[18px]">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container rounded-lg border-none focus:ring-2 focus:ring-primary-container text-body-sm" placeholder="Search components..." type="text"/>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto p-4 space-y-6">
+<!-- Triggers -->
+<div>
+<h3 class="font-label-md text-label-md text-text-muted uppercase tracking-wider mb-3">Triggers</h3>
+<div class="grid grid-cols-2 gap-2">
+<div class="p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors group">
+<span class="material-symbols-outlined text-primary mb-1 group-hover:scale-110 transition-transform">webhook</span>
+<p class="text-[11px] font-semibold">Webhook</p>
+</div>
+<div class="p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors group">
+<span class="material-symbols-outlined text-primary mb-1 group-hover:scale-110 transition-transform">mail</span>
+<p class="text-[11px] font-semibold">Email</p>
+</div>
+</div>
+</div>
+<!-- Logic -->
+<div>
+<h3 class="font-label-md text-label-md text-text-muted uppercase tracking-wider mb-3">Logic</h3>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-tertiary">call_split</span>
+<p class="text-body-sm font-semibold">Conditional Filter</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-tertiary">alt_route</span>
+<p class="text-body-sm font-semibold">Router / Branch</p>
+</div>
+</div>
+</div>
+<!-- Integrations -->
+<div>
+<h3 class="font-label-md text-label-md text-text-muted uppercase tracking-wider mb-3">Integrations</h3>
+<div class="space-y-2">
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="w-6 h-6 bg-[#4A154B] rounded flex items-center justify-center text-white text-[10px] font-bold">S</div>
+<p class="text-body-sm font-semibold">Slack</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="w-6 h-6 bg-[#2496ED] rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">terminal</span>
+</div>
+<p class="text-body-sm font-semibold">Docker Registry</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="w-6 h-6 bg-[#FF4F00] rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">link</span>
+</div>
+<p class="text-body-sm font-semibold">Zapier Hook</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors">
+<div class="w-6 h-6 bg-primary rounded flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[14px]">database</span>
+</div>
+<p class="text-body-sm font-semibold">PostgreSQL</p>
+</div>
+<div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors"><div class="w-6 h-6 bg-[#FF6C37] rounded flex items-center justify-center text-white"><span class="material-symbols-outlined text-[14px]">hub</span></div><p class="text-body-sm font-semibold">n8n Webhook</p></div><div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors"><div class="w-6 h-6 bg-[#FF4F00] rounded flex items-center justify-center text-white"><span class="material-symbols-outlined text-[14px]">bolt</span></div><p class="text-body-sm font-semibold">Zapier Action</p></div><div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors"><div class="w-6 h-6 bg-[#6A1B9A] rounded flex items-center justify-center text-white"><span class="material-symbols-outlined text-[14px]">auto_fix_high</span></div><p class="text-body-sm font-semibold">Make.com Scenario</p></div><div class="flex items-center gap-3 p-3 bg-white border border-border-subtle rounded-lg hover:border-primary cursor-pointer transition-colors"><div class="w-6 h-6 bg-primary rounded flex items-center justify-center text-white"><span class="material-symbols-outlined text-[14px]">smart_toy</span></div><p class="text-body-sm font-semibold">OpenClaw Trigger</p></div></div>
+</div>
+</div>
+<div class="p-4 bg-surface-container-low border-t border-border-subtle rounded-b-xl"><button class="w-full py-2 mb-2 bg-secondary/10 text-secondary border border-secondary/20 rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-secondary hover:text-white transition-all"><span class="material-symbols-outlined text-[18px]">grid_view</span>Integration Hub (100+)</button>
+<button class="w-full py-2 bg-primary text-white rounded-lg font-label-md flex items-center justify-center gap-2 hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-[18px]">add</span>
+                    Custom Node
+                </button>
+</div>
+</aside>
+<!-- Canvas Controls Toolbar -->
+<div class="absolute bottom-6 left-1/2 -translate-x-1/2 flex items-center gap-1 p-1 glass-panel border border-border-subtle rounded-xl shadow-2xl z-30">
+<button class="p-2.5 text-text-muted hover:bg-surface-container-high rounded-lg transition-colors" title="Zoom In"><span class="material-symbols-outlined">zoom_in</span></button>
+<button class="p-2.5 text-text-muted hover:bg-surface-container-high rounded-lg transition-colors" title="Zoom Out"><span class="material-symbols-outlined">zoom_out</span></button>
+<div class="w-px h-6 bg-border-subtle mx-1"></div>
+<button class="p-2.5 text-text-muted hover:bg-surface-container-high rounded-lg transition-colors" title="Fit to Screen"><span class="material-symbols-outlined">fullscreen</span></button>
+<button class="p-2.5 text-text-muted hover:bg-surface-container-high rounded-lg transition-colors" title="Auto Layout"><span class="material-symbols-outlined">account_tree</span></button>
+<div class="w-px h-6 bg-border-subtle mx-1"></div>
+<button class="px-4 py-2 flex items-center gap-2 bg-success-green/10 text-success-green hover:bg-success-green hover:text-white rounded-lg transition-all font-bold text-sm" title="Run Test">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+                Test Run
+            </button>
+</div>
+<!-- Canvas Area -->
+<div class="absolute inset-0 workflow-grid canvas-container" id="workflow-canvas">
+<svg class="absolute inset-0 w-full h-full pointer-events-none">
+<!-- Connection Lines -->
+<path class="connection-line" d="M 450 300 L 550 300"></path>
+<path class="connection-line" d="M 810 300 L 910 300"></path>
+<!-- Branching Path -->
+<path class="connection-line" d="M 1170 300 C 1250 300, 1250 450, 1330 450"></path>
+<path class="connection-line" d="M 1170 300 C 1250 300, 1250 150, 1330 150"></path>
+<path class="connection-line" d="M 450 590 L 550 590"></path></svg>
+<!-- Node 1: Trigger -->
+<div class="absolute left-[300px] top-[260px] w-40 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-tighter">Trigger</span>
+<span class="material-symbols-outlined text-text-muted text-[16px]">more_vert</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary-fixed-dim flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-[18px]">webhook</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold">New Webhook</span>
+<span class="text-[10px] text-text-muted">Port 8080</span>
+</div>
+</div>
+</div>
+<!-- Node 2: Logic -->
+<div class="absolute left-[560px] top-[240px] w-64 h-32 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-4 node-active transition-all cursor-move z-10">
+<div class="flex items-center justify-between mb-3">
+<span class="px-2 py-0.5 bg-tertiary/10 text-tertiary text-[10px] font-bold rounded uppercase tracking-tighter">Logic</span>
+<span class="material-symbols-outlined text-text-muted text-[16px]">more_vert</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+<span class="material-symbols-outlined">filter_alt</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[14px] font-bold">If Customer is VIP</span>
+<span class="text-[11px] text-text-muted font-code">lead_score &gt;= 80</span>
+</div>
+</div>
+<div class="mt-auto pt-3 border-t border-border-subtle flex justify-between">
+<span class="text-[10px] text-success-green font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-success-green rounded-full"></span> True</span>
+<span class="text-[10px] text-error font-bold flex items-center gap-1"><span class="w-1.5 h-1.5 bg-error rounded-full"></span> False</span>
+</div>
+</div>
+<!-- Node 3: Action -->
+<div class="absolute left-[920px] top-[260px] w-40 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold rounded uppercase tracking-tighter">Action</span>
+<span class="material-symbols-outlined text-text-muted text-[16px]">more_vert</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-[#4A154B] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">chat</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold">Slack Message</span>
+<span class="text-[10px] text-text-muted">#sales-leads</span>
+</div>
+</div>
+</div>
+<!-- Node 4: Integration (OmniCampaigns Branch 1) -->
+<div class="absolute left-[1340px] top-[110px] w-48 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10 opacity-80">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 bg-success-green/10 text-success-green text-[10px] font-bold rounded uppercase tracking-tighter">Integrate</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-[18px]">campaign</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold">OmniCampaigns</span>
+<span class="text-[10px] text-text-muted">Add to 'VIP' list</span>
+</div>
+</div>
+</div>
+<!-- Node 5: Integration (Database Branch 2) -->
+<div class="absolute left-[1340px] top-[410px] w-48 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10 opacity-80">
+<div class="flex items-center justify-between mb-2">
+<span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold rounded uppercase tracking-tighter">Database</span>
+</div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded bg-surface-dark flex items-center justify-center text-white border border-outline-variant">
+<span class="material-symbols-outlined text-[18px]">database</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[12px] font-bold">Update Lead</span>
+<span class="text-[10px] text-text-muted">Table: customers</span>
+</div>
+</div>
+</div>
+<div class="absolute left-[300px] top-[550px] w-40 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10"><div class="flex items-center justify-between mb-2"><span class="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded uppercase tracking-tighter">Trigger</span><div class="flex items-center gap-1"><span class="w-1.5 h-1.5 bg-success-green rounded-full animate-pulse"></span><span class="text-[9px] text-success-green font-bold">ACTIVE</span></div></div><div class="flex items-center gap-2"><div class="w-8 h-8 rounded bg-primary flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">person</span></div><div class="flex flex-col"><span class="text-[12px] font-bold">Omni Lead</span><span class="text-[10px] text-text-muted">New Signup</span></div></div></div><div class="absolute left-[560px] top-[550px] w-40 h-24 bg-white border border-border-subtle rounded-xl shadow-lg flex flex-col p-3 hover:border-primary transition-all cursor-move z-10"><div class="flex items-center justify-between mb-2"><span class="px-2 py-0.5 bg-secondary/10 text-secondary text-[10px] font-bold rounded uppercase tracking-tighter">Action</span><span class="material-symbols-outlined text-text-muted text-[16px]">more_vert</span></div><div class="flex items-center gap-2"><div class="w-8 h-8 rounded bg-[#FF4F00] flex items-center justify-center text-white"><span class="material-symbols-outlined text-[18px]">bolt</span></div><div class="flex flex-col"><span class="text-[12px] font-bold">Zapier</span><span class="text-[10px] text-text-muted">Create Row</span></div></div></div></div>
+<!-- Atmospheric Effect (Shadow at edges) -->
+<div class="absolute inset-0 pointer-events-none shadow-[inset_0_0_100px_rgba(0,5,19,0.05)]"></div>
+</main>
+<script>
+        // Micro-interactions for the canvas
+        const canvas = document.getElementById('workflow-canvas');
+        let isDragging = false;
+        let startX, startY, scrollLeft, scrollTop;
+
+        canvas.addEventListener('mousedown', (e) => {
+            if (e.target.closest('.rounded-xl')) return; // Don't drag if clicking a node
+            isDragging = true;
+            canvas.classList.add('active');
+            startX = e.pageX - canvas.offsetLeft;
+            startY = e.pageY - canvas.offsetTop;
+            scrollLeft = canvas.scrollLeft;
+            scrollTop = canvas.scrollTop;
+        });
+
+        canvas.addEventListener('mouseleave', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDragging = false;
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            e.preventDefault();
+            const x = e.pageX - canvas.offsetLeft;
+            const y = e.pageY - canvas.offsetTop;
+            const walkX = (x - startX) * 1.5; 
+            const walkY = (y - startY) * 1.5;
+            // In a real implementation, we would translate the canvas content here
+            // For this demo, we'll just mock the visual effect
+        });
+
+        // Toggle Active State logic
+        const nodes = document.querySelectorAll('.rounded-xl.cursor-move');
+        nodes.forEach(node => {
+            node.addEventListener('click', () => {
+                nodes.forEach(n => n.classList.remove('node-active'));
+                node.classList.add('node-active');
+            });
+        });
+    </script>
+</body></html>

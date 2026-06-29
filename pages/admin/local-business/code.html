@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>OmniPlatform | OmniLocal Business Profile</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;900&amp;family=JetBrains+Mono&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-container": "#c3ab00",
+                    "on-secondary-container": "#fffbff",
+                    "surface-container-high": "#e5e9eb",
+                    "secondary-fixed": "#ffdad9",
+                    "text-main": "#121C2D",
+                    "inverse-surface": "#2d3133",
+                    "surface-tint": "#475f86",
+                    "outline": "#74777f",
+                    "on-error-container": "#93000a",
+                    "surface-container-low": "#f1f4f6",
+                    "on-tertiary-fixed-variant": "#524700",
+                    "primary-fixed-dim": "#afc7f4",
+                    "on-surface-variant": "#44474e",
+                    "tertiary-fixed": "#ffe241",
+                    "surface-container": "#ebeef0",
+                    "secondary-fixed-dim": "#ffb3b2",
+                    "on-tertiary-container": "#493f00",
+                    "on-primary-fixed": "#001b3d",
+                    "success-green": "#00A91C",
+                    "background": "#f7fafc",
+                    "surface-dim": "#d7dadc",
+                    "tertiary-fixed-dim": "#e2c600",
+                    "on-primary": "#ffffff",
+                    "surface-variant": "#e0e3e5",
+                    "outline-variant": "#c4c6cf",
+                    "on-primary-container": "#6f87b0",
+                    "on-secondary-fixed-variant": "#92001f",
+                    "on-error": "#ffffff",
+                    "on-secondary-fixed": "#410008",
+                    "on-tertiary-fixed": "#211b00",
+                    "secondary": "#ba002a",
+                    "on-background": "#181c1e",
+                    "text-muted": "#52667A",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary-container": "#e2213c",
+                    "primary-fixed": "#d6e3ff",
+                    "inverse-on-surface": "#eef1f3",
+                    "error": "#ba1a1a",
+                    "inverse-primary": "#afc7f4",
+                    "surface-bright": "#f7fafc",
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#6d5e00",
+                    "on-surface": "#181c1e",
+                    "surface": "#f7fafc",
+                    "on-primary-fixed-variant": "#2f476d",
+                    "surface-container-highest": "#e0e3e5",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#000513",
+                    "error-container": "#ffdad6",
+                    "border-subtle": "#E1E8ED",
+                    "surface-dark": "#06142E",
+                    "primary-container": "#001e42"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "80px",
+                    "gutter": "24px",
+                    "container-max": "1280px",
+                    "base": "8px",
+                    "margin-mobile": "16px"
+            },
+            "fontFamily": {
+                    "display-lg-mobile": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "display-lg": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-md": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "body-sm": ["Inter"],
+                    "headline-sm": ["Inter"],
+                    "body-md": ["Inter"],
+                    "code": ["JetBrains Mono"]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; background-color: #f7fafc; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .hide-scrollbar::-webkit-scrollbar { display: none; }
+        .hide-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="text-text-main">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full h-16 bg-primary dark:bg-surface-dark text-on-primary dark:text-inverse-primary shadow-sm flex justify-between items-center px-gutter z-50">
+<div class="flex items-center gap-4">
+<span class="font-headline-md text-headline-md font-bold text-on-primary">OmniPlatform</span>
+<div class="hidden md:flex ml-8 gap-6">
+<a class="text-on-primary font-bold border-b-2 border-secondary h-16 flex items-center" href="#">Marketing</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors h-16 flex items-center px-2" href="#">Analytics</a>
+<a class="text-on-primary/70 font-medium hover:bg-primary-container/50 transition-colors h-16 flex items-center px-2" href="#">Ecosystem</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative hidden sm:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-primary/50">search</span>
+<input class="bg-primary-container/30 border-none rounded-lg pl-10 pr-4 py-1.5 text-body-sm focus:ring-2 focus:ring-secondary text-on-primary placeholder-on-primary/50" placeholder="Search locations..." type="text"/>
+</div>
+<div class="flex items-center gap-2">
+<button class="material-symbols-outlined p-2 hover:bg-primary-container/50 transition-colors cursor-pointer rounded-full">notifications</button>
+<button class="material-symbols-outlined p-2 hover:bg-primary-container/50 transition-colors cursor-pointer rounded-full">settings</button>
+<button class="material-symbols-outlined p-2 hover:bg-primary-container/50 transition-colors cursor-pointer rounded-full">help</button>
+<div class="w-8 h-8 rounded-full bg-surface-container-high overflow-hidden ml-2 cursor-pointer border border-on-primary/20">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate executive in a sharp navy suit, smiling confidently against a clean, softly lit studio background with neutral tones. High-end lighting creates subtle depth and professional polish, perfectly fitting an enterprise platform aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBc5tXSldvDc_yu3UMui5ePU_vBv9d6BNNx3_fXHskN6XqSg5nHHfcwdn9wL36jXFb8LICUwKblNO-FWULJhZGNbm9HhQ7DLw8_PXn7nXIBj8hqX-LZMyBUQ-xn-khtrAqr5z4BOU6mIelo92o67uvDwnDvgRby8188TzqvcT17_ljgSTBMqWpcTdO8eh2v6fXd0LjAbkOCU4S6Ys1Zcd7anTBPkk9xkcfWlLpVaIXV9WviwgTlNpSfuGGU6QEEdgcJJJ4LXwGa69Be"/>
+</div>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-64 bg-surface-container-low dark:bg-inverse-surface border-r border-border-subtle dark:border-outline-variant flex flex-col py-base px-4 overflow-y-auto hidden md:flex">
+<div class="mb-8 px-2">
+<div class="flex items-center gap-3 mb-1">
+<div class="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary text-xl" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm font-black text-primary dark:text-primary-fixed leading-tight">OmniLocal</h2>
+<p class="font-label-md text-label-md text-text-muted">Enterprise Suite</p>
+</div>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<div class="px-2 py-2 text-label-md font-bold text-text-muted uppercase tracking-wider">Management</div>
+<a class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">chat</span> Communications
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">folder_open</span> Files
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 bg-secondary text-on-secondary rounded-lg font-semibold font-label-md" href="#">
+<span class="material-symbols-outlined">campaign</span> Marketing
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">settings_suggest</span> Automations
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">dns</span> Infrastructure
+            </a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all duration-200 rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">analytics</span> Analytics
+            </a>
+</nav>
+<div class="mt-auto border-t border-border-subtle pt-4 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">contact_support</span> Support
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-text-muted hover:text-text-main hover:bg-surface-container-high transition-all rounded-lg font-label-md" href="#">
+<span class="material-symbols-outlined">manage_accounts</span> Account
+            </a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="md:ml-64 pt-16 min-h-screen bg-background">
+<div class="max-w-container-max mx-auto px-gutter py-8">
+<!-- Header Section -->
+<header class="flex flex-col md:flex-row md:items-center justify-between mb-8 gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-primary">Local Search Performance</h1>
+<p class="text-text-muted font-body-md mt-1">Real-time visibility metrics for your global location network.</p>
+</div>
+<button class="bg-secondary text-on-secondary px-6 py-3 rounded-lg font-semibold flex items-center gap-2 hover:scale-[1.02] active:scale-95 transition-all shadow-md">
+<span class="material-symbols-outlined">add_business</span>
+                    Claim New Business
+                </button>
+</header>
+<!-- Bento Grid - KPIs -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+<!-- KPI Card 1 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">visibility</span>
+</div>
+<span class="text-success-green font-semibold text-label-md flex items-center bg-success-green/10 px-2 py-0.5 rounded-full">
+                            +12.4% <span class="material-symbols-outlined text-xs ml-1">trending_up</span>
+</span>
+</div>
+<h3 class="text-text-muted font-label-md uppercase tracking-wider mb-1">Total Views</h3>
+<p class="font-headline-md text-headline-md text-primary">842.6k</p>
+</div>
+<!-- KPI Card 2 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">search</span>
+</div>
+<span class="text-success-green font-semibold text-label-md flex items-center bg-success-green/10 px-2 py-0.5 rounded-full">
+                            +8.2% <span class="material-symbols-outlined text-xs ml-1">trending_up</span>
+</span>
+</div>
+<h3 class="text-text-muted font-label-md uppercase tracking-wider mb-1">Search Queries</h3>
+<p class="font-headline-md text-headline-md text-primary">124.1k</p>
+</div>
+<!-- KPI Card 3 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">touch_app</span>
+</div>
+<span class="text-secondary font-semibold text-label-md flex items-center bg-secondary/10 px-2 py-0.5 rounded-full">
+                            -1.5% <span class="material-symbols-outlined text-xs ml-1">trending_down</span>
+</span>
+</div>
+<h3 class="text-text-muted font-label-md uppercase tracking-wider mb-1">Interactions</h3>
+<p class="font-headline-md text-headline-md text-primary">42.8k</p>
+</div>
+<!-- KPI Card 4 -->
+<div class="bg-surface-container-lowest p-6 rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="flex justify-between items-start mb-4">
+<div class="p-2 bg-primary-fixed text-primary rounded-lg">
+<span class="material-symbols-outlined">star</span>
+</div>
+<span class="text-success-green font-semibold text-label-md flex items-center bg-success-green/10 px-2 py-0.5 rounded-full">
+                            4.8 Avg
+                        </span>
+</div>
+<h3 class="text-text-muted font-label-md uppercase tracking-wider mb-1">Sentiment Score</h3>
+<p class="font-headline-md text-headline-md text-primary">94.2%</p>
+</div>
+</div>
+<!-- Main Features Section -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Left: Locations Management -->
+<section class="lg:col-span-2 space-y-6">
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle overflow-hidden shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="px-6 py-5 border-b border-border-subtle flex justify-between items-center bg-surface-container-low">
+<h2 class="font-headline-sm text-headline-sm text-primary">Manage Locations</h2>
+<button class="text-primary font-semibold text-body-sm hover:underline">View All</button>
+</div>
+<div class="divide-y divide-border-subtle">
+<!-- Location Row 1 -->
+<div class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A sophisticated storefront of a high-end flagship retail store in a modern metropolitan downtown area. The facade features large glass windows, clean architectural lines, and subtle primary navy branding. Soft evening light highlights the professional and premium atmosphere of the location." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDbJGyFaMVmwTnVYd-T3aWSgAf4Rpg8wbNdRalZug5giGeGcAj6xXqbXzJnczoC-lHJTzx__q9EaUUu0Pl-W9UmM-ndBpmGfg1cQcW6MZl9EBfsY9WAY9rq2jtw8_kI99AOUIlAwdqMnHu7aTXVNioqF-TxyE2sp1jfwiTJyEix3dwvTiKbG_i3-b3fQFOLPju8YvccKle3Uc6YPq_HBzCGHOIwYTQsiy6OVs9p_GsEdxFaqGxb35WLzRhU5LiCLbEjYzx3THHZnUS2"/>
+</div>
+<div>
+<h4 class="font-bold text-primary font-body-md">OmniHub - New York Central</h4>
+<p class="text-text-muted text-body-sm">450 Park Ave, New York, NY 10022</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-success-green/10 text-success-green font-semibold text-[10px] uppercase">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span> Verified
+                                        </span>
+<p class="text-text-muted text-[10px] mt-1">Sync: 2m ago</p>
+</div>
+<button class="material-symbols-outlined text-text-muted hover:text-primary transition-colors">more_vert</button>
+</div>
+</div>
+<!-- Location Row 2 -->
+<div class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="An interior view of a modern boutique tech office space with open-plan design, ergonomic furniture, and warm wood accents. Large windows show a vibrant city skyline. The lighting is natural and bright, creating an inviting yet professional work environment typical of a high-growth local business." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSL71Jv4eIJ81e_y8XHFDQwijO6t5z_XfL_A1zNV8L3RAURIG1fAmtRYpyFpC-as54ax26ZTuTjw8h47sY7gUwfiIHqXqXgpqKP_GBrvvv7v3eacJSRuOzHjuqm3lrx8DpGhrGEd8VRm_FOzwk3JVjfDnd7NUt-yQk7BkUTeHpH6KYETB8mJXw9uqcoMM3rkn4oX-SFs3DCNg2ibRqcDw35RkBkHGMc4VMAs02D9tuEBzGE_AjozhXpcTd1N2zJTIZcdWiydaPm8Va"/>
+</div>
+<div>
+<h4 class="font-bold text-primary font-body-md">OmniLabs - Austin Tech District</h4>
+<p class="text-text-muted text-body-sm">1200 E 6th St, Austin, TX 78702</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-tertiary-container/10 text-tertiary-container font-semibold text-[10px] uppercase">
+<span class="material-symbols-outlined text-[12px]">pending</span> Pending
+                                        </span>
+<p class="text-text-muted text-[10px] mt-1">Reviewing docs</p>
+</div>
+<button class="material-symbols-outlined text-text-muted hover:text-primary transition-colors">more_vert</button>
+</div>
+</div>
+<!-- Location Row 3 -->
+<div class="p-6 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:bg-surface-container-lowest transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-lg overflow-hidden shrink-0">
+<img class="w-full h-full object-cover" data-alt="A modern professional services building with a glass and steel facade. The setting is a clean, manicured suburban business park during a bright sunny morning. Shadows are crisp and the overall aesthetic is one of corporate reliability and high-tech security." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA2q_gheaQqx_BER6scwX1I5RUdXW8FVGw-BOA2_aAMV4OKJET8p-KxXtAAJMSnO4FbQYOtl-mEnO3nByD_r9STfmw0GyVeGpntBXGByXDoVo8j21u9qYBEalQSGSMaGwccEwiUAYcLuQIao87CqIXOFXbYY_5G3qXbdtyXBHNdKCzRdbYZ5qijdA498Tj0xhwIm6nXdDI-By1AyVk62PYAJsURBT3VgpmqBMZ_x2UEQGMzIAebpz-D_DiwDza88ZwhxjV6SG69-2e5"/>
+</div>
+<div>
+<h4 class="font-bold text-primary font-body-md">OmniSupport - London West End</h4>
+<p class="text-text-muted text-body-sm">15-19 Bloomsbury Way, London WC1A</p>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<div class="flex flex-col items-end">
+<span class="inline-flex items-center gap-1.5 px-2 py-1 rounded-full bg-success-green/10 text-success-green font-semibold text-[10px] uppercase">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span> Verified
+                                        </span>
+<p class="text-text-muted text-[10px] mt-1">Sync: 1h ago</p>
+</div>
+<button class="material-symbols-outlined text-text-muted hover:text-primary transition-colors">more_vert</button>
+</div>
+</div>
+</div>
+</div>
+<!-- AI Insights / Reviews -->
+<div class="bg-primary text-on-primary rounded-xl p-8 relative overflow-hidden shadow-xl">
+<div class="relative z-10">
+<div class="flex items-center gap-2 mb-4">
+<span class="bg-secondary text-on-secondary text-[10px] font-bold px-2 py-1 rounded uppercase tracking-widest">AI Agent</span>
+<h3 class="font-headline-sm text-headline-sm">Sentiment Analysis</h3>
+</div>
+<p class="font-body-lg text-body-lg text-on-primary/80 mb-6 max-w-lg">
+                                Customers are frequently mentioning "Reliability" and "Quick Onboarding" in recent 5-star reviews across all 12 New York locations.
+                            </p>
+<div class="flex flex-wrap gap-4">
+<div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10 flex-1 min-w-[200px]">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-md font-semibold text-on-primary/60">Positive Sentiment</span>
+<span class="text-success-green font-bold">88%</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-success-green h-full w-[88%]"></div>
+</div>
+</div>
+<div class="bg-white/10 backdrop-blur-md rounded-lg p-4 border border-white/10 flex-1 min-w-[200px]">
+<div class="flex justify-between items-center mb-1">
+<span class="text-label-md font-semibold text-on-primary/60">Neutral/Critical</span>
+<span class="text-secondary-fixed-dim font-bold">12%</span>
+</div>
+<div class="w-full bg-white/10 h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full w-[12%]"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Background decoration -->
+<div class="absolute right-0 top-0 w-64 h-64 bg-secondary/20 blur-[80px] -mr-32 -mt-32 rounded-full"></div>
+</div>
+</section>
+<!-- Right: Posts & Marketing -->
+<aside class="space-y-6">
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<div class="px-6 py-5 border-b border-border-subtle flex justify-between items-center">
+<h2 class="font-headline-sm text-headline-sm text-primary">Posts &amp; Offers</h2>
+<button class="material-symbols-outlined text-primary hover:bg-primary/5 p-1 rounded-full">add</button>
+</div>
+<div class="p-6 space-y-6">
+<!-- Post Item 1 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full rounded-lg overflow-hidden mb-3 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A visually appealing professional graphic design showing a '20% Summer Sale' promotion. The design features a modern minimalist aesthetic with deep navy blue and bright white colors, using bold sans-serif typography. It includes a subtle abstract geometric background and a 'Shop Now' call-to-action button." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbY9KgexCxqVFDMm4WkPunprM0-W-5x_-lceMR_zVzfmoRsAifVLeNuhSkuA7IiSymKPiRJJDIOkKyuNEYCBxmWoKE6AQRueWIKyAVerOsKHjFYiWw0Qp3tR2x6uJYc8PVm8kO6BOQddQkGIB9TdVWEyIo5Yw5oXg5J_nYa5IvPMbSAmnzRdVr4rnCQrQ3rUZcXl3qywcSLGlC_FgUxeGEjMGKxbaGn00gLPJmQqO09QPxeXVX8JqzcSbsudUAzTI-iCmIHjcm1F2_"/>
+<div class="absolute top-2 right-2 bg-primary/80 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded">ACTIVE</div>
+</div>
+<h5 class="font-bold text-primary font-body-md group-hover:text-secondary transition-colors">Summer Enterprise Onboarding Promo</h5>
+<p class="text-text-muted text-body-sm mt-1 line-clamp-2">Get 20% off all infrastructure expansion plans when you claim more than 5 locations this month.</p>
+<div class="flex items-center gap-4 mt-3 text-text-muted text-label-md">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">visibility</span> 14.2k</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-sm">ads_click</span> 2.1k</span>
+</div>
+</div>
+<!-- Post Item 2 -->
+<div class="group cursor-pointer">
+<div class="aspect-video w-full rounded-lg overflow-hidden mb-3 relative">
+<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" data-alt="A high-quality image of professional business consultants collaborating in a sleek conference room. The atmosphere is professional and innovative, with data visualizations projected on a glass wall. The lighting is cool and sophisticated, representing a 'New Feature' announcement for an enterprise software platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDt9Yu26Mcf3zt0oTYUeWz8trPfRCKHYMAJAQPnv_mG2yyCtNJmhPfBxGrRSUmVBv5I42luJTQ3C4PMY6MV6LRhEkw50RPvU7j2aDOuH89YsJofUtmr1TM0l3hKCj60PIGXF2aaSCNPHMlFX4MIAc83vq9YoMd6t6HcaczK7ToCPJprBv1t1OyGxzf0I-vzGzVWbnT_DoaiSp0p8Uox9tN3VEFkux95ls26u50zRV8VqaHHHWXSvEqHem10f51dZAsvvvwBJ_gcG_PK"/>
+<div class="absolute top-2 right-2 bg-text-muted/80 backdrop-blur text-white text-[10px] font-bold px-2 py-1 rounded">SCHEDULED</div>
+</div>
+<h5 class="font-bold text-primary font-body-md group-hover:text-secondary transition-colors">New Analytics Dashboard Release</h5>
+<p class="text-text-muted text-body-sm mt-1 line-clamp-2">Introducing real-time customer heatmaps for all premium tier location profiles.</p>
+<div class="flex items-center gap-4 mt-3 text-text-muted text-label-md">
+<span class="flex items-center gap-1">Goes live in 4h</span>
+</div>
+</div>
+</div>
+<div class="px-6 py-4 bg-surface-container-low border-t border-border-subtle text-center">
+<button class="text-secondary font-bold text-body-sm hover:underline">Campaign Manager</button>
+</div>
+</div>
+<!-- Quick Tools -->
+<div class="bg-surface-container-lowest rounded-xl border border-border-subtle p-6 shadow-[0_4px_20px_rgba(0,30,66,0.08)]">
+<h3 class="font-bold text-primary mb-4 font-body-md uppercase tracking-wider text-xs">Quick Actions</h3>
+<div class="grid grid-cols-2 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-border-subtle hover:bg-primary hover:text-white transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">star</span>
+<span class="text-[10px] font-bold uppercase">Reviews</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-border-subtle hover:bg-primary hover:text-white transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">map</span>
+<span class="text-[10px] font-bold uppercase">Map Sync</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-border-subtle hover:bg-primary hover:text-white transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">photo_library</span>
+<span class="text-[10px] font-bold uppercase">Photos</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl border border-border-subtle hover:bg-primary hover:text-white transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">share</span>
+<span class="text-[10px] font-bold uppercase">Social</span>
+</button>
+</div>
+</div>
+</aside>
+</div>
+</div>
+</main>
+<!-- Bottom Nav for Mobile -->
+<nav class="fixed bottom-0 left-0 right-0 h-16 bg-white border-t border-border-subtle flex md:hidden justify-around items-center px-4 z-50">
+<button class="flex flex-col items-center text-secondary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-[10px] font-bold">Home</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined">location_on</span>
+<span class="text-[10px] font-medium">Places</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined">campaign</span>
+<span class="text-[10px] font-medium">Marketing</span>
+</button>
+<button class="flex flex-col items-center text-text-muted">
+<span class="material-symbols-outlined">analytics</span>
+<span class="text-[10px] font-medium">Stats</span>
+</button>
+</nav>
+<script>
+        // Micro-interaction: Chart/Stat animation simulation
+        document.addEventListener('DOMContentLoaded', () => {
+            const cards = document.querySelectorAll('.bg-surface-container-lowest');
+            cards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                setTimeout(() => {
+                    card.style.transition = 'all 0.6s cubic-bezier(0.23, 1, 0.32, 1)';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100 * index);
+            });
+        });
+    </script>
+</body></html>

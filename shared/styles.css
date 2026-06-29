@@ -1,0 +1,359 @@
+/**
+ * OmniPlatform Design System - Shared Styles
+ * Common CSS used across all pages
+ */
+
+/* Base Styles */
+body {
+  background-color: #f7fafc;
+  color: #121C2D;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Material Symbols Icon Base */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  vertical-align: middle;
+}
+
+/* Glass Morphism Card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid #E1E8ED;
+}
+
+.dark .glass-card {
+  background: rgba(17, 19, 24, 0.8);
+  border: 1px solid #333539;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f4f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c4c6cf;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8aab3;
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: #1a1c20;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #414754;
+}
+
+/* Sidebar Navigation */
+.sidebar-nav-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 0.5rem;
+  color: #52667A;
+  transition: all 0.2s ease;
+}
+
+.sidebar-nav-item:hover {
+  background: #ebeef0;
+  color: #121C2D;
+}
+
+.sidebar-nav-item.active {
+  background: #001e42;
+  color: #ffffff;
+}
+
+.dark .sidebar-nav-item:hover {
+  background: #282a2e;
+  color: #e2e2e8;
+}
+
+.dark .sidebar-nav-item.active {
+  background: #468fff;
+  color: #002f67;
+}
+
+/* Top Navigation */
+.top-nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 64px;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 24px;
+  background: #000513;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.dark .top-nav {
+  background: #0c0e12;
+}
+
+/* Card Patterns */
+.stat-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 4px 20px rgba(0, 30, 66, 0.08);
+  transition: box-shadow 0.2s ease;
+}
+
+.stat-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 30, 66, 0.12);
+}
+
+.dark .stat-card {
+  background: #161b22;
+  border: 1px solid #30363d;
+}
+
+/* Data Table */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.data-table th {
+  background: #f1f4f6;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #52667A;
+  border-bottom: 1px solid #E1E8ED;
+  position: sticky;
+  top: 0;
+}
+
+.data-table td {
+  padding: 16px;
+  border-bottom: 1px solid #E1E8ED;
+}
+
+.data-table tr:nth-child(even) {
+  background: #f7fafc;
+}
+
+.data-table tr:hover {
+  background: #ebeef0;
+}
+
+.dark .data-table th {
+  background: #161b22;
+  color: #8b919f;
+  border-bottom: 1px solid #30363d;
+}
+
+.dark .data-table td {
+  border-bottom: 1px solid #30363d;
+}
+
+.dark .data-table tr:nth-child(even) {
+  background: #0a0c10;
+}
+
+.dark .data-table tr:hover {
+  background: #1a1c20;
+}
+
+/* Badge Patterns */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.badge-primary {
+  background: #001e42;
+  color: #afc7f4;
+}
+
+.badge-secondary {
+  background: #e2213c;
+  color: #ffffff;
+}
+
+.badge-success {
+  background: #00A91C;
+  color: #ffffff;
+}
+
+.badge-warning {
+  background: #c3ab00;
+  color: #000513;
+}
+
+/* Button Patterns */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background: #ba002a;
+  color: #ffffff;
+}
+
+.btn-primary:hover {
+  background: #92001f;
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: #000513;
+  color: #ffffff;
+}
+
+.btn-secondary:hover {
+  background: #001e42;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid #E1E8ED;
+  color: #121C2D;
+}
+
+.btn-outline:hover {
+  background: #f1f4f6;
+}
+
+.dark .btn-outline {
+  border-color: #30363d;
+  color: #e2e2e8;
+}
+
+.dark .btn-outline:hover {
+  background: #1a1c20;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+@keyframes pulse-red {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(186, 0, 42, 0.4); }
+  50% { box-shadow: 0 0 0 8px rgba(186, 0, 42, 0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
+
+.animate-pulse-red {
+  animation: pulse-red 2s infinite;
+}
+
+/* Modal/Overlay */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 16px;
+  box-shadow: 0 16px 48px rgba(0, 30, 66, 0.16);
+  max-width: 560px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.dark .modal-content {
+  background: #1e2024;
+  border: 1px solid #30363d;
+}
+
+/* Toggle Switch */
+.toggle-switch {
+  position: relative;
+  width: 44px;
+  height: 24px;
+  background: #c4c6cf;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toggle-switch.active {
+  background: #00A91C;
+}
+
+.toggle-switch::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: #ffffff;
+  border-radius: 50%;
+  transition: transform 0.2s ease;
+}
+
+.toggle-switch.active::after {
+  transform: translateX(20px);
+}
+
+/* Responsive Utilities */
+@media (max-width: 768px) {
+  .hide-mobile {
+    display: none !important;
+  }
+}
+
+@media (min-width: 769px) {
+  .show-mobile-only {
+    display: none !important;
+  }
+}
